@@ -6,6 +6,8 @@
 package Vistas;
 
 import Excepciones.NumeroNoValidoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import t6p1e1.T6P1E1;
 
@@ -18,6 +20,7 @@ public class Calculadora extends javax.swing.JFrame {
     public static double radio;
     public Calculadora() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -33,10 +36,13 @@ public class Calculadora extends javax.swing.JFrame {
         tfRadio = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cbLongitud = new javax.swing.JCheckBox();
-        cbArea = new javax.swing.JCheckBox();
-        cbVolumen = new javax.swing.JCheckBox();
         bListo = new javax.swing.JButton();
+        tfLongitud = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tfArea = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        tfVolumen = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,25 +59,6 @@ public class Calculadora extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setText("Calculadora");
 
-        cbLongitud.setBackground(new java.awt.Color(153, 255, 153));
-        cbLongitud.setText("Longitud de una circunferencia");
-        cbLongitud.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbLongitudActionPerformed(evt);
-            }
-        });
-
-        cbArea.setBackground(new java.awt.Color(153, 255, 153));
-        cbArea.setText("Area de una circunferencia");
-
-        cbVolumen.setBackground(new java.awt.Color(153, 255, 153));
-        cbVolumen.setText("Volumen de una esfera");
-        cbVolumen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbVolumenActionPerformed(evt);
-            }
-        });
-
         bListo.setBackground(new java.awt.Color(102, 255, 255));
         bListo.setText("¡Listo!");
         bListo.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +66,23 @@ public class Calculadora extends javax.swing.JFrame {
                 bListoActionPerformed(evt);
             }
         });
+
+        tfLongitud.setEnabled(false);
+
+        jLabel3.setText("Longitud de una circunferencia");
+
+        tfArea.setEnabled(false);
+
+        jLabel4.setText("Area de una circunferencia");
+
+        tfVolumen.setEnabled(false);
+        tfVolumen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfVolumenActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Volumen de una esfera");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,15 +98,22 @@ public class Calculadora extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(tfRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(bListo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bListo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addGap(119, 119, 119)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbArea)
-                            .addComponent(cbLongitud)
-                            .addComponent(cbVolumen))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                            .addComponent(tfLongitud, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfArea, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(jLabel4))
+                            .addComponent(tfVolumen, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(jLabel5)))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,12 +121,18 @@ public class Calculadora extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(cbLongitud)
-                .addGap(18, 18, 18)
-                .addComponent(cbArea)
-                .addGap(18, 18, 18)
-                .addComponent(cbVolumen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfLongitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addGap(8, 8, 8)
+                .addComponent(tfArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfVolumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -127,21 +144,13 @@ public class Calculadora extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -150,16 +159,6 @@ public class Calculadora extends javax.swing.JFrame {
     private void tfRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfRadioActionPerformed
 
     }//GEN-LAST:event_tfRadioActionPerformed
-
-    private void cbLongitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbLongitudActionPerformed
-        // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_cbLongitudActionPerformed
-
-    private void cbVolumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVolumenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbVolumenActionPerformed
 
     private void bListoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bListoActionPerformed
         // TODO add your handling code here:
@@ -170,6 +169,13 @@ public class Calculadora extends javax.swing.JFrame {
                 {
                     throw new NumeroNoValidoException();
                 }
+                t6p1e1.T6P1E1.datoCirculo(radio);
+                String dato = t6p1e1.T6P1E1.getArea();
+                tfArea.setText(dato);
+                dato = t6p1e1.T6P1E1.getLongitud();
+                tfLongitud.setText(dato);
+                dato = t6p1e1.T6P1E1.getVolumen();
+                tfVolumen.setText(dato);
             }
             catch(NumberFormatException e)
             {
@@ -178,8 +184,14 @@ public class Calculadora extends javax.swing.JFrame {
             catch(NumeroNoValidoException e)
             {
                 JOptionPane.showMessageDialog(null,"Prueba introduciendo otro radio");
-            }
+            } catch (Exception ex) {
+            Logger.getLogger(Calculadora.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bListoActionPerformed
+
+    private void tfVolumenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfVolumenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfVolumenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,12 +233,15 @@ public class Calculadora extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bListo;
-    private javax.swing.JCheckBox cbArea;
-    private javax.swing.JCheckBox cbLongitud;
-    private javax.swing.JCheckBox cbVolumen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField tfArea;
+    private javax.swing.JTextField tfLongitud;
     private javax.swing.JTextField tfRadio;
+    private javax.swing.JTextField tfVolumen;
     // End of variables declaration//GEN-END:variables
 }
