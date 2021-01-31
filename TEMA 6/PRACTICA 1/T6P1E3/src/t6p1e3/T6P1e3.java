@@ -1,20 +1,23 @@
 
 package t6p1e3;
 
+import Vista.Menu;
 import clases.*;
 import javax.swing.JOptionPane;
 import excepciones.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class T6P1e3 {
 
-    ArrayList <Persona> listaPersonas = new ArrayList <Persona>();
+    private static ArrayList <Persona> listaPersonas;
     
     public static void main(String[] args) {
         try
         {
+            listaPersonas = new ArrayList<Persona>();
             insertarPersonas();
-            menu();
+            abrirMenu();
         }
         catch(Exception e)
         {
@@ -22,77 +25,31 @@ public class T6P1e3 {
         }
     }
     public static void insertarPersonas() throws Exception{
-        int continuar = 0;
-        do
-        {
-        insertarDatos();
-        continuar = JOptionPane.showConfirmDialog(null, "Deseas anadir más personas?", "Añadir más Personas", JOptionPane.YES_NO_OPTION);
-        }
-        while(continuar == 0);
+        listaPersonas.add(new Persona("pepe", LocalDate.of(1, 5, 1954),"calle", "123456", "narnia"));
+        listaPersonas.add(new Persona("chenchu", LocalDate.of(1, 5, 1976),"rio", "112233", "sprinflind"));
+        listaPersonas.add(new Persona("juan palomo", LocalDate.of(1, 5, 1975),"puente", "554433", "aceitunilla"));
+        listaPersonas.add(new Persona("marcelino pan y vino", LocalDate.of(1, 5, 2009),"yeka", "123321", "el torno"));
     }
-    public static void insertarDatos() throws Exception{
-        int continuar = 0;
-        do
-        {
-            listaPersonas.add(--constructor)
-        }
-        while(continuar == 0);
+  
+    public static void abrirMenu() throws Exception{
+       Menu m = new Menu();
+       m.setVisible(true);
     }
-    public static void menu() throws Exception{
-        boolean fin = false;
-        do
+    public static String masViejo() throws Exception{
+        int x;
+        String nombre = "";
+        int anioViejo = 99999;
+        int anioComparar;
+        for(x = 0; x < listaPersonas.size(); x++)
         {
-            int n1 = 0;
-            while(n1 != 4)
+            anioComparar = listaPersonas.get(x).getFchNacimiento().getYear();
+            if(anioComparar < anioViejo)
             {
-                n1 = datoMenu(n1);
-                optMenu(n1);
+                anioViejo = anioComparar;
+                nombre = listaPersonas.get(x).getNombre();
             }
         }
-        while(fin == false);
+        return nombre;
     }
-    public static int datoMenu(int n1) throws Exception{
-        try
-        {
-            n1 = Integer.parseInt(JOptionPane.showInputDialog("MENU:\n\n"
-                                                              + "1- Persona de mayor edad\n"
-                                                              + "2- Personas que viven en Elche\n"
-                                                              + "3- Personas mayores de edad\n"
-                                                              + "4- Cerrar"));
-            if(n1 < 1 && n1 >4)
-            {
-                throw new NumeroNoValido();
-            }
-        }
-        catch(NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(null, "Debes introducir un caracter de tipo numerico");
-        }
-        catch(NumeroNoValido e)
-        {
-            JOptionPane.showMessageDialog(null, "Debes introducir una opcion (1-4)");
-        }
-        return n1;
-    }
-    public static void optMenu(int n1) throws Exception{
-        switch(n1){
-            case 1:
-            {
-                personaMayor();
-                break;
-            }
-            case 2:
-            {
-                deElche();
-                break;
-            }
-            case 3:
-            {
-                mayoresEdad();
-                break;
-            }
-            default:
-                break;
-        }
-    }
+   
 }
