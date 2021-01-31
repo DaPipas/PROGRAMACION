@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class T6P2E3 {
-    static ArrayList<Empleado> listaTodosEmpleados = new ArrayList<Empleado>();
-    static ArrayList<Directivo> listaDirectivos = new ArrayList<Directivo>();
+    static ArrayList<Empleado> listaTodosEmpleados;
+    static ArrayList<Directivo> listaDirectivos;
     public static void main(String[] args) {
         try
         {
+            listaTodosEmpleados = new ArrayList<Empleado>();
+            listaDirectivos = new ArrayList<Directivo>();
             inicializarDatos();
-            
-            System.out.println("listo");
+            JOptionPane.showMessageDialog(null, "Directivo con más subordinados: " + directivoMaxSubordinados());
         }
         catch(Exception e)
         {
@@ -36,14 +37,14 @@ public class T6P2E3 {
         
         listaDirectivos.add(new Directivo());
         listaDirectivos.get(1).setNombre("Juan");
-        for(int x = 0; x< 3; x++)
+        for(int x = 5; x< 7; x++)
         {
         listaDirectivos.get(1).addEmpleado(listaTodosEmpleados.get(x));
         }
         
         listaDirectivos.add(new Directivo());
         listaDirectivos.get(2).setNombre("Alberto");
-        for(int x = 0; x< 3; x++)
+        for(int x = 7; x< 10; x++)
         {
         listaDirectivos.get(2).addEmpleado(listaTodosEmpleados.get(x));
         }
@@ -55,9 +56,8 @@ public class T6P2E3 {
         
         for(int x = 0; x < listaDirectivos.size(); x++)
         {
-            if(listaDirectivos.get(x).getListaEmpleados().size() > max)
+            if(listaDirectivos.get(x).getListaEmpleados().size() > listaDirectivos.get(x+1).getListaEmpleados().size())
             {
-                max = listaDirectivos.get(x).getListaEmpleados().size();
                 d = listaDirectivos.get(x);
             }
         }
