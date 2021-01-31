@@ -1,18 +1,26 @@
 
 package t6p2e1;
 import Clases.*;
+import Vista.Ficha;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class T6P2e1 {
-    static ArrayList<Pelicula> listaPelicula = new ArrayList<Pelicula>();
-    static ArrayList<Estudio> listaEstudio = new ArrayList<Estudio>();
+    static ArrayList<Pelicula> listaPelicula;
+    static ArrayList<Estudio> listaEstudio;
     
     public static void main(String[] args) {
-        InicializarDatos();
-        /*String resultado = "Estudio con la pelicula más larga\n";*/
-        EstuidoMaxPeliculas();
-        
+        try
+        {
+            listaPelicula = new ArrayList<Pelicula>();
+            listaEstudio = new ArrayList<Estudio>();
+            InicializarDatos();
+            abrirFicha(getDatos());
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "#ERROR: " + e.getClass() + " " + e.getMessage());
+        }
         
     }
     public static void InicializarDatos(){
@@ -36,17 +44,50 @@ public class T6P2e1 {
         listaEstudio.get(0).setPeliculas(listaPelicula.get(2));
         listaEstudio.get(1).setPeliculas(listaPelicula.get(3));
         listaEstudio.get(1).setPeliculas(listaPelicula.get(4));
-        
-        
-        JOptionPane.showMessageDialog(null,"Listo");
     }
-    public static void EstuidoMaxPeliculas(){
-        int numPeli = 0;
-        String NombrEst = "";
-        for( int x = 0; x < listaEstudio.size(); x++)
+    public static String getDatos() throws Exception{
+        String datos = "";
+        datos += peliculaMasLarga();
+        datos += masPeliculas();
+        return datos;
+    }
+    public static String peliculaMasLarga() throws Exception{
+        Pelicula peliActual =  listaPelicula.get(1);
+        Pelicula peliDuracionMax = listaPelicula.get(0);
+        String dato = "--Estudios de la pelicula mas larga\n";
+        for(int x = 1;x < listaPelicula.size(); x++)
         {
-            
+            if(peliActual.getDuracion() > peliDuracionMax.getDuracion())
+            {
+                peliDuracionMax = peliActual;
+            }
         }
+        for(int x = 0; x < peliActual.getEstudios().size(); x++)
+        {
+            dato += peliActual.getEstudios().get(x).getNombre() + "\n";
+        }
+        dato += "\n";
+        return dato;
     }
-            
+    public static String masPeliculas() throws Exception{
+        String dato = "--Estudio con mas peliculas\n";
+        Estudio masPeliculas = listaEstudio.get(0);
+        Estudio actual = listaEstudio.get(1);
+        for(int x = 0; x < listaEstudio.size(); x++)
+        {
+            if(actual.getPeliculas().size() > masPeliculas.getPeliculas().size())
+            {
+                masPeliculas = actual;
+            }
+        }
+        dato += masPeliculas.getNombre();
+        return dato;
+    }
+    public static void abrirFicha(String datos) throws Exception{
+        Ficha f1 = new Ficha(datos);
+        f1.setVisible(true);
+    }
+    public static void finalizar() throws Exception{
+        System.exit(0);
+    }        
 }
