@@ -57,5 +57,10 @@ public class Persona {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
+
+    @Override
+    public String toString() {
+        return "nombre = " + nombre + "\nfchNacimiento = " + fchNacimiento + "\ndireccion = " +  direccion + "\ncp = " + cp + "\nciudad = " + ciudad;
+    }
     
 }
