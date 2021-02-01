@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import static t7p1e1.T7P1E1.salir;
 
@@ -216,6 +217,7 @@ public class Vista extends javax.swing.JFrame {
             tfIntentos.setText(String.valueOf(Integer.parseInt(tfIntentos.getText()) + 1));
             tfAcierto.setText(String.valueOf(Integer.parseInt(tfAcierto.getText()) + 1));
             tfResultado.setText(String.valueOf(total));
+            tfResultado.setBackground(Color.green);
             JOptionPane.showMessageDialog(this,"¡Correcto!"); /*atento con el this*/
         }
         else
