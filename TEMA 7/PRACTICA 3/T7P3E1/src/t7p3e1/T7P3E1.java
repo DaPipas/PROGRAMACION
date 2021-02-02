@@ -5,17 +5,35 @@
  */
 package t7p3e1;
 
+import Vista.Almacen;
+import java.util.ArrayList;
+
 /**
  *
  * @author 1gdaw05
  */
 public class T7P3E1 {
 
-    /**
-     * @param args the command line arguments
-     */
+    private static ArrayList listaProductos;
+    private static ArrayList listaProveedores;
+    private static ArrayList listaClientes;
+    
+    private final float DTOV = 0.8f;
+    private final float DTOPPP = 0.9f;
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        try
+        {
+            abrirAlmacen();
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
     
+    public static void abrirAlmacen() throws Exception{
+        Almacen a1 = new Almacen();
+        a1.setVisible(true);
+    }
 }
