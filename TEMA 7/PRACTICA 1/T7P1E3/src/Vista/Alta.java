@@ -5,6 +5,10 @@
  */
 package Vista;
 
+import Excepciones.DatoNoValido;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,9 +20,13 @@ public class Alta extends javax.swing.JFrame {
     /**
      * Creates new form Alta
      */
+    private boolean nuevo;
+    
+    
     public Alta() {
         initComponents();
         setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -39,6 +47,8 @@ public class Alta extends javax.swing.JFrame {
         tfDni = new javax.swing.JTextField();
         bAceptar = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        tfCurso = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,7 +61,18 @@ public class Alta extends javax.swing.JFrame {
 
         jLabel4.setText("DNI:");
 
+        tfNombre.setEditable(false);
+
+        tfApellidos.setEditable(false);
+
+        tfDni.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfDniFocusLost(evt);
+            }
+        });
+
         bAceptar.setText("Aceptar");
+        bAceptar.setEnabled(false);
         bAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bAceptarActionPerformed(evt);
@@ -65,6 +86,10 @@ public class Alta extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Curso:");
+
+        tfCurso.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,23 +99,25 @@ public class Alta extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(74, 74, 74))
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfNombre)
-                    .addComponent(tfApellidos)
-                    .addComponent(tfDni, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(97, 97, 97)
                 .addComponent(bAceptar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112))
+                .addGap(110, 110, 110))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfNombre)
+                    .addComponent(tfApellidos)
+                    .addComponent(tfDni, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                    .addComponent(tfCurso))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,72 +125,113 @@ public class Alta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bAceptar)
-                    .addComponent(bSalir))
-                .addGap(45, 45, 45))
+                    .addComponent(tfCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bSalir)
+                    .addComponent(bAceptar))
+                .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
-        // TODO add your handling code here:
         try
         {
-            boolean error = false;
-            
-            try
+            boolean editarMode = false;
+            if(t7p1e3.T7P1E3.getNuevo() && !editarMode)
             {
-                double comprobacion = Double.parseDouble(tfNombre.getText());
-                error = true;
+                validarNombre();
+                validarApellidos();
+                validarCurso();
+                t7p1e3.T7P1E3.datosPersona(tfNombre.getText(), tfApellidos.getText(), tfDni.getText(), tfCurso.getText());
             }
-            catch(NumberFormatException e)
+            if(!t7p1e3.T7P1E3.getNuevo() && !editarMode)
             {
-                error = false;
+                Opcion op = new Opcion(this, true);
+                op.setVisible(true);
+                if(t7p1e3.T7P1E3.getEditar())
+                {
+                    tfNombre.setEditable(true);
+                    tfApellidos.setEditable(true);
+                    tfCurso.setEditable(true);
+                }
+                if(t7p1e3.T7P1E3.getEliminar())
+                {
+                    tfNombre.setText("");
+                    tfApellidos.setText("");
+                    tfCurso.setText("");
+                    tfDni.setText("");
+                    tfDni.setEditable(true);
+                    tfDni.setFocusable(true);
+                    bAceptar.setEnabled(false);
+                }
             }
             
-            if(error = true)
-                throw new NumberFormatException();
-            
-            try
+            if(t7p1e3.T7P1E3.getEditar())
             {
-                double comprobacion = Double.parseDouble(tfApellidos.getText());
-                error = true;
+                try
+                {
+                    editarMode = true;
+                    validarNombre();
+                    validarApellidos();
+                    validarCurso();
+                    t7p1e3.T7P1E3.actualizarDatos(tfNombre.getText(),tfApellidos.getText(), tfCurso.getText());
+                    t7p1e3.T7P1E3.editar(false);
+                    tfNombre.setText("");
+                    tfApellidos.setText("");
+                    tfCurso.setText("");
+                    tfDni.setText("");
+                    tfDni.setFocusable(true);
+                    tfDni.setEditable(true);
+                    bAceptar.setEnabled(false);
+                    editarMode = false;
+                }
+                catch(DatoNoValido e)
+                {
+                    error(DatoNoValido.getText());
+                }
             }
-            catch(NumberFormatException e)
-            {
-                error = false;
-            }
-            
-            if(error = true)
-                throw new NumberFormatException();
-            
-            if(tfDni.getText().length != 9)
-                
-                
         }
-        catch(NumberFormatException e)
+        catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "El nombre y el apellido NO pueden contener NUMEROS");
+            error("ERROR: " + e.getClass() + " " + e.getMessage());
         }
     }//GEN-LAST:event_bAceptarActionPerformed
 
     private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bSalirActionPerformed
+
+    private void tfDniFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDniFocusLost
+        try
+        {
+            validarDni();
+        }
+        catch(DatoNoValido e)
+        {
+            error(DatoNoValido.getText());
+        }
+        catch(Exception e)
+        {
+            error("ERROR: " + e.getClass() + " " + e.getMessage());
+        }
+    }//GEN-LAST:event_tfDniFocusLost
 
     /**
      * @param args the command line arguments
@@ -199,7 +267,63 @@ public class Alta extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    public void error(String txt){
+        JOptionPane.showMessageDialog(null, txt);
+    }
+    
+    public void validarDni() throws Exception{
+        if(tfDni.getText().isEmpty())
+            throw new DatoNoValido("DNI vacio.");
+        Pattern pat = Pattern.compile("^[0-9]{7}[A-H|J-N|P-T|V-Z]$");
+        Matcher m = pat.matcher(tfDni.getText());
+        if(!m.matches())
+            throw new DatoNoValido("El formato del DNI no es valido.");
+        if(t7p1e3.T7P1E3.comprobarDni(tfDni.getText()))
+        {
+            t7p1e3.T7P1E3.nuevo(false);
+            tfDni.setEditable(false);
+            tfCurso.setText(t7p1e3.T7P1E3.datoCurso());
+            tfNombre.setText(t7p1e3.T7P1E3.datoNombre());
+            tfApellidos.setText(t7p1e3.T7P1E3.datoApellidos());
+            bAceptar.setEnabled(true);
+        }
+        else
+        {
+            t7p1e3.T7P1E3.nuevo(true);
+            tfDni.setEditable(false);
+            tfNombre.setEditable(true);
+            tfApellidos.setEditable(true);
+            tfCurso.setEditable(true);
+        }
+    }
+    
+    public void validarNombre() throws Exception{
+        if(tfNombre.getText().isEmpty())
+            throw new DatoNoValido("Nombre vacio.");
+        Pattern pat = Pattern.compile("^[A-Z][a-z]+|([ A-Z][a-z]+)*$");
+        Matcher m = pat.matcher(tfNombre.getText());
+        if(!m.matches())
+            throw new DatoNoValido("El nombre debe contener números y debe empezar con mayusculas.");
+    }
+    
+    public void validarApellidos() throws Exception{
+        if(tfApellidos.getText().isEmpty())
+            throw new DatoNoValido("Apellidos vacio.");
+        Pattern pat = Pattern.compile("^[A-Z][a-z]+|([ A-Z][a-z]+)*$");
+        Matcher m = pat.matcher(tfApellidos.getText());
+        if(!m.matches())
+            throw new DatoNoValido("Los apellidos deben contener números y debe empezar con mayusculas.");
+    }
+    
+    public void validarCurso() throws Exception{
+        if(tfCurso.getText().isEmpty())
+            throw new DatoNoValido("Curso vacio.");
+        Pattern pat = Pattern.compile("^[1-4][A|B|C|D]$");
+        Matcher m = pat.matcher(tfApellidos.getText());
+        if(!m.matches())
+            throw new DatoNoValido("Los apellidos deben contener números y debe empezar con mayusculas.");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAceptar;
     private javax.swing.JButton bSalir;
@@ -207,7 +331,9 @@ public class Alta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField tfApellidos;
+    private javax.swing.JTextField tfCurso;
     private javax.swing.JTextField tfDni;
     private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables

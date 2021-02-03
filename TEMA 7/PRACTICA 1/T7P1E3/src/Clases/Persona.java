@@ -5,12 +5,12 @@ public class Persona {
     private String nombre;
     private String apellido;
     private String dni;
-    private Curso curso;
+    private String curso;
 
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, String dni, Curso curso) {
+    public Persona(String nombre, String apellido, String dni, String curso) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -18,10 +18,10 @@ public class Persona {
     }
     
     public String getCurso() {
-        return curso.toString();
+        return curso;
     }
 
-    public void setCurso (Curso curso) {
+    public void setCurso (String curso) {
         this.curso = curso;
     }
     
