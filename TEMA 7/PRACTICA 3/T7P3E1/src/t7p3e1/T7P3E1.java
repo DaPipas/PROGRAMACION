@@ -5,17 +5,56 @@
  */
 package t7p3e1;
 
+import Clases.Cliente;
+import Clases.Producto;
+import Clases.Proveedor;
+import Vista.Almacen;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author 1gdaw05
  */
 public class T7P3E1 {
 
-    /**
-     * @param args the command line arguments
-     */
+    private static ArrayList<Producto> listaProductos;
+    private static ArrayList<Proveedor> listaProveedores;
+    private static ArrayList<Cliente> listaClientes;
+    
+    private final float DTOV = 0.8f;
+    private final float DTOPPP = 0.9f;
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        try
+        {
+            abrirAlmacen();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "ERROR: " +  e.getClass() + " " + e.getMessage());
+        }
     }
     
+    public static void abrirAlmacen() throws Exception{
+        Almacen a1 = new Almacen();
+        a1.setVisible(true);
+    }
+    
+    public static boolean comprobarNombreProducto(String producto) throws Exception{
+        int x;
+        for(x = 0; x<listaProductos.size()||producto == listaProductos.get(x).getNombre(); x++){}
+        if(x < listaProductos.size())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    public static void llenarCbProveedores(javax.swing.JComboBox cbProveedores){
+        for()
+    }
 }
