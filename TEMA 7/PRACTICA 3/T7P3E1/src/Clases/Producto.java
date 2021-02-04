@@ -53,4 +53,13 @@ public class Producto {
     public void addProveedor(Proveedor p){
         listaProveedores.add(p);
     }
+
+    public ArrayList<Proveedor> getListaProveedores() {
+        return listaProveedores;
+    }
+
+    public void setListaProveedores(ArrayList<Proveedor> listaProveedores) {
+        this.listaProveedores = listaProveedores;
+    }
+    
 }

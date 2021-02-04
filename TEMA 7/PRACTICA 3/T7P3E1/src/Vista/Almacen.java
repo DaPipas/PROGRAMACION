@@ -6,6 +6,8 @@
 package Vista;
 
 import Excepciones.DatoNoValido;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,7 +15,8 @@ import javax.swing.JOptionPane;
  * @author 1gdaw05
  */
 public class Almacen extends javax.swing.JFrame {
-
+    
+    boolean  comprar;
     /**
      * Creates new form Almacen
      */
@@ -378,10 +381,16 @@ public class Almacen extends javax.swing.JFrame {
         rbVender.setEnabled(false);
         tfPrecioCompra.setEditable(true);
         tfPrecioCompra.setFocusable(true);
+        comprar = true;
     }//GEN-LAST:event_rbComprarActionPerformed
 
     private void rbVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbVenderActionPerformed
-        // TODO add your handling code here:
+        rbVender.setEnabled(false);
+        tfCliente.setEnabled(true);
+        tfCliente.setFocusable(true);
+        tfPrecioVenta.setText(String.valueOf(t7p3e1.T7P3E1.precioVenta()));
+        tfImporteVenta.setText(String.valueOf(t7p3e1.T7P3E1.precioVenta() * Integer.parseInt(tfUnidades.getText())));
+        
     }//GEN-LAST:event_rbVenderActionPerformed
 
     private void tfNombreProductoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreProductoFocusLost
@@ -474,7 +483,19 @@ public class Almacen extends javax.swing.JFrame {
     }//GEN-LAST:event_tfPrecioVentaFocusLost
 
     private void tfClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfClienteFocusLost
-        // TODO add your handling code here:
+        try
+        {
+            tfCliente.getText().isEmpty();
+                throw new DatoNoValido("Nombre del cliente vacio.");
+            Pattern pat = Pattern.compile("^[A-Z|a-z]+");
+            Matcher m = pat.matcher(tfCliente.getText());
+        }
+        catch(DatoNoValido e)
+        {
+            error(DatoNoValido.getTxt());
+        }
+        cbDtopv.setEnabled(true);
+        cbDtoppp.setEnabled(true);
     }//GEN-LAST:event_tfClienteFocusLost
 
     private void cbDtopvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDtopvActionPerformed
@@ -486,7 +507,18 @@ public class Almacen extends javax.swing.JFrame {
     }//GEN-LAST:event_cbDtopppActionPerformed
 
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
-        // TODO add your handling code here:
+        if(comprar)
+        {
+            t7p3e1.T7P3E1.actualizarCompraProducto(Double.parseDouble(tfPrecioCompra.getText()), Integer.parseInt(tfUnidades.getText()));
+            JOptionPane.showMessageDialog(this, "Operación realizada con exito.");
+            dispose();
+        }
+        else
+        {
+            t7p3e1.T7P3E1.actualizarVentaProducto(Double.parseDouble(tfPrecioVenta.getText()), int unidades);
+            JOptionPane.showMessageDialog(this, "Operación realizada con exito.");
+            dispose();
+        }
     }//GEN-LAST:event_bAceptarActionPerformed
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
@@ -494,7 +526,11 @@ public class Almacen extends javax.swing.JFrame {
     }//GEN-LAST:event_bCancelarActionPerformed
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
-        // TODO add your handling code here:
+        cbProveedores.setEnabled(false);
+        double total = (Double.parseDouble(tfPrecioCompra.getText()) * Integer.parseInt(tfUnidades.getText()));
+        tfImporteCompra.setText(String.valueOf(total));
+        bAceptar.setEnabled(true);
+        bAceptar.setFocusable(true);
     }//GEN-LAST:event_cbProveedoresActionPerformed
 
     /**
