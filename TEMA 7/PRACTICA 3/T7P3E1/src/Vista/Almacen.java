@@ -385,12 +385,22 @@ public class Almacen extends javax.swing.JFrame {
     }//GEN-LAST:event_rbComprarActionPerformed
 
     private void rbVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbVenderActionPerformed
+        try
+        {
+        if(t7p3e1.T7P3E1.unidadesProducto() < Integer.parseInt(tfUnidades.getText()))
+            throw new DatoNoValido("Existencias insuficientes.");
         rbVender.setEnabled(false);
         tfCliente.setEnabled(true);
         tfCliente.setFocusable(true);
         tfPrecioVenta.setText(String.valueOf(t7p3e1.T7P3E1.precioVenta()));
-        tfImporteVenta.setText(String.valueOf(t7p3e1.T7P3E1.precioVenta() * Integer.parseInt(tfUnidades.getText())));
+        cbDtopv.setEnabled(true);
+        cbDtoppp.setEnabled(true);
         
+        }
+        catch(DatoNoValido e)
+        {
+            error(DatoNoValido.getTxt());
+        }
     }//GEN-LAST:event_rbVenderActionPerformed
 
     private void tfNombreProductoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreProductoFocusLost
@@ -485,25 +495,33 @@ public class Almacen extends javax.swing.JFrame {
     private void tfClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfClienteFocusLost
         try
         {
-            tfCliente.getText().isEmpty();
+            if(tfCliente.getText().isEmpty())
                 throw new DatoNoValido("Nombre del cliente vacio.");
-            Pattern pat = Pattern.compile("^[A-Z|a-z]+");
+            Pattern pat = Pattern.compile("^[A-Za-z ]{1, *}$");
             Matcher m = pat.matcher(tfCliente.getText());
+            if(!m.matches())
+                throw new DatoNoValido("Formato del nombre invalido");
+            t7p3e1.T7P3E1.encontrarCliente(tfCliente.getText());
+            cbDtopv.setEnabled(true);
+            cbDtoppp.setEnabled(true);
+            tfImporteVenta.setText(String.valueOf(t7p3e1.T7P3E1.precioVenta() * Integer.parseInt(tfUnidades.getText())));
+            bAceptar.setEnabled(true);
         }
         catch(DatoNoValido e)
         {
             error(DatoNoValido.getTxt());
         }
-        cbDtopv.setEnabled(true);
-        cbDtoppp.setEnabled(true);
+        
     }//GEN-LAST:event_tfClienteFocusLost
 
     private void cbDtopvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDtopvActionPerformed
-        // TODO add your handling code here:
+        tfImporteVenta.setText(String.valueOf(t7p3e1.T7P3E1.precioVenta() * Integer.parseInt(tfUnidades.getText()) * 0.9));
+        bAceptar.setFocusable(true);
     }//GEN-LAST:event_cbDtopvActionPerformed
 
     private void cbDtopppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDtopppActionPerformed
-        // TODO add your handling code here:
+        tfImporteVenta.setText(String.valueOf(t7p3e1.T7P3E1.precioVenta() * Integer.parseInt(tfUnidades.getText()) * 0.9));
+        bAceptar.setFocusable(true);
     }//GEN-LAST:event_cbDtopppActionPerformed
 
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
@@ -515,14 +533,14 @@ public class Almacen extends javax.swing.JFrame {
         }
         else
         {
-            t7p3e1.T7P3E1.actualizarVentaProducto(Double.parseDouble(tfPrecioVenta.getText()), int unidades);
+            t7p3e1.T7P3E1.actualizarVentaProducto(Integer.parseInt(tfUnidades.getText()));
             JOptionPane.showMessageDialog(this, "Operación realizada con exito.");
             dispose();
         }
     }//GEN-LAST:event_bAceptarActionPerformed
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
-        // TODO add your handling code here:
+        t7p3e1.T7P3E1.finalizar();
     }//GEN-LAST:event_bCancelarActionPerformed
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed

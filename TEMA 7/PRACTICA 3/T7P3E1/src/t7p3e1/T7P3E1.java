@@ -22,6 +22,7 @@ public class T7P3E1 {
     private static ArrayList<Proveedor> listaProveedores;
     private static ArrayList<Cliente> listaClientes;
     private static Producto productoActual;
+    private static Cliente clienteActual;
     
     private final float DTOV = 0.8f;
     private final float DTOPPP = 0.9f;
@@ -101,8 +102,31 @@ public class T7P3E1 {
     }
     
     public static double precioVenta() {
-        return productoActual.getPrecio();
+        return productoActual.getPrecio()*2;
     }
     
+    public static int unidadesProducto(){
+        return productoActual.getUnidades();
+    }
     
+    public static void encontrarCliente(String nombre){
+        int x;
+        for(x = 0; x<listaClientes.size()||nombre.equalsIgnoreCase(listaClientes.get(x).getNombre()); x++){}
+        if(x > listaClientes.size())
+        {
+            listaClientes.add(new Cliente(nombre));
+        }
+        else
+        {
+            clienteActual = listaClientes.get(x);
+        }
+    }
+    
+    public static void actualizarVentaProducto(int unidades){
+        productoActual.setUnidades(productoActual.getUnidades() - unidades );
+    }
+    
+    public static void finalizar(){
+    System.exit(0);
+    }
 }
