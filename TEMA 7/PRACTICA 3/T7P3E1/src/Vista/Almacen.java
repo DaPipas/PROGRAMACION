@@ -520,7 +520,7 @@ public class Almacen extends javax.swing.JFrame {
     }//GEN-LAST:event_cbDtopvActionPerformed
 
     private void cbDtopppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDtopppActionPerformed
-        tfImporteVenta.setText(String.valueOf(t7p3e1.T7P3E1.precioVenta() * Integer.parseInt(tfUnidades.getText()) * 0.9));
+        tfImporteVenta.setText(String.valueOf(t7p3e1.T7P3E1.precioVenta() * Integer.parseInt(tfUnidades.getText()) * 0.8));
         bAceptar.setFocusable(true);
     }//GEN-LAST:event_cbDtopppActionPerformed
 
