@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package t7p3e1;
+package t7p3e2;
 
 import Clases.Cliente;
 import Clases.Producto;
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author 1gdaw05
  */
-public class T7P3E1 {
+public class T7P3E2 {
 
     private static ArrayList<Producto> listaProductos;
     private static ArrayList<Proveedor> listaProveedores;
