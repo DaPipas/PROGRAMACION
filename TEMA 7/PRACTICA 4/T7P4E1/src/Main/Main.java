@@ -30,6 +30,7 @@ public class Main {
     public static void main(String[] args) {
         try
         {
+            listaClientes = new ArrayList();
             datosPrueba();
             abrirInicio();
         }
@@ -59,7 +60,7 @@ public class Main {
                 
         listaClientes.get(3).addCuenta(new Cuenta(123123123, 5555));
         
-        listaClientes.get(0).getListaCuentas().get(0).addMovimiento(new Transferencia("Pepe", LocalDate.parse("17/05/2020"), 200));
+        listaClientes.get(0).getListaCuentas().get(0).addMovimiento(new Transferencia("Pepe", LocalDate.parse("17/05/2020"), 200)); //formatter para la fecha hara falta
         listaClientes.get(0).getListaCuentas().get(0).addMovimiento(new Transferencia("Adolfo", LocalDate.parse("23/06/2020"), 150));
         listaClientes.get(0).getListaCuentas().get(0).addMovimiento(new PagoRecibo("12345678-A", LocalDate.parse("25/07/2020"), 58));
         listaClientes.get(0).getListaCuentas().get(0).addMovimiento(new Transferencia("Paula", LocalDate.parse("30/09/2020"), 312));
