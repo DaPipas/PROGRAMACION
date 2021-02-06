@@ -134,19 +134,16 @@ public class Compra extends javax.swing.JDialog {
             validarNombre();
             validarUnidades();
             validarPrecio();
-            if(Main.Main.comprobarProducto(tfNombre.getText()))
-            {
-                Main.Main.actualizarCompraProducto(Integer.parseInt(tfUnidades.getText(), Double.parseDouble(tfPrecio.getText())));
-            }
-            else
-            {
-                Main.Main.nuevoProducto(tfNombre.getText(),Integer.parseInt(tfUnidades.getText(), Double.parseDouble(tfPrecio.getText())));
-            }
-            
+            Main.Main.transferirDatos(tfNombre.getText(), tfUnidades.getText(), tfPrecio.getText());
+            dispose();
         }
         catch(DatoNoValido e)
         {
             error(DatoNoValido.getMensaje());
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "ERROR: " + e.getClass() + " " + e.getMessage());
         }
     }//GEN-LAST:event_bAceptarActionPerformed
 

@@ -92,13 +92,13 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_bSalirActionPerformed
 
     private void bComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bComprarActionPerformed
-        Venta c1 = new Venta(this, true);
-        c1.setVisible(true);
+        Compra v1 = new Compra(this, true);
+        v1.setVisible(true);
     }//GEN-LAST:event_bComprarActionPerformed
 
     private void bVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVentaActionPerformed
-        Compra v1 = new Compra(this, true);
-        v1.setVisible(true);
+        Venta c1 = new Venta(this, true);
+        c1.setVisible(true);
     }//GEN-LAST:event_bVentaActionPerformed
 
     /**

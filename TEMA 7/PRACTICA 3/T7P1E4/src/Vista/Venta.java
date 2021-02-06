@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import Excepciones.DatoNoValido;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,9 +54,16 @@ public class Venta extends javax.swing.JDialog {
 
         jLabel4.setText("Importe");
 
+        tfUnidades.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfUnidadesFocusLost(evt);
+            }
+        });
+
         tfImporte.setEditable(false);
 
         bAceptar.setText("Aceptar");
+        bAceptar.setEnabled(false);
         bAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bAceptarActionPerformed(evt);
@@ -127,8 +137,50 @@ public class Venta extends javax.swing.JDialog {
     }//GEN-LAST:event_bCancelarActionPerformed
 
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
-        
+        try
+        {
+            Main.Main.actualizarUnidadesProducto(tfUnidades.getText());
+            dispose();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "ERROR: " + e.getClass() + " " + e.getMessage());
+        }
     }//GEN-LAST:event_bAceptarActionPerformed
+
+    private void tfUnidadesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfUnidadesFocusLost
+        try
+        {
+            validarNombre();
+            validarUnidades();
+            if(Main.Main.comprobarProducto(tfNombre.getText()))
+            {
+                if(Main.Main.comprobarUnidadesProducto(tfUnidades.getText()))
+                {
+                    tfImporte.setText(Main.Main.datoImporte());
+                    bAceptar.enable(true);
+                    bAceptar.setFocusable(true);
+                }
+                else
+                {
+                    throw new DatoNoValido("Stock no disponible.");
+                }
+            }
+            else
+            {
+                throw new DatoNoValido("Producto no disponible");
+            }
+        
+        }
+        catch(DatoNoValido e)
+        {
+            
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "ERROR: " + e.getClass() + " " + e.getMessage());
+        }
+    }//GEN-LAST:event_tfUnidadesFocusLost
 
     /**
      * @param args the command line arguments
@@ -176,6 +228,24 @@ public class Venta extends javax.swing.JDialog {
     }
     public void error(String mensaje){
         JOptionPane.showMessageDialog(this, mensaje);
+    }
+    
+    public void validarNombre() throws Exception{
+        if(tfNombre.getText().isEmpty())
+            throw new DatoNoValido("Nombre vacio.");
+        Pattern pat = Pattern.compile("^[A-Za-z ]+$");
+        Matcher m = pat.matcher(tfNombre.getText());
+        if(!m.matches())
+            throw new DatoNoValido("El formato del nombre no valido.");
+    }
+    
+    public void validarUnidades() throws Exception{
+        if(tfUnidades.getText().isEmpty())
+            throw new DatoNoValido("Unidades vacias.");
+        Pattern pat = Pattern.compile("^[0-9]+$");
+        Matcher m = pat.matcher(tfUnidades.getText());
+        if(!m.matches())
+            throw new DatoNoValido("El formato de  las unidades no valido.");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAceptar;
