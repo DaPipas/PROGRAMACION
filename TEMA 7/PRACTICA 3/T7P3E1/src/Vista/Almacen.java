@@ -393,6 +393,10 @@ public class Almacen extends javax.swing.JFrame {
         tfCliente.setEnabled(true);
         tfCliente.setFocusable(true);
         tfPrecioVenta.setText(String.valueOf(t7p3e1.T7P3E1.precioVenta()));
+<<<<<<< HEAD
+        tfImporteVenta.setText(String.valueOf(t7p3e1.T7P3E1.precioVenta() * Integer.parseInt(tfUnidades.getText())));
+        //validar unidades
+=======
         cbDtopv.setEnabled(true);
         cbDtoppp.setEnabled(true);
         
@@ -401,6 +405,7 @@ public class Almacen extends javax.swing.JFrame {
         {
             error(DatoNoValido.getTxt());
         }
+>>>>>>> main
     }//GEN-LAST:event_rbVenderActionPerformed
 
     private void tfNombreProductoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNombreProductoFocusLost
