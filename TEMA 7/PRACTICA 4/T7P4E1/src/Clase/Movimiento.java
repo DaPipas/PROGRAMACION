@@ -5,7 +5,10 @@
  */
 package Clase;
 
+
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -14,6 +17,7 @@ import java.time.LocalDate;
 public class Movimiento {
     private LocalDate fecha;
     private double importe;
+    
 
     public Movimiento(LocalDate fecha, double importe) {
         this.fecha = fecha;
@@ -36,6 +40,8 @@ public class Movimiento {
     public void setImporte(double importe) {
         this.importe = importe;
     }
+
+    
     
     
 }

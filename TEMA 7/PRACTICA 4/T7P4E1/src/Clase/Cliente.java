@@ -5,6 +5,7 @@
  */
 package Clase;
 
+
 import java.util.ArrayList;
 
 /**
@@ -14,11 +15,11 @@ import java.util.ArrayList;
 public class Cliente {
     private String nombre;
     private String dni;
-    private int clave;
+    private String clave;
     
     private ArrayList<Cuenta> listaCuentas;
 
-    public Cliente(String nombre, String dni, int clave) {
+    public Cliente(String nombre, String dni, String clave) {
         this.nombre = nombre;
         this.dni = dni;
         this.clave = clave;
@@ -46,11 +47,11 @@ public class Cliente {
         this.dni = dni;
     }
 
-    public int getClave() {
+    public String getClave() {
         return clave;
     }
 
-    public void setClave(int clave) {
+    public void setClave(String clave) {
         this.clave = clave;
     }
 
@@ -61,6 +62,7 @@ public class Cliente {
     public void setListaCuentas(ArrayList<Cuenta> listaCuentas) {
         this.listaCuentas = listaCuentas;
     }
+    
     
     
     
