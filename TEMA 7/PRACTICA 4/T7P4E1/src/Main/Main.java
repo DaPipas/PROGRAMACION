@@ -5,6 +5,7 @@ import Clase.Cuenta;
 import Clase.PagoRecibo;
 import Clase.Transferencia;
 import Vista.Inicio;
+import Vista.Login;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -95,8 +96,10 @@ public class Main {
         init.setVisible(true);
     }
     
-    public static LocalDate formatoFch(String fecha){
+    public static LocalDate formatoFch (String fecha) throws Exception{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return LocalDate.parse(fecha, formatter);
     }
+    
+    
 }
