@@ -122,7 +122,7 @@ public class Inicio extends javax.swing.JFrame {
     }
     public void abrirLogin() throws Exception{
        Login log = new Login(this, true);
-       log.setVisible(true);
+       
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cAcceso;

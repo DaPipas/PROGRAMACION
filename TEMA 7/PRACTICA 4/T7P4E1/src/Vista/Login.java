@@ -24,6 +24,7 @@ public class Login extends javax.swing.JDialog {
             listaBotones = new ArrayList();
             llenarArrayList();
             generarBotones();
+            setVisible(true);
         
     }
 
@@ -132,6 +133,11 @@ public class Login extends javax.swing.JDialog {
         jLabel3.setText("Ej: 1234567A");
 
         bEntrar.setText("Entrar");
+        bEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEntrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,6 +189,10 @@ public class Login extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bEntrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -231,13 +241,13 @@ public class Login extends javax.swing.JDialog {
             do
             {
                 
-                listaBotones.get(x).setText(String.valueOf((int) Math.random() * 10));
+                listaBotones.get(x).setText(String.valueOf((int)(Math.random() * 10))); 
                 int y;
                 for(y = 0; y < listaBotones.size() || existe == true; y++)
                 {
                     if(listaBotones.get(x) != listaBotones.get(y))
                     {
-                        if(listaBotones.get(x).getText() == listaBotones.get(y).getText())
+                        if(listaBotones.get(x).getText() == listaBotones.get(y).getText()) //problema si se repite el numero
                         {
                             existe = true;
                         }
