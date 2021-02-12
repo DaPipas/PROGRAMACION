@@ -10,13 +10,13 @@ package Excepciones;
  * @author 1gdaw05
  */
 public class DatoNoValido extends Exception{
-    private String mensaje;
+    private static String mensaje;
 
     public DatoNoValido(String mensaje) {
         this.mensaje = mensaje;
     }
 
-    public String getMensaje() {
+    public static String getMensaje() {
         return mensaje;
     }
 

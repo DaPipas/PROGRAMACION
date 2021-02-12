@@ -6,6 +6,7 @@ import Clase.PagoRecibo;
 import Clase.Transferencia;
 import Vista.Inicio;
 import Vista.Login;
+import Vista.Menu;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -101,5 +102,13 @@ public class Main {
         return LocalDate.parse(fecha, formatter);
     }
     
+    public static void abrirMenu() throws Exception{
+        Menu m = new Menu();
+        m.setVisible(true);
+    }
+    
+    public static boolean validarUsuario(String nif, String pass) throws Exception{
+    
+    } 
     
 }

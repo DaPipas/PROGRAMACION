@@ -79,10 +79,11 @@ public class Inicio extends javax.swing.JFrame {
         try
         {
             abrirLogin();
+            dispose();
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "ERROR: " + e.getClass() + " " + e.getMessage());   
+            Main.Main.error("ERROR: " + e.getClass() + " " + e.getMessage());   
         }
     }//GEN-LAST:event_cAccesoActionPerformed
 

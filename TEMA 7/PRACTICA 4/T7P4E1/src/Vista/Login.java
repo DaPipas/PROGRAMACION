@@ -5,8 +5,10 @@
  */
 package Vista;
 
+import Excepciones.DatoNoValido;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -60,6 +62,8 @@ public class Login extends javax.swing.JDialog {
         jLabel1.setText("NIF");
 
         jLabel2.setText("Clave");
+
+        tfPass.setEditable(false);
 
         b1.setText("b1");
 
@@ -190,7 +194,27 @@ public class Login extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntrarActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            if(Main.Main.validarUsuario(tfNif.getText(), tfPass.getText()))
+            {
+                Main.Main.abrirMenu();
+                dispose();
+            }
+            else
+            {
+                throw new DatoNoValido("NIF o contraseña invalido.");
+            }
+        }
+        catch(DatoNoValido e)
+        {
+            Main.Main.error(DatoNoValido.getMensaje());
+        }
+        catch(Exception e)
+        {
+            Main.Main.error("ERROR: " + e.getClass() + " " + e.getMessage());
+        }
+        
     }//GEN-LAST:event_bEntrarActionPerformed
 
     /**
@@ -235,25 +259,26 @@ public class Login extends javax.swing.JDialog {
         });
     }
     public void generarBotones(){
-        boolean existe = false;
         for(int x = 0; x < listaBotones.size(); x++)
         {
+            boolean existe;
             do
             {
                 
                 listaBotones.get(x).setText(String.valueOf((int)(Math.random() * 10))); 
                 int y;
-                for(y = 0; y < listaBotones.size() || existe == true; y++)
+                existe = false;
+                for(y = 0; y < listaBotones.size() && existe == false; y++)
                 {
                     if(listaBotones.get(x) != listaBotones.get(y))
                     {
-                        if(listaBotones.get(x).getText() == listaBotones.get(y).getText()) //problema si se repite el numero
+                        if(!listaBotones.get(x).getText().contains(listaBotones.get(y).getText())) //problema si se repite el numero
                         {
-                            existe = true;
+                            existe = false;
                         }
                         else
                         {
-                            existe = false;
+                            existe = true;
                         }
                     }
                 }
