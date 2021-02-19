@@ -27,19 +27,78 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToolBar1 = new javax.swing.JToolBar();
+        mbAlta = new javax.swing.JButton();
+        mbListaNumeroEmpleado = new javax.swing.JButton();
+        mbListaContrato = new javax.swing.JButton();
+        mbListaDepartamento = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mAlta = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        mModificacion = new javax.swing.JMenuItem();
+        mBaja = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        mListaNumeroEmpleado = new javax.swing.JMenuItem();
+        mListaContrato = new javax.swing.JMenuItem();
+        mListaDepartamento = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jToolBar1.setRollover(true);
+
+        mbAlta.setText("-Alta-");
+        mbAlta.setFocusable(false);
+        mbAlta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        mbAlta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        mbAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mbAltaActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(mbAlta);
+
+        mbListaNumeroEmpleado.setText("-Lista numero empleados-");
+        mbListaNumeroEmpleado.setFocusable(false);
+        mbListaNumeroEmpleado.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        mbListaNumeroEmpleado.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        mbListaNumeroEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mbListaNumeroEmpleadoActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(mbListaNumeroEmpleado);
+
+        mbListaContrato.setText("-Lista por contracto-");
+        mbListaContrato.setFocusable(false);
+        mbListaContrato.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        mbListaContrato.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        mbListaContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mbListaContratoActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(mbListaContrato);
+
+        mbListaDepartamento.setText("-Lista por departamento-");
+        mbListaDepartamento.setFocusable(false);
+        mbListaDepartamento.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        mbListaDepartamento.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        mbListaDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mbListaDepartamentoActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(mbListaDepartamento);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel1.setText("Bienvenido");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Indica que operacion deas realizar");
 
         jMenu1.setText("Personas");
 
@@ -51,23 +110,48 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenu1.add(mAlta);
 
-        jMenuItem2.setText("jMenuItem2");
-        jMenu1.add(jMenuItem2);
+        mModificacion.setText("Modificación");
+        mModificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mModificacionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mModificacion);
 
-        jMenuItem3.setText("jMenuItem3");
-        jMenu1.add(jMenuItem3);
+        mBaja.setText("Baja");
+        mBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mBajaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mBaja);
         jMenu1.add(jSeparator1);
 
-        jMenu3.setText("jMenu3");
+        jMenu3.setText("Listado");
 
-        jMenuItem4.setText("jMenuItem4");
-        jMenu3.add(jMenuItem4);
+        mListaNumeroEmpleado.setText("Por número de empleado");
+        mListaNumeroEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mListaNumeroEmpleadoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mListaNumeroEmpleado);
 
-        jMenuItem6.setText("jMenuItem6");
-        jMenu3.add(jMenuItem6);
+        mListaContrato.setText("Por contrato");
+        mListaContrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mListaContratoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mListaContrato);
 
-        jMenuItem7.setText("jMenuItem7");
-        jMenu3.add(jMenuItem7);
+        mListaDepartamento.setText("Por departamento");
+        mListaDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mListaDepartamentoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mListaDepartamento);
 
         jMenu1.add(jMenu3);
 
@@ -82,11 +166,26 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 796, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(220, 220, 220)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 414, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93)
+                .addComponent(jLabel1)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel2)
+                .addGap(0, 175, Short.MAX_VALUE))
         );
 
         pack();
@@ -95,6 +194,42 @@ public class Inicio extends javax.swing.JFrame {
     private void mAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAltaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mAltaActionPerformed
+
+    private void mBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mBajaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mBajaActionPerformed
+
+    private void mModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModificacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mModificacionActionPerformed
+
+    private void mListaNumeroEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mListaNumeroEmpleadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mListaNumeroEmpleadoActionPerformed
+
+    private void mListaContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mListaContratoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mListaContratoActionPerformed
+
+    private void mListaDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mListaDepartamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mListaDepartamentoActionPerformed
+
+    private void mbAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mbAltaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mbAltaActionPerformed
+
+    private void mbListaNumeroEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mbListaNumeroEmpleadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mbListaNumeroEmpleadoActionPerformed
+
+    private void mbListaContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mbListaContratoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mbListaContratoActionPerformed
+
+    private void mbListaDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mbListaDepartamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mbListaDepartamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,16 +267,23 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem mAlta;
+    private javax.swing.JMenuItem mBaja;
+    private javax.swing.JMenuItem mListaContrato;
+    private javax.swing.JMenuItem mListaDepartamento;
+    private javax.swing.JMenuItem mListaNumeroEmpleado;
+    private javax.swing.JMenuItem mModificacion;
+    private javax.swing.JButton mbAlta;
+    private javax.swing.JButton mbListaContrato;
+    private javax.swing.JButton mbListaDepartamento;
+    private javax.swing.JButton mbListaNumeroEmpleado;
     // End of variables declaration//GEN-END:variables
 }
