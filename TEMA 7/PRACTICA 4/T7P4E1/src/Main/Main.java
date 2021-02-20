@@ -30,7 +30,7 @@ public class Main {
      * @param args the command line arguments
      */
     private static ArrayList<Cliente> listaClientes;
-    private Cliente clienteActual;
+    private static Cliente clienteActual;
     
     public static void main(String[] args) {
         try
@@ -50,10 +50,10 @@ public class Main {
     }
     
     public static void datosPrueba() throws Exception{
-        listaClientes.add(new Cliente("Pepe", "1234567A", DigestUtils.md5Hex("123456")));
-        listaClientes.add(new Cliente("IronMan", "7654321B", DigestUtils.md5Hex("654321")));
-        listaClientes.add(new Cliente("ShinChan", "1122334C", DigestUtils.md5Hex("112233")));
-        listaClientes.add(new Cliente("Masaho", "1112223", DigestUtils.md5Hex("111222")));
+        listaClientes.add(new Cliente("Pepe", "1234567-A", DigestUtils.md5Hex("123456")));
+        listaClientes.add(new Cliente("IronMan", "7654321-B", DigestUtils.md5Hex("654321")));
+        listaClientes.add(new Cliente("ShinChan", "1122334-C", DigestUtils.md5Hex("112233")));
+        listaClientes.add(new Cliente("Masaho", "1112223-L", DigestUtils.md5Hex("111222")));
         
         listaClientes.get(0).addCuenta(new Cuenta(123456789, 1255.5));
         listaClientes.get(0).addCuenta(new Cuenta(987654321, 1468.5));
@@ -108,7 +108,19 @@ public class Main {
     }
     
     public static boolean validarUsuario(String nif, String pass) throws Exception{
-    
+        boolean existe = false;
+        for(int x = 0; x < listaClientes.size() && existe == false; x++)
+        {
+            if(listaClientes.get(x).getDni().contains(nif))
+            {
+                if(listaClientes.get(x).getClave().contains(DigestUtils.md5Hex(pass)))
+                {
+                    clienteActual = listaClientes.get(x);
+                    existe = true;
+                }
+            }
+        }
+        return existe;
     } 
     
 }

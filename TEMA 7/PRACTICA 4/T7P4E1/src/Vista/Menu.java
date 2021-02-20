@@ -28,19 +28,249 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
+        bMovimientos = new javax.swing.JButton();
+        bConsulta = new javax.swing.JButton();
+        pCuentas = new javax.swing.JLayeredPane();
+        rbEjemplo1 = new javax.swing.JRadioButton();
+        rbEjemplo2 = new javax.swing.JRadioButton();
+        pMovimientos = new javax.swing.JPanel();
+        cbTipo = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        tfCuentaDestino = new javax.swing.JFormattedTextField();
+        jLabel9 = new javax.swing.JLabel();
+        tfImporte = new javax.swing.JFormattedTextField();
+        bAceptar = new javax.swing.JButton();
+        pConsulta = new javax.swing.JPanel();
+        lbM1 = new javax.swing.JLabel();
+        lbM2 = new javax.swing.JLabel();
+        lbM3 = new javax.swing.JLabel();
+        lbM4 = new javax.swing.JLabel();
+        lbM5 = new javax.swing.JLabel();
+        lbSaldo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
+        ss = new javax.swing.JMenu();
+        mConsulta = new javax.swing.JMenu();
+        mMovimientos = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jToolBar1.setRollover(true);
 
-        jMenu1.setText("File");
+        bMovimientos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/movimientos.JPG"))); // NOI18N
+        bMovimientos.setFocusable(false);
+        bMovimientos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bMovimientos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bMovimientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bMovimientosActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(bMovimientos);
+
+        bConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/consulta.JPG"))); // NOI18N
+        bConsulta.setFocusable(false);
+        bConsulta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bConsulta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConsultaActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(bConsulta);
+
+        pCuentas.setBorder(javax.swing.BorderFactory.createTitledBorder("Cuentas"));
+
+        rbEjemplo1.setText("rb de prueba 1");
+
+        rbEjemplo2.setText("rb de prueba 2");
+
+        pCuentas.setLayer(rbEjemplo1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        pCuentas.setLayer(rbEjemplo2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout pCuentasLayout = new javax.swing.GroupLayout(pCuentas);
+        pCuentas.setLayout(pCuentasLayout);
+        pCuentasLayout.setHorizontalGroup(
+            pCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pCuentasLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(pCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbEjemplo2)
+                    .addComponent(rbEjemplo1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pCuentasLayout.setVerticalGroup(
+            pCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pCuentasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rbEjemplo1)
+                .addGap(18, 18, 18)
+                .addComponent(rbEjemplo2)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        pMovimientos.setBorder(javax.swing.BorderFactory.createTitledBorder("Movimientos"));
+
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel7.setText("Tipo");
+
+        jLabel8.setText("Cuenta Destino");
+
+        try {
+            tfCuentaDestino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jLabel9.setText("Importe");
+
+        tfImporte.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        bAceptar.setText("Aceptar");
+
+        javax.swing.GroupLayout pMovimientosLayout = new javax.swing.GroupLayout(pMovimientos);
+        pMovimientos.setLayout(pMovimientosLayout);
+        pMovimientosLayout.setHorizontalGroup(
+            pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pMovimientosLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addGap(30, 30, 30)
+                .addGroup(pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbTipo, 0, 341, Short.MAX_VALUE)
+                    .addComponent(tfImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCuentaDestino, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pMovimientosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bAceptar)
+                .addGap(45, 45, 45))
+        );
+        pMovimientosLayout.setVerticalGroup(
+            pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pMovimientosLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(48, 48, 48)
+                .addGroup(pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(tfCuentaDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addGroup(pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(tfImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bAceptar)
+                .addGap(91, 91, 91))
+        );
+
+        pConsulta.setBorder(javax.swing.BorderFactory.createTitledBorder("Consulta"));
+
+        lbM1.setText("m1");
+
+        lbM2.setText("m2");
+
+        lbM3.setText("m3");
+
+        lbM4.setText("m4");
+
+        lbM5.setText("m5");
+
+        lbSaldo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        lbSaldo.setText("SALDO: ####");
+
+        javax.swing.GroupLayout pConsultaLayout = new javax.swing.GroupLayout(pConsulta);
+        pConsulta.setLayout(pConsultaLayout);
+        pConsultaLayout.setHorizontalGroup(
+            pConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pConsultaLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(pConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pConsultaLayout.createSequentialGroup()
+                        .addGroup(pConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbM1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbM2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbM3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbM4, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lbM5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pConsultaLayout.createSequentialGroup()
+                .addContainerGap(440, Short.MAX_VALUE)
+                .addComponent(lbSaldo)
+                .addGap(29, 29, 29))
+        );
+        pConsultaLayout.setVerticalGroup(
+            pConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pConsultaLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(lbM1)
+                .addGap(18, 18, 18)
+                .addComponent(lbM2)
+                .addGap(18, 18, 18)
+                .addComponent(lbM3)
+                .addGap(18, 18, 18)
+                .addComponent(lbM4)
+                .addGap(18, 18, 18)
+                .addComponent(lbM5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jMenu1.setText("Resumen");
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Tarjetas");
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Inversiones");
+        jMenuBar1.add(jMenu3);
+
+        jMenu5.setText("Mercados");
+        jMenuBar1.add(jMenu5);
+
+        jMenu6.setText("Prestamos");
+        jMenuBar1.add(jMenu6);
+
+        jMenu7.setText("Seguros");
+        jMenuBar1.add(jMenu7);
+
+        jMenu8.setText("Servicios");
+        jMenuBar1.add(jMenu8);
+
+        ss.setText("Cuentas");
+
+        mConsulta.setText("Consulta");
+        mConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mConsultaActionPerformed(evt);
+            }
+        });
+        ss.add(mConsulta);
+
+        mMovimientos.setText("Movimientos");
+        mMovimientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mMovimientosActionPerformed(evt);
+            }
+        });
+        ss.add(mMovimientos);
+
+        jMenuBar1.add(ss);
 
         setJMenuBar(jMenuBar1);
 
@@ -48,17 +278,48 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1385, Short.MAX_VALUE)
+            .addComponent(pCuentas)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(pMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(106, 106, 106)
+                .addComponent(pConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 446, Short.MAX_VALUE))
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pCuentas)
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMovimientosActionPerformed
+        mMovimientos.doClick();
+    }//GEN-LAST:event_bMovimientosActionPerformed
+
+    private void bConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConsultaActionPerformed
+        mConsulta.doClick();
+    }//GEN-LAST:event_bConsultaActionPerformed
+
+    private void mConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultaActionPerformed
+        pCuentas.setVisible(true);
+        pConsulta.setVisible(true);
+    }//GEN-LAST:event_mConsultaActionPerformed
+
+    private void mMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mMovimientosActionPerformed
+        pCuentas.setVisible(true);
+        pMovimientos.setVisible(true);
+    }//GEN-LAST:event_mMovimientosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -96,9 +357,37 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAceptar;
+    private javax.swing.JButton bConsulta;
+    private javax.swing.JButton bMovimientos;
+    private javax.swing.JComboBox<String> cbTipo;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lbM1;
+    private javax.swing.JLabel lbM2;
+    private javax.swing.JLabel lbM3;
+    private javax.swing.JLabel lbM4;
+    private javax.swing.JLabel lbM5;
+    private javax.swing.JLabel lbSaldo;
+    private javax.swing.JMenu mConsulta;
+    private javax.swing.JMenu mMovimientos;
+    private javax.swing.JPanel pConsulta;
+    private javax.swing.JLayeredPane pCuentas;
+    private javax.swing.JPanel pMovimientos;
+    private javax.swing.JRadioButton rbEjemplo1;
+    private javax.swing.JRadioButton rbEjemplo2;
+    private javax.swing.JMenu ss;
+    private javax.swing.JFormattedTextField tfCuentaDestino;
+    private javax.swing.JFormattedTextField tfImporte;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package Vista;
 
 import Excepciones.DatoNoValido;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -41,7 +42,6 @@ public class Login extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tfNif = new javax.swing.JTextField();
         tfPass = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         b1 = new javax.swing.JButton();
@@ -56,6 +56,7 @@ public class Login extends javax.swing.JDialog {
         b10 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         bEntrar = new javax.swing.JButton();
+        tfNif = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -143,6 +144,12 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
+        try {
+            tfNif.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#######-U")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,13 +165,12 @@ public class Login extends javax.swing.JDialog {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(jLabel3))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tfNif)
-                                        .addComponent(tfPass, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))))))
+                                    .addComponent(tfPass, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                                    .addComponent(tfNif)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(182, 182, 182)
                         .addComponent(bEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -196,6 +202,14 @@ public class Login extends javax.swing.JDialog {
     private void bEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntrarActionPerformed
         try
         {
+            if(tfNif.getText().isEmpty())
+            {
+                throw new DatoNoValido("NIF vacio.");
+            }
+            if(tfPass.getText().isEmpty())
+            {
+                throw new DatoNoValido("Contraseña vacia");
+            }
             if(Main.Main.validarUsuario(tfNif.getText(), tfPass.getText()))
             {
                 Main.Main.abrirMenu();
@@ -315,7 +329,7 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField tfNif;
+    private javax.swing.JFormattedTextField tfNif;
     private javax.swing.JPasswordField tfPass;
     // End of variables declaration//GEN-END:variables
 }
