@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import Excepciones.DatoNoValido;
+import static Main.T7P5E1.error;
+
 /**
  *
  * @author 1gdaw05
@@ -14,8 +17,10 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    int malicioso = 0;
     public Login() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -30,10 +35,10 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        tfUsuario = new javax.swing.JTextField();
-        tfPass = new javax.swing.JTextField();
         bAceptar = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
+        tfPass = new javax.swing.JPasswordField();
+        tfUsuario = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,12 +48,6 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Usuario");
 
         jLabel3.setText("Contraseña");
-
-        tfUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfUsuarioActionPerformed(evt);
-            }
-        });
 
         bAceptar.setText("Aceptar");
         bAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -63,6 +62,12 @@ public class Login extends javax.swing.JFrame {
                 bSalirActionPerformed(evt);
             }
         });
+
+        try {
+            tfUsuario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#######-U")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,8 +85,8 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfUsuario)
-                            .addComponent(tfPass, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)))
+                            .addComponent(tfPass)
+                            .addComponent(tfUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(201, 201, 201)
                         .addComponent(bAceptar)
@@ -112,16 +117,51 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfUsuarioActionPerformed
-
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            if(tfUsuario.getText().isEmpty())
+            {
+                throw new DatoNoValido("Usuario o contraseña invalido");
+            }
+            if(tfPass.getText().isEmpty())
+            {
+                throw new DatoNoValido("Usuario o contraseña invalido");
+            }
+            if(tfPass.getText().length() < 6)
+            {
+                throw new DatoNoValido("Usuario o contraseña invalido");
+            }
+            if(!Main.T7P5E1.usuarioValido(tfUsuario.getText(), tfPass.getText()))
+            {
+                throw new DatoNoValido("Usuario o contraseña invalido");
+            }
+            Main.T7P5E1.abrirVentanaInicio();
+            Main.T7P5E1.bandera();
+            dispose();
+        }
+        catch(DatoNoValido e)
+        {
+            malicioso++;
+            tfUsuario.setText("");
+            tfPass.setText("");
+            tfUsuario.setFocusable(true);
+            if(malicioso > 2){
+                Main.T7P5E1.abrirAmenaza();
+                dispose();
+            }
+            else{
+                Main.T7P5E1.error(e.getMensaje());
+            }
+        }
+        catch(Exception e)
+        {
+            error("#ERROR: " + e.getClass() + " " + e.getMessage());
+        }
     }//GEN-LAST:event_bAceptarActionPerformed
 
     private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
-        // TODO add your handling code here:
+        Main.T7P5E1.finalizar();
     }//GEN-LAST:event_bSalirActionPerformed
 
     /**
@@ -165,7 +205,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField tfPass;
-    private javax.swing.JTextField tfUsuario;
+    private javax.swing.JPasswordField tfPass;
+    private javax.swing.JFormattedTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
 }

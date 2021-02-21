@@ -16,15 +16,15 @@ public class Empleado {
     private int nss;
     private String nombreApellido;
     private String direccion;
-    private int telefono;
-    private String sexo;
-    private String estadoCivil;
+    private String telefono;
+    private char sexo;
+    private char estadoCivil;
     private Contrato tipoContrato;
     private Departamento departamento;
     private LocalDate fchAlta;
     private final int nEmpleado;
 
-    public Empleado(String dni, int nss, String nombreApellido, String direccion, int telefono, String sexo, String estadoCivil, Contrato tipoContrato, Departamento departamento, LocalDate fchAlta, int nEmpleado) {
+    public Empleado(String dni, int nss, String nombreApellido, String direccion, String telefono, char sexo, char estadoCivil, Contrato tipoContrato, Departamento departamento, LocalDate fchAlta, int nEmpleado) {
         this.dni = dni;
         this.nss = nss;
         this.nombreApellido = nombreApellido;
@@ -70,27 +70,27 @@ public class Empleado {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-    public String getSexo() {
+    public char getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(char sexo) {
         this.sexo = sexo;
     }
 
-    public String getEstadoCivil() {
+    public char getEstadoCivil() {
         return estadoCivil;
     }
 
-    public void setEstadoCivil(String estadoCivil) {
+    public void setEstadoCivil(char estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
 

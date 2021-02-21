@@ -17,6 +17,7 @@ public class Amenaza extends javax.swing.JDialog {
     public Amenaza(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -30,7 +31,7 @@ public class Amenaza extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        bOk = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -41,7 +42,12 @@ public class Amenaza extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("Se ha notificado al Adminitrador de esta incidencia.");
 
-        jButton1.setText("OK");
+        bOk.setText("OK");
+        bOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bOkActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -54,7 +60,7 @@ public class Amenaza extends javax.swing.JDialog {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(244, 244, 244)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bOk, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(162, 162, 162)
                         .addComponent(jLabel2)))
@@ -68,12 +74,16 @@ public class Amenaza extends javax.swing.JDialog {
                 .addGap(55, 55, 55)
                 .addComponent(jLabel2)
                 .addGap(32, 32, 32)
-                .addComponent(jButton1)
+                .addComponent(bOk)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOkActionPerformed
+        Main.T7P5E1.finalizar();
+    }//GEN-LAST:event_bOkActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,7 +128,7 @@ public class Amenaza extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bOk;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

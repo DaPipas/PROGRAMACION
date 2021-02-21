@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import static Main.T7P5E1.error;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author 1gdaw05
@@ -14,8 +17,37 @@ public class Formulario extends javax.swing.JFrame {
     /**
      * Creates new form Formulario
      */
+    int controladorFormulario;
     public Formulario() {
         initComponents();
+        setLocationRelativeTo(null);
+        
+    }
+    
+    public Formulario(int controlador) {
+        initComponents();
+        setLocationRelativeTo(null);
+        controladorFormulario = controlador;
+        switch (controladorFormulario){
+            case 0: 
+                    break;
+            case 1: 
+                    tfNss.setEditable(false);
+                    tfNombreApellidos.setEditable(false);
+                    tfDireccion.setEditable(false);
+                    tfTelefono.setEditable(false);
+                    rbHombre.setEnabled(false);
+                    rbMujer.setEnabled(false);
+                    rbCasado.setEnabled(false);
+                    rbSoltero.setEnabled(false);
+                    cbContrato.setEnabled(false);
+                    cbDepartamento.setEnabled(false);
+                    break;
+            case 2: 
+                    rbHombre.setEnabled(false);
+                    rbMujer.setEnabled(false);
+                    break;
+        }
     }
 
     /**
@@ -83,8 +115,24 @@ public class Formulario extends javax.swing.JFrame {
         jLabel11.setText("Número de empleado");
 
         bAceptar.setText("Aceptar");
+        bAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAceptarActionPerformed(evt);
+            }
+        });
 
         bCancelar.setText("Cancelar");
+        bCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCancelarActionPerformed(evt);
+            }
+        });
+
+        tfDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfDniActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -93,11 +141,6 @@ public class Formulario extends javax.swing.JFrame {
 
         bgSexo.add(rbMujer);
         rbMujer.setText("Mujer");
-        rbMujer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbMujerActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -147,15 +190,13 @@ public class Formulario extends javax.swing.JFrame {
                     .addComponent(rbCasado)))
         );
 
-        cbContrato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbContrato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Media Jornada", "Jornada Completa" }));
 
-        cbDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Personal", "Logistica", "Marketing" }));
 
-        tfFchAlta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfFchAltaActionPerformed(evt);
-            }
-        });
+        tfFchAlta.setEditable(false);
+
+        tfNumEmple.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -256,14 +297,62 @@ public class Formulario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfFchAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfFchAltaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfFchAltaActionPerformed
+    private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_bCancelarActionPerformed
 
-    private void rbMujerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMujerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbMujerActionPerformed
+    private void tfDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDniActionPerformed
+        try{
+            if(controladorFormulario == 2){
+                if(Main.T7P5E1.validarEmpleado()){
+                    tfNss.setText(Main.T7P5E1.datoNss());
+                    tfNombreApellidos.setText(Main.T7P5E1.datoNombreApellidos());
+                    tfDireccion.setText(Main.T7P5E1.datoDireccion());
+                    tfTelefono.setText(Main.T7P5E1.datoTelefono());
+                    String sexo = Main.T7P5E1.datoSexo();
+                    if(sexo.contains("H")){
+                        rbHombre.setSelected(true);
+                    }
+                    else{
+                        rbMujer.setSelected(true);
+                    }
+                    String estadoCivil = Main.T7P5E1.datoEstadoCivil();
+                    if(estadoCivil.contains("C")){
+                        rbCasado.setSelected(true);
+                    }
+                    else{
+                        rbSoltero.setSelected(true);
+                    }
+                    cbContrato.setSelectedIndex(Main.T7P5E1.datoContrato());
+                    cbDepartamento.setSelectedIndex(Main.T7P5E1.datoDepartamento());
+                }
+            }
+        }
+        catch(Exception e){
+            error("#ERROR: " + e.getClass() + " " + e.getMessage());
+        }
+    }//GEN-LAST:event_tfDniActionPerformed
 
+    private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
+       switch (controladorFormulario){
+            case 0: 
+                    validacionAlta();
+                    break;
+            case 1: 
+                    validarBaja();
+                    break;
+            case 2: 
+                    validarModificacion();
+                    break;
+        }
+    }//GEN-LAST:event_bAceptarActionPerformed
+     public void validacionBaja() throws Exception{
+        if(Main.T7P5E1.validarEmpleado()){
+            if(JOptionPane.showConfirmDialog(this, "¿Seguro que quieres eliminar el empleado?", "Eliminar Usuario", JOptionPane.YES_NO_OPTION) == 0){
+                Main.T7P5E1.eliminarEmpleado();
+            }
+        }
+     }
     /**
      * @param args the command line arguments
      */

@@ -111,7 +111,7 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="215" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -136,7 +136,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="mbAlta">
+        <Component class="javax.swing.JButton" name="bAlta">
           <Properties>
             <Property name="text" type="java.lang.String" value="-Alta-"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -144,10 +144,10 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mbAltaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAltaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="mbListaNumeroEmpleado">
+        <Component class="javax.swing.JButton" name="bListaNumeroEmpleado">
           <Properties>
             <Property name="text" type="java.lang.String" value="-Lista numero empleados-"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -155,10 +155,10 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mbListaNumeroEmpleadoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bListaNumeroEmpleadoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="mbListaContrato">
+        <Component class="javax.swing.JButton" name="bListaContrato">
           <Properties>
             <Property name="text" type="java.lang.String" value="-Lista por contracto-"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -166,10 +166,10 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mbListaContratoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bListaContratoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="mbListaDepartamento">
+        <Component class="javax.swing.JButton" name="bListaDepartamento">
           <Properties>
             <Property name="text" type="java.lang.String" value="-Lista por departamento-"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -177,7 +177,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mbListaDepartamentoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bListaDepartamentoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
