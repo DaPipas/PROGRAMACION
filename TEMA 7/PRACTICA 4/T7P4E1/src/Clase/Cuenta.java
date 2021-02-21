@@ -50,6 +50,7 @@ public class Cuenta {
     public void setListaMovimientos(ArrayList<Movimiento> listaMovimientos) {
         this.listaMovimientos = listaMovimientos;
     }
+
     
     
 }

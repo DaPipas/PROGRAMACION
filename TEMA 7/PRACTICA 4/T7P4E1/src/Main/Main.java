@@ -2,6 +2,7 @@ package Main;
 
 import Clase.Cliente;
 import Clase.Cuenta;
+import Clase.Ingreso;
 import Clase.PagoRecibo;
 import Clase.Transferencia;
 import Vista.Inicio;
@@ -31,6 +32,7 @@ public class Main {
      */
     private static ArrayList<Cliente> listaClientes;
     private static Cliente clienteActual;
+    private static Cuenta cuentaActual;
     
     public static void main(String[] args) {
         try
@@ -123,4 +125,45 @@ public class Main {
         return existe;
     } 
     
+    public static ArrayList datosCuentas() throws Exception{
+        return clienteActual.getListaCuentas();
+    } 
+    
+    public static void setCuentaActual(String dato) throws Exception{
+        for(int x = 0; x < clienteActual.getListaCuentas().size(); x++)
+        {
+            if(clienteActual.getListaCuentas().get(x).getnCuenta() == Integer.parseInt(dato))
+            {
+                cuentaActual = clienteActual.getListaCuentas().get(x);
+            }
+        }
+    }
+    
+    public static ArrayList datosConsulta() throws Exception{
+        ArrayList<String> movimientos = new ArrayList();
+        for(int x = 0; x <5; x++)
+        {
+            movimientos.add(cuentaActual.getListaMovimientos().get(x).toString());
+        }
+        return movimientos;
+    }
+    
+    public static String datoSaldo() throws Exception{
+        return "SALDO: " + String.valueOf(cuentaActual.getSaldo());
+    }
+    
+    public static void registrarTransferencia(String cuentaDestino, String importe) throws Exception{
+        cuentaActual.addMovimiento(new Transferencia(cuentaDestino, LocalDate.now(), Double.parseDouble(importe)));
+        cuentaActual.setSaldo(cuentaActual.getSaldo() - Double.parseDouble(importe));
+    }
+    
+    public static void registrarIngreso(String importe) throws Exception{
+        cuentaActual.addMovimiento(new Ingreso(LocalDate.now(), Double.parseDouble(importe)));
+        cuentaActual.setSaldo(cuentaActual.getSaldo() + Double.parseDouble(importe));
+    }
+    
+    public static void registrarPagoRecibo(String codRecibo, String importe) throws Exception{
+        cuentaActual.addMovimiento(new PagoRecibo(codRecibo, LocalDate.now(), Double.parseDouble(importe)));
+        cuentaActual.setSaldo(cuentaActual.getSaldo() - Double.parseDouble(importe));
+    }
 }

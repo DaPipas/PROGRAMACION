@@ -5,6 +5,11 @@
  */
 package Vista;
 
+import Excepciones.DatoNoValido;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+
 /**
  *
  * @author 1gdaw05
@@ -14,8 +19,13 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    ArrayList<JRadioButton> listaCuentas = new ArrayList();
+    int optMovimiento;
     public Menu() {
         initComponents();
+        pCuentas.setVisible(false);
+        pConsulta.setVisible(false);
+        pMovimientos.setVisible(false);
     }
 
     /**
@@ -27,20 +37,20 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgCuentas = new javax.swing.ButtonGroup();
         jToolBar1 = new javax.swing.JToolBar();
         bMovimientos = new javax.swing.JButton();
         bConsulta = new javax.swing.JButton();
         pCuentas = new javax.swing.JLayeredPane();
-        rbEjemplo1 = new javax.swing.JRadioButton();
-        rbEjemplo2 = new javax.swing.JRadioButton();
         pMovimientos = new javax.swing.JPanel();
         cbTipo = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        lbId = new javax.swing.JLabel();
         tfCuentaDestino = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
         tfImporte = new javax.swing.JFormattedTextField();
         bAceptar = new javax.swing.JButton();
+        tfCodRecibo = new javax.swing.JFormattedTextField();
         pConsulta = new javax.swing.JPanel();
         lbM1 = new javax.swing.JLabel();
         lbM2 = new javax.swing.JLabel();
@@ -88,41 +98,29 @@ public class Menu extends javax.swing.JFrame {
 
         pCuentas.setBorder(javax.swing.BorderFactory.createTitledBorder("Cuentas"));
 
-        rbEjemplo1.setText("rb de prueba 1");
-
-        rbEjemplo2.setText("rb de prueba 2");
-
-        pCuentas.setLayer(rbEjemplo1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        pCuentas.setLayer(rbEjemplo2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout pCuentasLayout = new javax.swing.GroupLayout(pCuentas);
         pCuentas.setLayout(pCuentasLayout);
         pCuentasLayout.setHorizontalGroup(
             pCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pCuentasLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(pCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbEjemplo2)
-                    .addComponent(rbEjemplo1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 1351, Short.MAX_VALUE)
         );
         pCuentasLayout.setVerticalGroup(
             pCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pCuentasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(rbEjemplo1)
-                .addGap(18, 18, 18)
-                .addComponent(rbEjemplo2)
-                .addContainerGap(17, Short.MAX_VALUE))
+            .addGap(0, 129, Short.MAX_VALUE)
         );
 
         pMovimientos.setBorder(javax.swing.BorderFactory.createTitledBorder("Movimientos"));
 
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TRANSFERENCIA", "INGRESO", "PAGO RECIBO" }));
+        cbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Tipo");
 
-        jLabel8.setText("Cuenta Destino");
+        lbId.setText("Cuenta Destino");
 
         try {
             tfCuentaDestino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
@@ -135,27 +133,34 @@ public class Menu extends javax.swing.JFrame {
         tfImporte.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         bAceptar.setText("Aceptar");
+        bAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pMovimientosLayout = new javax.swing.GroupLayout(pMovimientos);
         pMovimientos.setLayout(pMovimientosLayout);
         pMovimientosLayout.setHorizontalGroup(
             pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pMovimientosLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addGap(30, 30, 30)
-                .addGroup(pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbTipo, 0, 341, Short.MAX_VALUE)
-                    .addComponent(tfImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfCuentaDestino, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pMovimientosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bAceptar)
                 .addGap(45, 45, 45))
+            .addGroup(pMovimientosLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(lbId)
+                    .addComponent(jLabel9))
+                .addGap(30, 30, 30)
+                .addGroup(pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfCodRecibo, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                    .addGroup(pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cbTipo, 0, 341, Short.MAX_VALUE)
+                        .addComponent(tfImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfCuentaDestino, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         pMovimientosLayout.setVerticalGroup(
             pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,9 +171,11 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(48, 48, 48)
                 .addGroup(pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+                    .addComponent(lbId)
                     .addComponent(tfCuentaDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfCodRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addGroup(pMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(tfImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -196,22 +203,20 @@ public class Menu extends javax.swing.JFrame {
         pConsulta.setLayout(pConsultaLayout);
         pConsultaLayout.setHorizontalGroup(
             pConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pConsultaLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(pConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pConsultaLayout.createSequentialGroup()
-                        .addGroup(pConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbM1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbM2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbM3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbM4, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lbM5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pConsultaLayout.createSequentialGroup()
-                .addContainerGap(440, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbSaldo)
                 .addGap(29, 29, 29))
+            .addGroup(pConsultaLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(pConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbM5, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                    .addGroup(pConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lbM1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                        .addComponent(lbM2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbM3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbM4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         pConsultaLayout.setVerticalGroup(
             pConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,25 +284,28 @@ public class Menu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1385, Short.MAX_VALUE)
-            .addComponent(pCuentas)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(50, 50, 50)
                 .addComponent(pMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(106, 106, 106)
+                .addGap(102, 102, 102)
                 .addComponent(pConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pCuentas)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pCuentas)
-                .addGap(56, 56, 56)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -312,15 +320,182 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_bConsultaActionPerformed
 
     private void mConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultaActionPerformed
-        pCuentas.setVisible(true);
-        pConsulta.setVisible(true);
+        try
+        {
+            llenarCuentas(Main.Main.datosCuentas());
+            pCuentas.setVisible(true);
+        }
+        catch(Exception e)
+        {
+            Main.Main.error("ERROR: " + e.getClass() + " " + e.getMessage());
+        }
     }//GEN-LAST:event_mConsultaActionPerformed
 
     private void mMovimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mMovimientosActionPerformed
-        pCuentas.setVisible(true);
-        pMovimientos.setVisible(true);
+        try
+        {
+            llenarCuentas(Main.Main.datosCuentas());
+            pMovimientos.setVisible(true);
+        }
+        catch(Exception e)
+        {
+            Main.Main.error("ERROR: " + e.getClass() + " " + e.getMessage());
+        }
     }//GEN-LAST:event_mMovimientosActionPerformed
 
+    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
+        optMovimiento = cbTipo.getSelectedIndex();
+        switch(optMovimiento){
+            case 1: lbId.setText("Cuenta Destino");
+                    break;
+            case 2: lbId.setText("Cuenta Seleccionada");
+                    break;
+            case 3: lbId.setText("Número Recibo");
+                    tfCuentaDestino.setVisible(false);
+                    tfCodRecibo.setVisible(true);
+                    break;
+        }
+    }//GEN-LAST:event_cbTipoActionPerformed
+
+    private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
+        try
+        {
+            if(optMovimiento == 3)
+            {
+                if(tfCodRecibo.getText().isEmpty())
+                {
+                    throw new DatoNoValido("Codigo Recibo Vacio");
+                }
+            }
+            else
+            {
+                if(tfCuentaDestino.getText().isEmpty())
+                {
+                    throw new DatoNoValido("Numero de Cuenta vacio");
+                }
+            }
+            
+            if(tfImporte.getText().isEmpty())
+            {
+                throw new DatoNoValido("Importe Vacio");
+            }
+            
+            if(optMovimiento != 2)
+            {
+                if(Double.parseDouble(tfImporte.getText()) > Double.parseDouble(Main.Main.datoSaldo()))
+                {
+                    throw new DatoNoValido("Saldo insuficiente");
+                }
+            }
+            
+            switch(optMovimiento){
+            case 1: Main.Main.registrarTransferencia(tfCuentaDestino.getText(), tfImporte.getText());
+                    break;
+            case 2: Main.Main.registrarIngreso(tfImporte.getText());
+                    break;
+            case 3: Main.Main.registrarPagoRecibo(tfCodRecibo.getText(), tfImporte.getText());
+                    break;
+            }
+            
+            tfCodRecibo.setText("");
+            tfImporte.setText("");
+            tfCuentaDestino.setText("");
+            
+        }
+        catch(DatoNoValido e)
+        {
+            Main.Main.error(e.getMensaje());
+        }
+        catch(Exception e)
+        {
+            Main.Main.error("ERROR: " + e.getClass() + " " + e.getMessage());
+        }
+    }//GEN-LAST:event_bAceptarActionPerformed
+    
+    private void rbCuentaActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try
+        {
+            boolean encontrado = false;
+            for( int x = 0; x < listaCuentas.size() && encontrado == false; x++)
+            {
+                if(listaCuentas.get(x).isSelected())
+                {
+                    Main.Main.setCuentaActual(listaCuentas.get(x).getText());
+                    encontrado = true;
+                }
+            }
+            if(pConsulta.isVisible())
+            {
+                llenarConsultas(Main.Main.datosConsulta());
+                pConsulta.setVisible(true);
+            }
+            
+        }
+        catch(Exception e)
+        {
+            Main.Main.error("ERROR: " + e.getClass() + " " + e.getMessage());
+        }
+        
+    }
+    
+    public void llenarConsultas (ArrayList<String> listaMovimientos) throws Exception{
+        ArrayList<JLabel> listaLabel = new ArrayList();
+        listaLabel.add(lbM1);
+        listaLabel.add(lbM2);
+        listaLabel.add(lbM3);
+        listaLabel.add(lbM4);
+        listaLabel.add(lbM5);
+        for(int x = 0; x < listaMovimientos.size(); x++)
+        {
+            listaLabel.get(x).setText(listaMovimientos.get(x));
+        }
+        lbSaldo.setText(Main.Main.datoSaldo());
+    }
+    
+    public void llenarCuentas(ArrayList<String> datos) throws Exception{
+        pCuentas = new javax.swing.JLayeredPane();
+        bgCuentas = new javax.swing.ButtonGroup();
+        
+        for(int x = 0; x < datos.size(); x++)
+        {
+            
+            listaCuentas.add(new JRadioButton());
+            listaCuentas.get(x).setText(datos.get(x));
+            listaCuentas.get(x).addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbCuentaActionPerformed(evt);
+            }
+            });
+            
+            bgCuentas.add(listaCuentas.get(x));
+            
+            pCuentas.setLayer(listaCuentas.get(x), javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        
+            javax.swing.GroupLayout pCuentasLayout = new javax.swing.GroupLayout(pCuentas);
+            pCuentas.setLayout(pCuentasLayout);
+            pCuentasLayout.setHorizontalGroup(
+
+                pCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pCuentasLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(31, 31, 31)
+                    .addGroup(pCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(listaCuentas.get(x))));
+
+
+
+                pCuentasLayout.setVerticalGroup(
+                pCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pCuentasLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(listaCuentas.get(x))
+                    .addGap(18, 18, 18)
+                    .addContainerGap(20, Short.MAX_VALUE)));
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -360,9 +535,9 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton bAceptar;
     private javax.swing.JButton bConsulta;
     private javax.swing.JButton bMovimientos;
+    private javax.swing.ButtonGroup bgCuentas;
     private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -373,6 +548,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lbId;
     private javax.swing.JLabel lbM1;
     private javax.swing.JLabel lbM2;
     private javax.swing.JLabel lbM3;
@@ -384,9 +560,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel pConsulta;
     private javax.swing.JLayeredPane pCuentas;
     private javax.swing.JPanel pMovimientos;
-    private javax.swing.JRadioButton rbEjemplo1;
-    private javax.swing.JRadioButton rbEjemplo2;
     private javax.swing.JMenu ss;
+    private javax.swing.JFormattedTextField tfCodRecibo;
     private javax.swing.JFormattedTextField tfCuentaDestino;
     private javax.swing.JFormattedTextField tfImporte;
     // End of variables declaration//GEN-END:variables
