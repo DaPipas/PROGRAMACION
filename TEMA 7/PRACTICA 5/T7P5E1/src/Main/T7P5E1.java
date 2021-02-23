@@ -150,4 +150,71 @@ public class T7P5E1 {
         for(x = 0; x < listaDepartamentos.size() && empleadoActual.getDepartamento() == listaDepartamentos.get(x); x++){}
         return x;
     }
+    
+    public static boolean validarEmpleado(String dni) throws Exception{
+        boolean existe = false;
+        for(int x = 0; x < listaEmpleados.size() && existe == false; x++)
+        {
+            if(listaEmpleados.get(x).getDni().equals(dni)){
+                existe = true;
+            }
+        }
+        return existe;
+    }
+    
+    public static void eliminarEmpleado() throws Exception{
+        listaEmpleados.remove(empleadoActual);
+    }
+    
+    public static void validarModificacion(String nombreApellido, String direccion, String telefono, char estadoCivil, int contrato, int departamento) throws Exception{
+        empleadoActual.setNombreApellido(nombreApellido);
+        empleadoActual.setDireccion(direccion);
+        empleadoActual.setTelefono(telefono);
+        empleadoActual.setEstadoCivil(estadoCivil);
+        empleadoActual.setTipoContrato(listaTiposContrato.get(contrato));
+        empleadoActual.setDepartamento(listaDepartamentos.get(departamento));
+        
+    }
+    
+    public static void validarAlta(String dni, int nss, String nombreApellido, String direccion, String telefono,char sexo, char estadoCivil, int contrato, int departamento) throws Exception{
+        Contrato c = listaTiposContrato.get(contrato);
+        Departamento d = listaDepartamentos.get(departamento);
+        LocalDate fchAlta = LocalDate.now();
+        int cod = listaEmpleados.get(listaEmpleados.size()).getnEmpleado() + 1;
+        Empleado e1 = new Empleado(dni, nss, nombreApellido, direccion, telefono, sexo, estadoCivil, c, d, fchAlta, cod);
+    }
+    
+    public static String generarListaNumero() throws Exception{
+        String listaOrdenada= "";
+        for(int x = 0; x < listaEmpleados.size(); x++)
+        {
+            listaOrdenada += listaEmpleados.get(x).toString() + "\n";
+        }
+        return listaOrdenada;
+    }
+    
+    public static String generarListaContrato() throws Exception{
+        String listaOrdenada = "";
+        for(int x = 0; x < listaTiposContrato.size(); x++){
+            listaOrdenada = listaTiposContrato.get(x).getNombre() + "\n\n";
+            for(int y = 0; y < listaTiposContrato.get(x).getListaEmpleados().size(); y++)
+            {
+                listaOrdenada += listaTiposContrato.get(x).getListaEmpleados().get(y).toString() + "\n";
+            }
+        }
+        return listaOrdenada;
+    }
+    
+    public static String generarListaDepartamento() throws Exception{
+        String listaOrdenada = "";
+        for(int x = 0; x < listaDepartamentos.size(); x++){
+            listaOrdenada = listaDepartamentos.get(x).getNombre() + "\n\n";
+            for(int y = 0; y < listaDepartamentos.get(x).getListaEmpleados().size(); y++)
+            {
+                listaOrdenada += listaDepartamentos.get(x).getListaEmpleados().get(y).toString() + "\n";
+            }
+        }
+        return listaOrdenada;
+    }
 }
+   

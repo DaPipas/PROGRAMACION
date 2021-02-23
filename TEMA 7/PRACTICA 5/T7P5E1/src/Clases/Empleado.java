@@ -22,8 +22,12 @@ public class Empleado {
     private Contrato tipoContrato;
     private Departamento departamento;
     private LocalDate fchAlta;
-    private final int nEmpleado;
+    private int nEmpleado;
 
+    public Empleado() {
+    }
+    
+    
     public Empleado(String dni, int nss, String nombreApellido, String direccion, String telefono, char sexo, char estadoCivil, Contrato tipoContrato, Departamento departamento, LocalDate fchAlta, int nEmpleado) {
         this.dni = dni;
         this.nss = nss;
@@ -117,4 +121,14 @@ public class Empleado {
     public void setFchAlta(LocalDate fchAlta) {
         this.fchAlta = fchAlta;
     }
+
+    public int getnEmpleado() {
+        return nEmpleado;
+    }
+
+    public void setnEmpleado(int nEmpleado) {
+        this.nEmpleado = nEmpleado;
+    }
+    
+    
 }
