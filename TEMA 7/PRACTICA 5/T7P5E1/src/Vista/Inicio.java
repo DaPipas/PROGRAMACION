@@ -226,7 +226,8 @@ public class Inicio extends javax.swing.JFrame {
 
     private void mListaNumeroEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mListaNumeroEmpleadoActionPerformed
         try{
-            abrirListaNumero();
+            Listado l = new Listado("Lista de Empleados Ordenado por id", Main.T7P5E1.generarListaNumero());
+            l.setVisible(true);
         }
         catch(Exception e){
             error("#ERROR: " + e.getClass() + " " + e.getMessage());
@@ -235,7 +236,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void mListaContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mListaContratoActionPerformed
         try{
-            abrirListaContrato();
+            Listado l = new Listado("Lista de Empleados Ordenada por tipo de contrato", Main.T7P5E1.generarListaContrato());
         }
         catch(Exception e){
             error("#ERROR: " + e.getClass() + " " + e.getMessage());
@@ -244,7 +245,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void mListaDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mListaDepartamentoActionPerformed
         try{
-            abrirListaDepartamento();
+           Listado l = new Listado("Lista de Empleados Ordenada por Departamento", Main.T7P5E1.generarListaDepartamento());
         }
         catch(Exception e){
             error("#ERROR: " + e.getClass() + " " + e.getMessage());

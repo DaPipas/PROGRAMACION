@@ -44,6 +44,7 @@ public class Formulario extends javax.swing.JFrame {
                     cbDepartamento.setEnabled(false);
                     break;
             case 2: 
+                    tfNss.setEditable(false);
                     rbHombre.setEnabled(false);
                     rbMujer.setEnabled(false);
                     break;
@@ -304,7 +305,7 @@ public class Formulario extends javax.swing.JFrame {
     private void tfDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDniActionPerformed
         try{
             if(controladorFormulario == 2){
-                if(Main.T7P5E1.validarEmpleado()){
+                if(Main.T7P5E1.validarEmpleado(tfDni.getText())){
                     tfNss.setText(Main.T7P5E1.datoNss());
                     tfNombreApellidos.setText(Main.T7P5E1.datoNombreApellidos());
                     tfDireccion.setText(Main.T7P5E1.datoDireccion());
@@ -334,25 +335,77 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_tfDniActionPerformed
 
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
-       switch (controladorFormulario){
-            case 0: 
-                    validacionAlta();
-                    break;
-            case 1: 
-                    validarBaja();
-                    break;
-            case 2: 
-                    validarModificacion();
-                    break;
-        }
-    }//GEN-LAST:event_bAceptarActionPerformed
-     public void validacionBaja() throws Exception{
-        if(Main.T7P5E1.validarEmpleado()){
-            if(JOptionPane.showConfirmDialog(this, "¿Seguro que quieres eliminar el empleado?", "Eliminar Usuario", JOptionPane.YES_NO_OPTION) == 0){
-                Main.T7P5E1.eliminarEmpleado();
+        try
+        {
+            if(Main.T7P5E1.validarEmpleado(tfDni.getText())){
+                char estadoCivil;
+                switch (controladorFormulario){
+                case 0: 
+                        int nss = Integer.parseInt(tfNss.getText());
+                        
+                        if(rbCasado.isSelected())
+                        {
+                            estadoCivil = 'C';
+                        }
+                        else{
+                            estadoCivil = 'S';
+                        }
+                        char sexo;
+                        if(rbHombre.isSelected())
+                        {
+                            sexo = 'H';
+                        }
+                        else{
+                            sexo = 'M';
+                        }
+                        Main.T7P5E1.validarAlta(tfDni.getText(), nss, tfNombreApellidos.getText(), tfDireccion.getText(), tfTelefono.getText(), sexo, estadoCivil, cbContrato.getSelectedIndex(), cbDepartamento.getSelectedIndex());
+                        break;
+                case 1: 
+                        Main.T7P5E1.eliminarEmpleado();
+                        JOptionPane.showMessageDialog(null,"Usuario eliminado con exito.");
+                        dispose();
+                        break;
+                case 2:
+                        if(rbCasado.isSelected())
+                        {
+                            estadoCivil = 'C';
+                        }
+                        else{
+                            estadoCivil = 'S';
+                        }
+                        Main.T7P5E1.validarModificacion(
+                                        tfNombreApellidos.getText(),
+                                        tfDireccion.getText(),
+                                        tfTelefono.getText(),
+                                        estadoCivil,
+                                        cbContrato.getSelectedIndex(),
+                                        cbDepartamento.getSelectedIndex()
+                        );
+                        JOptionPane.showMessageDialog(null,"Usuario modificado con exito.");
+                        dispose();
+                        break;
+                }
+            }
+            else{
+                switch (controladorFormulario){
+                case 0: 
+                        JOptionPane.showMessageDialog(null,"Datos introducidos incorrectos.\nRevise los campos.");
+                        break;
+                case 1: 
+
+                        break;
+                case 2: 
+
+                        break;
+                }
             }
         }
-     }
+        catch(Exception e){
+            Main.T7P5E1.error("#ERROR: " + e.getClass() + " " + e.getMessage());
+        }
+    }//GEN-LAST:event_bAceptarActionPerformed
+     
+     
     /**
      * @param args the command line arguments
      */
