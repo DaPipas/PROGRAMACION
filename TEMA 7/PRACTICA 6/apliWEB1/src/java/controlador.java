@@ -8,6 +8,7 @@ import Clases.Usuario;
 import Excepciones.DatoNoValido;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author 1gdaw05
  */
+
 @WebServlet(urlPatterns = {"/controlador"})
 public class controlador extends HttpServlet {
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,6 +32,11 @@ public class controlador extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    ArrayList<Usuario> listaUsuarios;
+    
+    public void init() throws ServletException{
+        listaUsuarios = new ArrayList();
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -112,7 +119,7 @@ public class controlador extends HttpServlet {
     }
     
     public void nuevoUsuario(String nombre, String pass) throws ServletException, IOException{
-        Usuario u1 = new Usuario(nombre, pass);
+        listaUsuarios.add(new Usuario(nombre, pass));
     }
 
     /**
