@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Ejercicio 2</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>
+            Reserva mesa
+        </h1>
+        <form method="get" action="Controlador">
+            <label for="nombre">
+                <span>
+                    Nombre: 
+                </span>
+                <input type="text" id="nombre" name="nombre" required>
+            </label>
+            <br>
+            <label for="email">
+                <span>
+                    Correo electr&oacute;nico: 
+                </span>
+                <input type="email" id="email" name="email" required>
+            </label>
+            <br>
+            <label for="telefono">
+                <span>
+                    Tel&eacute;fono: 
+                </span>
+                <input type="text" id="telefono" name="telefono" required>
+            </label>
+            <br>
+            <label for="fecha">
+                <span>
+                    Fecha de reserva 
+                </span>
+                <input type="date" id="fecha" name="fecha" required>
+            </label>
+            <br>
+            <label for="horario">
+                <span>
+                    Franja Horaria 
+                </span>
+                <input type="time" id="horario" name="horario" required min="13:00:00" max="15:00:00">
+            </label>
+            <br>
+            <label for="comensales">
+                <span>
+                    Comensales 
+                </span>
+                <input type="number" id="comensales" name="comensales" required min="1" max="10">
+            </label>
+            <br>
+            <label for="mantel">
+                <span>
+                    Color del mantel 
+                </span>
+                <input type="color" id="mantel" name="mantel">
+            </label>
+            <br>
+            <label for="demandasExtra">
+                <span>
+                    Demandas especiales 
+                </span>
+                <br>
+                <textarea id="demandasExtra" name="demandasExtra"  rows="10" cols="50">alergias, tronas, ...</textarea>
+            </label>
+            <br>
+            <input type="submit">
+        </form>
+    </body>
+</html>
