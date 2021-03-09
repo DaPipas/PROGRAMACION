@@ -15,6 +15,10 @@ public class Persona {
     private String profesion;
     private String telefono;
 
+    public Persona() {
+    }
+
+    
     public Persona(String nombre, int edad, String profesion, String telefono) {
         this.nombre = nombre;
         this.edad = edad;

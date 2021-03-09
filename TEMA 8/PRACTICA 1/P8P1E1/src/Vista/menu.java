@@ -112,12 +112,12 @@ public class menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfOptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfOptActionPerformed
-        switch (tfOpt.getText()){
-                case 1: t8p1e1.T8P1E1.abrirAlta();
+        switch (Integer.parseInt(tfOpt.getText())){
+                case 1: t8p1e1.T8P1E1.abrirAlta(1);
                         break;
-                case 2: t8p1e1.T8P1E1.abrirConsultaIndividual();
+                case 2: t8p1e1.T8P1E1.abrirConsultaIndividual(2);
                         break;
-                case 3: t8p1e1.T8P1E1.abrriConsultaMultiple();
+                case 3: t8p1e1.T8P1E1.abrirConsultaMultiple(3);
                         break;
                 case 4: t8p1e1.T8P1E1.finalizar();
                         break;
