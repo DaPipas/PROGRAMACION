@@ -112,18 +112,25 @@ public class menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfOptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfOptActionPerformed
-        switch (Integer.parseInt(tfOpt.getText())){
-                case 1: t8p1e1.T8P1E1.abrirAlta(1);
-                        break;
-                case 2: t8p1e1.T8P1E1.abrirConsultaIndividual(2);
-                        break;
-                case 3: t8p1e1.T8P1E1.abrirConsultaMultiple(3);
-                        break;
-                case 4: t8p1e1.T8P1E1.finalizar();
-                        break;
-                default: JOptionPane.showMessageDialog(this, "Introduce una de las opciones 1-4");
-                        tfOpt.setText("");
-                        break;
+        try
+        {
+            switch (Integer.parseInt(tfOpt.getText())){
+                    case 1: t8p1e1.T8P1E1.abrirAlta();
+                            break;
+                    case 2: t8p1e1.T8P1E1.abrirConsultaIndividual();
+                            break;
+                    case 3: t8p1e1.T8P1E1.abrirConsultaMultiple();
+                            break;
+                    case 4: t8p1e1.T8P1E1.finalizar();
+                            break;
+                    default: JOptionPane.showMessageDialog(this, "Introduce una de las opciones 1-4");
+                            tfOpt.setText("");
+                            break;
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Algo a ido mal " + e.getMessage());
         }
     }//GEN-LAST:event_tfOptActionPerformed
 

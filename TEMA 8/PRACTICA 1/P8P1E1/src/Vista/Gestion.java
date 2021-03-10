@@ -5,18 +5,88 @@
  */
 package Vista;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author 1gdaw05
  */
 public class Gestion extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Gestion
-     */
+    int controlador;
+    
     public Gestion() {
         initComponents();
+        setLocationRelativeTo(null);
     }
+    
+    public Gestion(int control){
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        this.controlador = control;
+        
+        switch (controlador){
+            case 1: bBack.setVisible(false);
+                    bNext.setVisible(false);
+                    bSalir.setVisible(false);
+                    break;
+            case 2: bBack.setVisible(false);
+                    bNext.setVisible(false);
+                    bSalir.setVisible(false);
+                    tfNombre.setEditable(false);
+                    tfEdad.setEditable(false);
+                    tfProfesion.setEditable(false);
+                    tfTelefono.setEditable(false);
+                    rellenarDatos(controlador);
+                    break;
+            case 3: bBack.setVisible(true);
+                    bNext.setVisible(true);
+                    bSalir.setVisible(true);
+                    tfNombre.setEditable(false);
+                    tfEdad.setEditable(false);
+                    tfProfesion.setEditable(false);
+                    tfTelefono.setEditable(false);
+                    bAceptar.setVisible(false);
+                    rellenarDatos(controlador);
+                    break;
+            default: JOptionPane.showMessageDialog(null, "Algo a ido mal");
+                     dispose();
+                     break;
+        }
+            
+    }
+    
+    public void rellenarDatos(int controlador){
+        try
+        {
+            if(controlador == 2){
+                datoIndividual();
+            }
+            else{
+                datoMultiple(0);
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Algo a ido mal");
+        }
+    }
+    
+    public void datoIndividual() throws Exception{
+        tfNombre.getText(t8p1e1.T8P1E1.nombreIndividual());
+        tfEdad.getText(Integer.parseInt(t8p1e1.T8P1E1.edadIndividual()));
+        tfProfesion.getText(t8p1e1.T8P1E1.profesionIndividual());
+        tfTelefono.getText(t8p1e1.T8P1E1.telefonoIndividual());
+    }
+    
+    public void datoMultiple(int x) throws Exception{
+        tfNombre.getText(t8p1e1.T8P1E1.nombreMultiple(x));
+        tfEdad.getText(Integer.parseInt(t8p1e1.T8P1E1.edadMultiple(x)));
+        tfProfesion.getText(t8p1e1.T8P1E1.profesionMultiple(x));
+        tfTelefono.getText(t8p1e1.T8P1E1.telefonoMultiple(x));
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
