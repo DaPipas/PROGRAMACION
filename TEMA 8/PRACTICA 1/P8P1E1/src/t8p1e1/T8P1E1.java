@@ -44,4 +44,70 @@ public class T8P1E1 {
     public static String nombreIndividual() throws Exception{
         return personaActual.getNombre();
     }
+    
+    public static int edadIndividual() throws Exception{
+        return personaActual.getEdad();
+    }
+    
+    public static String profesionIndividual() throws Exception{
+        return personaActual.getProfesion();
+    } 
+    
+    public static String telefonoIndividual() throws Exception{
+        return personaActual.getTelefono();
+    }
+    
+    public static String nombreMultiple(int posicion) throws Exception{
+        if(posicion <= listaPersonas.size())
+        {
+            return listaPersonas.get(posicion).getNombre();
+        }
+        else
+        {
+            return listaPersonas.get(listaPersonas.size()).getNombre();
+        }
+    }
+    
+    public static int edadMultiple(int posicion) throws Exception{
+        if(posicion <= listaPersonas.size())
+        {
+            return listaPersonas.get(posicion).getEdad();
+        }
+        else
+        {
+            return listaPersonas.get(listaPersonas.size()).getEdad();
+        }
+    }
+    
+    public static String profesionMultiple(int posicion) throws Exception{
+        if(posicion <= listaPersonas.size())
+        {
+            return listaPersonas.get(posicion).getProfesion();
+        }
+        else
+        {
+            return listaPersonas.get(listaPersonas.size()).getProfesion();
+        }
+    }
+    
+    public static String telefonoMultiple(int posicion) throws Exception{
+        if(posicion <= listaPersonas.size())
+        {
+            return listaPersonas.get(posicion).getTelefono();
+        }
+        else
+        {
+            return listaPersonas.get(listaPersonas.size()).getTelefono();
+        }
+}
+    
+    public static int maxPersonas() throws Exception{
+        return listaPersonas.size();
+    }
+    
+    public static void altaNueva(String nombre, int edad, String profesion, String telefono) throws Exception{
+        Persona p = new Persona(nombre, edad, profesion, telefono);
+        TablaPersona tp = new TablaPersona();
+        tp.insertar(p);
+    }
 }

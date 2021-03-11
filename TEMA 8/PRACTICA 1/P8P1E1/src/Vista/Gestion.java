@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 public class Gestion extends javax.swing.JFrame {
 
     int controlador;
+    int posicion = 0;
+    int maxList;
     
     public Gestion() {
         initComponents();
@@ -41,6 +43,7 @@ public class Gestion extends javax.swing.JFrame {
                     rellenarDatos(controlador);
                     break;
             case 3: bBack.setVisible(true);
+                    bBack.setEnabled(false);
                     bNext.setVisible(true);
                     bSalir.setVisible(true);
                     tfNombre.setEditable(false);
@@ -57,7 +60,7 @@ public class Gestion extends javax.swing.JFrame {
             
     }
     
-    public void rellenarDatos(int controlador){
+    private void rellenarDatos(int controlador){
         try
         {
             if(controlador == 2){
@@ -65,6 +68,7 @@ public class Gestion extends javax.swing.JFrame {
             }
             else{
                 datoMultiple(0);
+                maxList = t8p1e1.T8P1E1.maxPersonas();
             }
         }
         catch(Exception e)
@@ -73,21 +77,23 @@ public class Gestion extends javax.swing.JFrame {
         }
     }
     
-    public void datoIndividual() throws Exception{
-        tfNombre.getText(t8p1e1.T8P1E1.nombreIndividual());
-        tfEdad.getText(Integer.parseInt(t8p1e1.T8P1E1.edadIndividual()));
-        tfProfesion.getText(t8p1e1.T8P1E1.profesionIndividual());
-        tfTelefono.getText(t8p1e1.T8P1E1.telefonoIndividual());
+    private void datoIndividual() throws Exception{
+        tfNombre.setText(t8p1e1.T8P1E1.nombreIndividual());
+        tfEdad.setText(String.valueOf(t8p1e1.T8P1E1.edadIndividual()));
+        tfProfesion.setText(t8p1e1.T8P1E1.profesionIndividual());
+        tfTelefono.setText(t8p1e1.T8P1E1.telefonoIndividual());
     }
     
-    public void datoMultiple(int x) throws Exception{
-        tfNombre.getText(t8p1e1.T8P1E1.nombreMultiple(x));
-        tfEdad.getText(Integer.parseInt(t8p1e1.T8P1E1.edadMultiple(x)));
-        tfProfesion.getText(t8p1e1.T8P1E1.profesionMultiple(x));
-        tfTelefono.getText(t8p1e1.T8P1E1.telefonoMultiple(x));
+    private void datoMultiple(int x) throws Exception{
+        tfNombre.setText(t8p1e1.T8P1E1.nombreMultiple(posicion));
+        tfEdad.setText(String.valueOf(t8p1e1.T8P1E1.edadMultiple(posicion)));
+        tfProfesion.setText(t8p1e1.T8P1E1.profesionMultiple(posicion));
+        tfTelefono.setText(t8p1e1.T8P1E1.telefonoMultiple(posicion));
     }
     
-
+    private boolean validarDatos() throws Exception{
+        return true;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,11 +246,43 @@ public class Gestion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBackActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            posicion -= 1;
+        
+            if(posicion <= 0)
+            {
+                bBack.setEnabled(false);
+            }
+            else
+            {
+                datoMultiple(posicion);
+            }  
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
     }//GEN-LAST:event_bBackActionPerformed
 
     private void bNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNextActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            posicion += 1;
+            
+            if(posicion >= maxList)
+            {
+                bNext.setEnabled(false);
+            }
+            else
+            {
+                datoMultiple(posicion);
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
     }//GEN-LAST:event_bNextActionPerformed
 
     private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
@@ -252,7 +290,30 @@ public class Gestion extends javax.swing.JFrame {
     }//GEN-LAST:event_bSalirActionPerformed
 
     private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            if(controlador == 1)
+            {
+                if(validarDatos())
+                {
+                    t8p1e1.T8P1E1.altaNueva(tfNombre.getText(), Integer.parseInt(tfEdad.getText()), tfProfesion.getText(), tfTelefono.getText());
+                    JOptionPane.showMessageDialog(this, "Alta realizada.");
+                    dispose();
+                }
+                else
+                {
+                    tfNombre.setFocusable(true);
+                }
+            }
+            else
+            {
+                dispose();
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        }
     }//GEN-LAST:event_bAceptarActionPerformed
 
     /**
