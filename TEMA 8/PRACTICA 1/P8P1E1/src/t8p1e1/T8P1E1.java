@@ -4,6 +4,7 @@ package t8p1e1;
 import ModeloDB.TablaPersona;
 import ModeloUML.Persona;
 import Vista.Gestion;
+import Vista.Menu;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -13,9 +14,20 @@ public class T8P1E1 {
     public static ArrayList<Persona> listaPersonas;
     
     public static void main(String[] args) {
-        
+        try
+        {
+        abrirMenu();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
     }
     
+    public static void abrirMenu() throws Exception{
+        Menu m = new Menu();
+        m.setVisible(true);
+    }
     public static void finalizar(){
         System.exit(0);
     }
