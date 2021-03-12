@@ -1,6 +1,7 @@
 
 package t8p1e1;
 
+import Excepciones.Problemas;
 import ModeloDB.TablaPersona;
 import ModeloUML.Persona;
 import Vista.Gestion;
@@ -16,11 +17,15 @@ public class T8P1E1 {
     public static void main(String[] args) {
         try
         {
-        abrirMenu();
+            abrirMenu();
+        }
+        catch(Problemas e)
+        {
+            JOptionPane.showMessageDialog(null, "Error: " + " " + e.getClass() + " " + e.getMensaje());
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: " + " " + e.getClass() + " " + e.getMessage());
         }
     }
     
@@ -28,6 +33,7 @@ public class T8P1E1 {
         Menu m = new Menu();
         m.setVisible(true);
     }
+    
     public static void finalizar(){
         System.exit(0);
     }
@@ -38,10 +44,10 @@ public class T8P1E1 {
     }
     
     public static void abrirConsultaIndividual() throws Exception{
-        String telefono = JOptionPane.showInputDialog("Introduce el numero de telefono de la persona que deses consuñltar: ");
-        Gestion cIndividual = new Gestion(2);
+        String telefono = JOptionPane.showInputDialog("Introduce el numero de telefono de la persona que deses consultar: ");
         TablaPersona datoPersona = new TablaPersona();
         personaActual = datoPersona.seleccionarUna(telefono);
+        Gestion cIndividual = new Gestion(2);
         cIndividual.setVisible(true);
     }
     

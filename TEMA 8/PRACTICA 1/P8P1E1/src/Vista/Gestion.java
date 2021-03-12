@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Excepciones.Problemas;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +23,7 @@ public class Gestion extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     
-    public Gestion(int control){
+    public Gestion(int control) throws Exception{
         initComponents();
         setLocationRelativeTo(null);
         
@@ -53,9 +54,8 @@ public class Gestion extends javax.swing.JFrame {
                     bAceptar.setVisible(false);
                     rellenarDatos(controlador);
                     break;
-            default: JOptionPane.showMessageDialog(null, "Algo a ido mal");
-                     dispose();
-                     break;
+            default: setVisible(false); 
+                     throw new Problemas("Fallo en con el controlador del menú.");
         }
             
     }
@@ -73,7 +73,7 @@ public class Gestion extends javax.swing.JFrame {
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "Algo a ido mal");
+            JOptionPane.showMessageDialog(null, "Error: " + " " + e.getClass() + " " + e.getMessage());
         }
     }
     
@@ -261,7 +261,7 @@ public class Gestion extends javax.swing.JFrame {
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: " + " " + e.getClass() + " " + e.getMessage());
         }
     }//GEN-LAST:event_bBackActionPerformed
 
@@ -281,7 +281,7 @@ public class Gestion extends javax.swing.JFrame {
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: " + " " + e.getClass() + " " + e.getMessage());
         }
     }//GEN-LAST:event_bNextActionPerformed
 
@@ -298,7 +298,7 @@ public class Gestion extends javax.swing.JFrame {
                 {
                     t8p1e1.T8P1E1.altaNueva(tfNombre.getText(), Integer.parseInt(tfEdad.getText()), tfProfesion.getText(), tfTelefono.getText());
                     JOptionPane.showMessageDialog(this, "Alta realizada.");
-                    dispose();
+                    this.dispose();
                 }
                 else
                 {
@@ -312,7 +312,7 @@ public class Gestion extends javax.swing.JFrame {
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: " + " " + e.getClass() + " " + e.getMessage());
         }
     }//GEN-LAST:event_bAceptarActionPerformed
 

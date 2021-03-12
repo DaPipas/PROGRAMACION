@@ -8,14 +8,14 @@ package ModeloDB;
 import java.sql.*;
 
 public class BaseDatos {
-    private Connection con;
+    private static Connection con;
 
-    public BaseDatos() {
+    public static void BaseDatos() {
     }
     
-    public void conectar(){
+    public static void conectar(){
         try{
-            Class.forName("com.mysql.jdbc.Dreiver");
+            Class.forName("com.mysql.jdbc.Driver");
             String bd = "bd_t8p1e1";
             String url = "jdbc:mysql://localhost:3306/"+bd;
             String login = "root";
@@ -25,13 +25,17 @@ public class BaseDatos {
             if(con==null){
                 throw new Exception("problemas con la conexión");
             }
+            else
+            {
+                System.out.println("Conexión realizada con exito.");
+            }
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
     }
     
-    public void desconectar(){
+    public static void desconectar(){
         try{
             con.close();
         }
@@ -40,7 +44,7 @@ public class BaseDatos {
         }
     }
     
-    public Connection getCon(){
+    public static Connection getCon(){
         return con;
     }
 }

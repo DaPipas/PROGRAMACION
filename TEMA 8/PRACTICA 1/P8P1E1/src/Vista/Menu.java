@@ -127,10 +127,11 @@ public class Menu extends javax.swing.JFrame {
                             tfOpt.setText("");
                             break;
             }
+            tfOpt.setText("");
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "Algo a ido mal " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error: " + this.getClass() + " " + e.getClass() + " " + e.getMessage());
         }
     }//GEN-LAST:event_tfOptActionPerformed
 
