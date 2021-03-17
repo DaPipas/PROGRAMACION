@@ -19,10 +19,7 @@ public class T8P1E1 {
         {
             abrirMenu();
         }
-        catch(Problemas e)
-        {
-            JOptionPane.showMessageDialog(null, "Error: " + " " + e.getClass() + " " + e.getMensaje());
-        }
+       
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error: " + " " + e.getClass() + " " + e.getMessage());
