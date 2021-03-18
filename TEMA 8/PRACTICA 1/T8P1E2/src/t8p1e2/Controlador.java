@@ -5,6 +5,11 @@
  */
 package t8p1e2;
 
+import BD.tablaEvento;
+import UML.Evento;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
 import javax.swing.JOptionPane;
 
 
@@ -18,6 +23,8 @@ public class Controlador {
     /**
      * @param args the command line arguments
      */
+    private static Evento eventoActual;
+    
     public static void main(String[] args) {
         try{
             tests();
@@ -28,8 +35,15 @@ public class Controlador {
         }
     }
     
-    public static void tests(){
+    public static void tests() throws Exception{
+        /*Comprobamos la conexion con la base de datos */
         BD.ControladorBD.conectar();
         BD.ControladorBD.desconectar();
+        
+        /*Comprobamos las ejecuciones en la base de datos EVENTO*/
+        eventoActual = new Evento("Boda", "Bilbao", LocalDate.of(2031, 5, 2), LocalTime.of(20, 0), LocalTime.of(1, 0), 30);
+        
+        tablaEvento.insertEvento(eventoActual);
+        
     }
 }
