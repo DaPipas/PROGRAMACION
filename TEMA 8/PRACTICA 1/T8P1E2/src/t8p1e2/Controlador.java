@@ -41,9 +41,12 @@ public class Controlador {
         BD.ControladorBD.desconectar();
         
         /*Comprobamos las ejecuciones en la base de datos EVENTO*/
-        eventoActual = new Evento("Boda", "Bilbao", LocalDate.of(2031, 5, 2), LocalTime.of(20, 0), LocalTime.of(1, 0), 30);
+        eventoActual = new Evento("Boda", "Vitoria", LocalDate.of(2031, 5, 2), LocalTime.of(20, 0), LocalTime.of(1, 0), 30);
         
         tablaEvento.insertEvento(eventoActual);
+        tablaEvento.validarEvento(eventoActual);
+        tablaEvento.updateEvento(eventoActual);
+        tablaEvento.deleteEvento(eventoActual);
         
     }
 }

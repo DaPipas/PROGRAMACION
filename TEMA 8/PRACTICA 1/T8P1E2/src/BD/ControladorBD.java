@@ -26,7 +26,7 @@ public class ControladorBD {
                 throw new Exception("Problemas con la conexion con la base de datos");
             }
             else{
-                System.out.println("Conexion realizada con exito.");
+                System.out.println("----Conexion realizada con exito.");
             }
         }
         catch(Exception e)
@@ -38,7 +38,7 @@ public class ControladorBD {
     public static void desconectar(){
         try{
             con.close();
-            System.out.println("Conexion cerrada con exito.");
+            System.out.println("----Conexion cerrada con exito.");
         }
         catch(Exception e){
             System.out.println("Problemas cerrando la conexion con la base de datos.");

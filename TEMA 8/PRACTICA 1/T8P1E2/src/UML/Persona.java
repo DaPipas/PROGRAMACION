@@ -5,6 +5,8 @@
  */
 package UML;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author 1gdaw05
@@ -14,17 +16,36 @@ public class Persona {
     private String nombre;
     private String apellido;
     private String telefono;
+    private Empresa empresa;
+    private ArrayList<Evento> listaEventos;
 
     public Persona() {
     }
 
-    public Persona(String dni, String nombre, String apellido, String telefono) {
+    public Persona(String dni, String nombre, String apellido, String telefono, Empresa empresa) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
+        this.empresa = empresa;
     }
 
+    public ArrayList<Evento> getListaEventos() {
+        return listaEventos;
+    }
+
+    public void setListaEventos(Evento e) {
+        this.listaEventos.add(e);
+    }
+    
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+    
     public String getDni() {
         return dni;
     }
