@@ -47,6 +47,5 @@ public class Controlador {
         tablaEvento.validarEvento(eventoActual);
         tablaEvento.updateEvento(eventoActual);
         tablaEvento.deleteEvento(eventoActual);
-        
     }
 }

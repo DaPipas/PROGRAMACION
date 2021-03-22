@@ -40,6 +40,3 @@ public class Empresa {
     
     
 }
-
-
-//crear foreingkey y relaciones 

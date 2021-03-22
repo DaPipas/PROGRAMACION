@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
 
     
@@ -121,9 +122,44 @@ public class tablaEvento {
         }
     }
     
+    public static ArrayList<String> selectProximosEventos() throws Exception{
+        ControladorBD.conectar();
+        con = ControladorBD.getCon();
+        String plantilla = "SELECT nombre FROM evento WHERE fecha > ?;";
+        PreparedStatement ps = con.prepareStatement(plantilla);
+        ps.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+        ResultSet resultado = ps.executeQuery();
+        ArrayList<String> listaEventos = new ArrayList();
+        while(resultado.next()){
+            listaEventos.add(resultado.getString("nombre"));
+        }
+        ControladorBD.desconectar();
+        if(resultado != null)
+            return listaEventos;
+        return null;
+    }
     
-    //public static Evento selectProximosEventos() throws Exception{}
-    
-    //public static int plazasDisponibles(Evento e) throws Exception{}
+    public static int plazasDisponibles(Evento e) throws Exception{
+        ControladorBD.conectar();
+        con = ControladorBD.getCon();
+        String plantilla = "SELECT aforo FROM evento WHERE nombre = ?;";
+        PreparedStatement ps = con.prepareStatement(plantilla);
+        ps.setString(1, e.getNombre());
+        ResultSet resultado = ps.executeQuery();
+        int aforo;
+        int ocupado;
+        if(resultado.next())
+        {
+            aforo = resultado.getInt("aforo");
+            ocupado = tablaAsistentes.getNumeroAsistentes(e);
+            int plazas = aforo - ocupado;
+            System.out.print("Plazas comprobadas con exito.");
+            ControladorBD.desconectar();
+            return plazas;
+        }
+        System.out.print("Error comprobando plazas.");
+        ControladorBD.desconectar();
+        return 0;
+    }
     
 }

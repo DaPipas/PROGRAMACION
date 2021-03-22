@@ -9,6 +9,7 @@ import UML.Persona;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
 
 /**
@@ -69,7 +70,29 @@ public class tablaPersona {
         }
     }
     //
-    //public static ArrayList<Persona> getDatosAsistentes(ArrayList<String> a) throws Exception{}
+    public static ArrayList<Persona> getDatosAsistentes(ArrayList<String> a) throws Exception{
+        ControladorBD.conectar();
+        con = ControladorBD.getCon();
+        String plantilla = "SELECT nombre, dni FROM persona WHERE LOWER(dni) = ?;";
+        PreparedStatement ps = con.prepareStatement(plantilla);
+        ArrayList<Persona> listaDatosAsistentes = new ArrayList();
+        Persona p;
+        for(int x = 0; x < a.size(); x++)
+        {
+            ps.setString(1, toLowerCase(a.get(x)));
+            ResultSet resultado = ps.executeQuery();
+            if(resultado.next()){
+                p = new Persona();
+                p.setNombre(resultado.getString("nombre"));
+                p.setDni(resultado.getString("dni"));
+                listaDatosAsistentes.add(p);
+            }
+                
+        }
+        if(listaDatosAsistentes == null)
+            return null;
+        return listaDatosAsistentes;
+    }
     
     
     
