@@ -159,7 +159,7 @@ public class tablaEvento {
         }
         System.out.print("Error comprobando plazas.");
         ControladorBD.desconectar();
-        return 0;
+        return -1;
     }
     
 }

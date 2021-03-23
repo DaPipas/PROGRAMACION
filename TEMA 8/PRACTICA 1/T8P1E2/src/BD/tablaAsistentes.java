@@ -20,7 +20,22 @@ import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
 public class tablaAsistentes {
     private static Connection con;
     
-    public static void insertAsistente(Evento e, Persona p) throws Exception{}
+    public static void insertAsistente(Evento e, Persona p) throws Exception{
+        ControladorBD.conectar();
+        con = ControladorBD.getCon();
+        
+        String plantilla = "INSERT INTO asistentes VALUES( nombre = ?, dni = ?);";
+        PreparedStatement ps = con.prepareStatement(plantilla);
+        ps.setString(1, e.getNombre());
+        ps.setString(2, p.getDni());
+        int x = ps.executeUpdate();
+        if(x!=1){
+            throw new Exception("Se ha actualizado mas de una fila.");
+        }
+        else{
+            System.out.println("Se ha insertado un nuevo asistente al evento");
+        }
+    }
     
     public static int getNumeroAsistentes(Evento e) throws Exception{
         ControladorBD.conectar();
