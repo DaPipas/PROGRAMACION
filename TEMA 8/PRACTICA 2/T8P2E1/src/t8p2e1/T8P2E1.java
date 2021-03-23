@@ -5,6 +5,8 @@
  */
 package t8p2e1;
 
+import GUI.ErrorGenerico;
+
 /**
  *
  * @author 1gdaw05
@@ -21,12 +23,17 @@ public class T8P2E1 {
         }
         catch(Exception e)
         {
-        
+            abrirError(e.getClass() + " : " + e.getMessage());
         }
     }
     
     public static void finalizar(){
         System.exit(0);
+    }
+    
+    public static void abrirError(String mensaje){
+        ErrorGenerico e = new ErrorGenerico(mensaje);
+        e.setVisible(true);
     }
     
 }
