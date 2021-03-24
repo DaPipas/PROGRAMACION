@@ -5,6 +5,8 @@
  */
 package UML;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author 1gdaw05
@@ -16,8 +18,10 @@ public class Cliente {
     private String direccion;
     private String telefono;
     private String email;
+    private ArrayList<Caso> listaCasos;
 
     public Cliente() {
+        listaCasos = new ArrayList();
     }
 
     public String getDni() {
@@ -66,6 +70,18 @@ public class Cliente {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public void addCaso(Caso c){
+        listaCasos.add(c);
+    }
+    
+    public void rmCaso(Caso c){
+        listaCasos.remove(c);
+    }
+
+    public ArrayList<Caso> getListaCasos() {
+        return listaCasos;
     }
     
     

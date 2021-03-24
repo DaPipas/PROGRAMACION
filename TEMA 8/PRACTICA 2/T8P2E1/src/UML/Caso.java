@@ -21,6 +21,7 @@ public class Caso {
     private ArrayList<Abogado> listaAbogados;
 
     public Caso() {
+        listaAbogados = new ArrayList();
     }
 
     public int getId() {
@@ -66,13 +67,12 @@ public class Caso {
     public ArrayList<Abogado> getListaAbogados() {
         return listaAbogados;
     }
-
-    public void setListaAbogados(ArrayList<Abogado> listaAbogados) {
-        this.listaAbogados = listaAbogados;
-    }
     
     public void addAbogado(Abogado a){
         listaAbogados.add(a);
     }
     
+    public void rmAbogado(Abogado a){
+        listaAbogados.remove(a);
+    }
 }

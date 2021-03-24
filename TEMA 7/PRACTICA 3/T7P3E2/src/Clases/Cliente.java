@@ -6,8 +6,9 @@
 package Clases;
 
 /**
- *
- * @author 1gdaw05
+ * Clase encargada de la compra de productos en nuestro modelo.
+ * @author Luis H. ALves
+ * @see Producto
  */
 public class Cliente {
     private String nombre;

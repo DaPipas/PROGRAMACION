@@ -5,10 +5,16 @@
  */
 package DB;
 
+import UML.Cliente;
+
 /**
  *
  * @author 1gdaw05
  */
 public class CasoDAO {
     
+    
+    public static Caso obtenerCasos(Cliente c) throws Exception{}
+    
+    public static void eliminarCaso(Cliente c) throws Exception{}
 }

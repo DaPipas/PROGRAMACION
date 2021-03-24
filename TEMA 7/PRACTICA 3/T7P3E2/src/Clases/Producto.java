@@ -8,8 +8,10 @@ package Clases;
 import java.util.ArrayList;
 
 /**
- *
- * @author 1gdaw05
+ * Nucleo del modelo, identifica los productos del almacén.
+ * @author Luis H. ALves
+ * @see Proveedor
+ * @see Cliente
  */
 public class Producto {
     private String nombre;

@@ -6,8 +6,9 @@
 package Clases;
 
 /**
- *
- * @author 1gdaw05
+ * Clase encargada de la obtencion de productos.
+ * @author Luis H. Alves
+ * @see Producto
  */
 public class Proveedor {
     private String nombre;

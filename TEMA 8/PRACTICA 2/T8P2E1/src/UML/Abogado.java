@@ -19,6 +19,7 @@ public class Abogado {
     private ArrayList<Caso> listaCasos;
 
     public Abogado() {
+        listaCasos = new ArrayList();
     }
 
     public String getDni() {
@@ -56,12 +57,12 @@ public class Abogado {
     public ArrayList<Caso> getListaCasos() {
         return listaCasos;
     }
-
-    public void setListaCasos(ArrayList<Caso> listaCasos) {
-        this.listaCasos = listaCasos;
-    }
     
     public void addCaso(Caso c){
         listaCasos.add(c);
+    }
+    
+    public void rmCaso(Caso c){
+        listaCasos.remove(c);
     }
 }
