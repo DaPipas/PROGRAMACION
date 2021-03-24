@@ -5,7 +5,11 @@
  */
 package t8p2e1;
 
+import GUI.Alta;
 import GUI.ErrorGenerico;
+import GUI.Inicio;
+import UML.Abogado;
+import UML.Cliente;
 
 /**
  *
@@ -16,10 +20,17 @@ public class T8P2E1 {
     /**
      * @param args the command line arguments
      */
+    public static Cliente clienteActual;
+    public static Abogado abogadoActual;
+    
+    public static Inicio vInicio;
+    public static Alta vAlta;
+    
     public static void main(String[] args) {
         try
         {
-        
+            abrirInicio();
+            
         }
         catch(Exception e)
         {
@@ -34,6 +45,17 @@ public class T8P2E1 {
     public static void abrirError(String mensaje){
         ErrorGenerico e = new ErrorGenerico(mensaje);
         e.setVisible(true);
+    }
+    
+    public static void abrirInicio() throws Exception{
+        vInicio = new Inicio();
+        vInicio.setVisible(true);
+    }
+    
+    public static void abrirAlta(Boolean cliente) throws Exception{
+        //abrir en modo cliente true o false
+        vAlta = new Alta(cliente);
+        vAlta.setVisible(true);
     }
     
 }

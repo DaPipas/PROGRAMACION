@@ -14,7 +14,7 @@ import UML.Cliente;
 public class CasoDAO {
     
     
-    public static Caso obtenerCasos(Cliente c) throws Exception{}
+    //public static Caso obtenerCasos(Cliente c) throws Exception{}
     
-    public static void eliminarCaso(Cliente c) throws Exception{}
+    //public static void eliminarCaso(Cliente c) throws Exception{}
 }
