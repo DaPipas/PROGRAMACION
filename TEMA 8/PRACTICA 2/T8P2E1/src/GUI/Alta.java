@@ -179,14 +179,14 @@ public class Alta extends javax.swing.JFrame {
         try{
             if(validarDatos(modoCliente, tfDni.getText(), tfNombre.getText(), tfApellidos.getText(), tfDireccion.getText(), tfTelefono.getText(), tfEmail.getText()))
             {
-                t8p2e1.T8P2E1.datoDni(modoCliente);
-                t8p2e1.T8P2E1.datoNombre(modoCliente);
-                t8p2e1.T8P2E1.datoApellidos(modoCliente);
-                t8p2e1.T8P2E1.datoDireccion(modoCliente);
+                t8p2e1.T8P2E1.datoDni(tfDni.getText(), modoCliente);
+                t8p2e1.T8P2E1.datoNombre(tfNombre.getText(), modoCliente);
+                t8p2e1.T8P2E1.datoApellidos(tfApellidos.getText(), modoCliente);
+                t8p2e1.T8P2E1.datoDireccion(tfDireccion.getText(), modoCliente);
                 if(modoCliente)
                 {
-                    t8p2e1.T8P2E1.datoTelefono();
-                    t8p2e1.T8P2E1.datoEmail();
+                    t8p2e1.T8P2E1.datoTelefono(tfTelefono.getText());
+                    t8p2e1.T8P2E1.datoEmail(tfEmail.getText());
                 }
             }
             t8p2e1.T8P2E1.Alta(modoCliente);

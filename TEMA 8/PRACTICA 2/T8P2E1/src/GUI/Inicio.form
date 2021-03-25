@@ -9,38 +9,26 @@
             <Property name="text" type="java.lang.String" value="Abogados"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="mAltaAbogado">
+            <MenuItem class="javax.swing.JMenuItem" name="mAltaAbogado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Alta"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mAltaAbogadoActionPerformed"/>
-              </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mBajaAbogado">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mBajaAbogado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Baja"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mBajaAbogadoActionPerformed"/>
-              </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mModificarAbogado">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mModificarAbogado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mModificarAbogadoActionPerformed"/>
-              </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mConsultaAbogado">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mConsultaAbogado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consulta"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mConsultaAbogadoActionPerformed"/>
-              </Events>
-            </Menu>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mCliente">
@@ -48,38 +36,38 @@
             <Property name="text" type="java.lang.String" value="Clientes"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="mAltaCliente">
+            <MenuItem class="javax.swing.JMenuItem" name="mAltaCliente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Alta"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mAltaClienteActionPerformed"/>
               </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mBajaCliente">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mBajaCliente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Baja"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mBajaClienteActionPerformed"/>
               </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mModificarCliente">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mModificarCliente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mModificarClienteActionPerformed"/>
               </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mConsultaCliente">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mConsultaCliente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consulta"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mConsultaClienteActionPerformed"/>
               </Events>
-            </Menu>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mCaso">
@@ -87,47 +75,42 @@
             <Property name="text" type="java.lang.String" value="Casos"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="mAltaCaso">
+            <MenuItem class="javax.swing.JMenuItem" name="mAltaCaso">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Alta"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mAltaCasoActionPerformed"/>
-              </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mBajaCaso">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mBajaCaso">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Baja"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mBajaCasoActionPerformed"/>
-              </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mModificarCaso">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mModificarCaso">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Modificar"/>
+                <Property name="text" type="java.lang.String" value="Modificaci&#xf3;n"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mModificarCasoActionPerformed"/>
-              </Events>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="mConsultaCaso">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mConsultaCaso">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consulta"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mConsultaCasoActionPerformed"/>
-              </Events>
-            </Menu>
+            </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mSalir">
+        <Menu class="javax.swing.JMenu" name="menusalir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mSalirActionPerformed"/>
-          </Events>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mSalir">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Salir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mSalirActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>

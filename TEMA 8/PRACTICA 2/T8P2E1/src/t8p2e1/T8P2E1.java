@@ -5,6 +5,7 @@
  */
 package t8p2e1;
 
+import DB.ClienteDAO;
 import GUI.Alta;
 import GUI.ErrorGenerico;
 import GUI.Inicio;
@@ -57,5 +58,64 @@ public class T8P2E1 {
         vAlta = new Alta(cliente);
         vAlta.setVisible(true);
     }
+    
+    public static void datoDni(String dni, Boolean cliente) throws Exception{
+        if(cliente)
+        {
+            clienteActual.setDni(dni);
+        }
+        else
+        {
+            abogadoActual.setDni(dni);
+        }
+    }
+    public static void datoNombre(String nombre, Boolean cliente) throws Exception{
+        if(cliente)
+        {
+            clienteActual.setNombre(nombre);
+        }
+        else
+        {
+            abogadoActual.setNombre(nombre);
+        }
+    }
+    public static void datoApellidos(String apellidos, Boolean cliente) throws Exception{
+        if(cliente)
+        {
+            clienteActual.setApellidos(apellidos);
+        }
+        else
+        {
+            abogadoActual.setApellidos(apellidos);
+        }
+    }
+    public static void datoDireccion(String direccion, Boolean cliente) throws Exception{
+        if(cliente)
+        {
+            clienteActual.setDireccion(direccion);
+        }
+        else
+        {
+            abogadoActual.setDireccion(direccion);
+        }
+    }
+    public static void datoTelefono(String telefono) throws Exception{
+        clienteActual.setTelefono(telefono);
+    }
+    public static void datoEmail(String email) throws Exception{
+            clienteActual.setTelefono(email);
+    }
+    
+    public static void Alta(Boolean cliente) throws Exception{
+        if(cliente)
+        {
+            ClienteDAO.alta(clienteActual);
+        }
+        else
+        {
+            //AbogadoDAO.alta(abogadoActual);
+        }
+    }
+    
     
 }

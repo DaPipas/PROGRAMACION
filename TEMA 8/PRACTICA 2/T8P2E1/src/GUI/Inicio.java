@@ -33,21 +33,22 @@ public class Inicio extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         mAbogado = new javax.swing.JMenu();
-        mAltaAbogado = new javax.swing.JMenu();
-        mBajaAbogado = new javax.swing.JMenu();
-        mModificarAbogado = new javax.swing.JMenu();
-        mConsultaAbogado = new javax.swing.JMenu();
+        mAltaAbogado = new javax.swing.JMenuItem();
+        mBajaAbogado = new javax.swing.JMenuItem();
+        mModificarAbogado = new javax.swing.JMenuItem();
+        mConsultaAbogado = new javax.swing.JMenuItem();
         mCliente = new javax.swing.JMenu();
-        mAltaCliente = new javax.swing.JMenu();
-        mBajaCliente = new javax.swing.JMenu();
-        mModificarCliente = new javax.swing.JMenu();
-        mConsultaCliente = new javax.swing.JMenu();
+        mAltaCliente = new javax.swing.JMenuItem();
+        mBajaCliente = new javax.swing.JMenuItem();
+        mModificarCliente = new javax.swing.JMenuItem();
+        mConsultaCliente = new javax.swing.JMenuItem();
         mCaso = new javax.swing.JMenu();
-        mAltaCaso = new javax.swing.JMenu();
-        mBajaCaso = new javax.swing.JMenu();
-        mModificarCaso = new javax.swing.JMenu();
-        mConsultaCaso = new javax.swing.JMenu();
-        mSalir = new javax.swing.JMenu();
+        mAltaCaso = new javax.swing.JMenuItem();
+        mBajaCaso = new javax.swing.JMenuItem();
+        mModificarCaso = new javax.swing.JMenuItem();
+        mConsultaCaso = new javax.swing.JMenuItem();
+        menusalir = new javax.swing.JMenu();
+        mSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,35 +57,15 @@ public class Inicio extends javax.swing.JFrame {
         mAbogado.setText("Abogados");
 
         mAltaAbogado.setText("Alta");
-        mAltaAbogado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mAltaAbogadoActionPerformed(evt);
-            }
-        });
         mAbogado.add(mAltaAbogado);
 
         mBajaAbogado.setText("Baja");
-        mBajaAbogado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mBajaAbogadoActionPerformed(evt);
-            }
-        });
         mAbogado.add(mBajaAbogado);
 
         mModificarAbogado.setText("Modificar");
-        mModificarAbogado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mModificarAbogadoActionPerformed(evt);
-            }
-        });
         mAbogado.add(mModificarAbogado);
 
         mConsultaAbogado.setText("Consulta");
-        mConsultaAbogado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mConsultaAbogadoActionPerformed(evt);
-            }
-        });
         mAbogado.add(mConsultaAbogado);
 
         jMenuBar1.add(mAbogado);
@@ -128,38 +109,20 @@ public class Inicio extends javax.swing.JFrame {
         mCaso.setText("Casos");
 
         mAltaCaso.setText("Alta");
-        mAltaCaso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mAltaCasoActionPerformed(evt);
-            }
-        });
         mCaso.add(mAltaCaso);
 
         mBajaCaso.setText("Baja");
-        mBajaCaso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mBajaCasoActionPerformed(evt);
-            }
-        });
         mCaso.add(mBajaCaso);
 
-        mModificarCaso.setText("Modificar");
-        mModificarCaso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mModificarCasoActionPerformed(evt);
-            }
-        });
+        mModificarCaso.setText("Modificación");
         mCaso.add(mModificarCaso);
 
         mConsultaCaso.setText("Consulta");
-        mConsultaCaso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mConsultaCasoActionPerformed(evt);
-            }
-        });
         mCaso.add(mConsultaCaso);
 
         jMenuBar1.add(mCaso);
+
+        menusalir.setText("Salir");
 
         mSalir.setText("Salir");
         mSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +130,9 @@ public class Inicio extends javax.swing.JFrame {
                 mSalirActionPerformed(evt);
             }
         });
-        jMenuBar1.add(mSalir);
+        menusalir.add(mSalir);
+
+        jMenuBar1.add(menusalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -189,21 +154,17 @@ public class Inicio extends javax.swing.JFrame {
         t8p2e1.T8P2E1.finalizar();
     }//GEN-LAST:event_mSalirActionPerformed
 
-    private void mAltaAbogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAltaAbogadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mAltaAbogadoActionPerformed
-
-    private void mBajaAbogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mBajaAbogadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mBajaAbogadoActionPerformed
-
-    private void mModificarAbogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModificarAbogadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mModificarAbogadoActionPerformed
-
-    private void mConsultaAbogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultaAbogadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mConsultaAbogadoActionPerformed
+    private void mBajaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mBajaClienteActionPerformed
+        try
+        {
+            //t8p2e1.T8P2E1.abrirBaja(true);
+            dispose();
+        }
+        catch(Exception e)
+        {
+            t8p2e1.T8P2E1.abrirError(e.getClass() + " : " + e.getMessage());
+        }
+    }//GEN-LAST:event_mBajaClienteActionPerformed
 
     private void mAltaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAltaClienteActionPerformed
         try
@@ -217,22 +178,10 @@ public class Inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mAltaClienteActionPerformed
 
-    private void mBajaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mBajaClienteActionPerformed
-        try
-        {
-            t8p2e1.T8P2E1.abrirBaja(true);
-            dispose();
-        }
-        catch(Exception e)
-        {
-            t8p2e1.T8P2E1.abrirError(e.getClass() + " : " + e.getMessage());
-        }
-    }//GEN-LAST:event_mBajaClienteActionPerformed
-
     private void mModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModificarClienteActionPerformed
         try
         {
-            t8p2e1.T8P2E1.abrirModificar(true);
+            //t8p2e1.T8P2E1.abrirModificar(true);
             dispose();
         }
         catch(Exception e)
@@ -244,7 +193,7 @@ public class Inicio extends javax.swing.JFrame {
     private void mConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultaClienteActionPerformed
         try
         {
-            t8p2e1.T8P2E1.abrirConsulta(true);
+            //t8p2e1.T8P2E1.abrirConsulta(true);
             dispose();
         }
         catch(Exception e)
@@ -252,22 +201,6 @@ public class Inicio extends javax.swing.JFrame {
             t8p2e1.T8P2E1.abrirError(e.getClass() + " : " + e.getMessage());
         }
     }//GEN-LAST:event_mConsultaClienteActionPerformed
-
-    private void mAltaCasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAltaCasoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mAltaCasoActionPerformed
-
-    private void mBajaCasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mBajaCasoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mBajaCasoActionPerformed
-
-    private void mModificarCasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mModificarCasoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mModificarCasoActionPerformed
-
-    private void mConsultaCasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mConsultaCasoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mConsultaCasoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,20 +241,21 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu mAbogado;
-    private javax.swing.JMenu mAltaAbogado;
-    private javax.swing.JMenu mAltaCaso;
-    private javax.swing.JMenu mAltaCliente;
-    private javax.swing.JMenu mBajaAbogado;
-    private javax.swing.JMenu mBajaCaso;
-    private javax.swing.JMenu mBajaCliente;
+    private javax.swing.JMenuItem mAltaAbogado;
+    private javax.swing.JMenuItem mAltaCaso;
+    private javax.swing.JMenuItem mAltaCliente;
+    private javax.swing.JMenuItem mBajaAbogado;
+    private javax.swing.JMenuItem mBajaCaso;
+    private javax.swing.JMenuItem mBajaCliente;
     private javax.swing.JMenu mCaso;
     private javax.swing.JMenu mCliente;
-    private javax.swing.JMenu mConsultaAbogado;
-    private javax.swing.JMenu mConsultaCaso;
-    private javax.swing.JMenu mConsultaCliente;
-    private javax.swing.JMenu mModificarAbogado;
-    private javax.swing.JMenu mModificarCaso;
-    private javax.swing.JMenu mModificarCliente;
-    private javax.swing.JMenu mSalir;
+    private javax.swing.JMenuItem mConsultaAbogado;
+    private javax.swing.JMenuItem mConsultaCaso;
+    private javax.swing.JMenuItem mConsultaCliente;
+    private javax.swing.JMenuItem mModificarAbogado;
+    private javax.swing.JMenuItem mModificarCaso;
+    private javax.swing.JMenuItem mModificarCliente;
+    private javax.swing.JMenuItem mSalir;
+    private javax.swing.JMenu menusalir;
     // End of variables declaration//GEN-END:variables
 }
