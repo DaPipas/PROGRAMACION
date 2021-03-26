@@ -21,7 +21,7 @@ public class ClienteDAO {
     public static void alta(Cliente c) throws Exception{
         ControladorDB.conectar();
         con = ControladorDB.getCon();
-        String plantilla = "INSERT INTO cliente"
+        String plantilla = "INSERT INTO cliente "
                          + "VALUES(?, ?, ?, ?, ?, ?);";
         PreparedStatement ps = con.prepareStatement(plantilla);
         ps.setString(1, c.getDni());
@@ -30,7 +30,7 @@ public class ClienteDAO {
         ps.setString(4, c.getDireccion());
         ps.setString(5, c.getTelefono());
         ps.setString(6, c.getEmail());
-        ps.executeUpdate();
+        int x = ps.executeUpdate();
         ControladorDB.desconectar();
         System.out.println("Se ha dado de alta al cliente con exito.");
     }

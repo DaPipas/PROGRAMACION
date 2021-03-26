@@ -30,6 +30,8 @@ public class T8P2E1 {
     public static void main(String[] args) {
         try
         {
+            clienteActual = new Cliente();
+            abogadoActual = new Abogado();
             abrirInicio();
             
         }
@@ -103,7 +105,7 @@ public class T8P2E1 {
         clienteActual.setTelefono(telefono);
     }
     public static void datoEmail(String email) throws Exception{
-            clienteActual.setTelefono(email);
+            clienteActual.setEmail(email);
     }
     
     public static void Alta(Boolean cliente) throws Exception{
