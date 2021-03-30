@@ -3,20 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DB;
-
-import UML.Abogado;
-import java.sql.Connection;
+package EXCEPTION;
 
 /**
  *
  * @author 1gdaw05
  */
-public class AbogadoDAO {
-    Connection con;
+public class ClienteNoExiste extends Exception{
     
-    public static Abogado getByDni(Abogado a) throws Exception{
-        ControladorDB.conectar();
-        
-    }
 }

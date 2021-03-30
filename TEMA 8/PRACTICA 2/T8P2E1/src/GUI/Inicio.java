@@ -157,7 +157,7 @@ public class Inicio extends javax.swing.JFrame {
     private void mBajaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mBajaClienteActionPerformed
         try
         {
-            //t8p2e1.T8P2E1.abrirBaja(true);
+            t8p2e1.T8P2E1.abrirBaja(true);
             dispose();
         }
         catch(Exception e)

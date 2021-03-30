@@ -5,8 +5,10 @@
  */
 package t8p2e1;
 
+import DB.AbogadoDAO;
 import DB.ClienteDAO;
 import GUI.Alta;
+import GUI.Baja;
 import GUI.ErrorGenerico;
 import GUI.Inicio;
 import UML.Abogado;
@@ -26,6 +28,7 @@ public class T8P2E1 {
     
     public static Inicio vInicio;
     public static Alta vAlta;
+    public static Baja vBaja;
     
     public static void main(String[] args) {
         try
@@ -119,5 +122,27 @@ public class T8P2E1 {
         }
     }
     
+    public static void abrirBaja(Boolean cliente) throws Exception{
+        //abrir en modo cliente true o false
+        vBaja = new Baja(cliente);
+        vBaja.setVisible(true);
+    }
     
+    public static boolean getDatosCliente(String dni) throws Exception{
+        clienteActual = new Cliente();
+        clienteActual.setDni(dni);
+        clienteActual = ClienteDAO.selectByDni(clienteActual);
+        if(clienteActual == null)
+            return false;
+        return true;
+    }
+    
+    public static boolean getDatosAbogado(String dni) throws Exception{
+        abogadoActual = new Abogado();
+        abogadoActual.setDni(dni);
+        abogadoActual = AbogadoDAO.selectByDni(abogadoActual);
+        if(abogadoActual == null)
+            return false;
+        return true;
+    }
 }

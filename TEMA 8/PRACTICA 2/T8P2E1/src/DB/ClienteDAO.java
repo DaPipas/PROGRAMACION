@@ -240,4 +240,28 @@ public class ClienteDAO {
         }
         return cliente;
     }
+    
+    public static Cliente selectByDni(Cliente c) throws Exception{
+        ControladorDB.conectar();
+        con = ControladorDB.getCon();
+        String plantilla = "SELECT * FROM cliente WHERE dni = ?;";
+        PreparedStatement ps = con.prepareStatement(plantilla);
+        ps.setString(1, c.getDni());
+        ResultSet resultado = ps.executeQuery();
+        if(resultado.next())
+        {
+            c.setDni(resultado.getString("dni"));
+            c.setNombre(resultado.getString("nombre"));
+            c.setApellidos(resultado.getString("apellidos"));
+            c.setDireccion(resultado.getString("direccion"));
+            c.setTelefono(resultado.getString("telefono"));
+            c.setEmail(resultado.getString("email"));
+        }
+        else
+        {
+            c = null;
+        }
+        return c;
+    
+    }
 }

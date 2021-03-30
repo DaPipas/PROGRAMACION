@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import EXCEPTION.AbogadoNoExiste;
+import EXCEPTION.ClienteNoExiste;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Luyan
@@ -14,8 +18,26 @@ public class Baja extends javax.swing.JFrame {
     /**
      * Creates new form Baja
      */
+    boolean modoCliente;
+    String tipo;
+    
     public Baja() {
         initComponents();
+    }
+    
+    public Baja(Boolean cliente) {
+        initComponents();
+        setLocationRelativeTo(null);
+        modoCliente = cliente;
+        tipo = "Cliente";
+        if(!modoCliente)
+        {
+            lbTelefono.setVisible(false);
+            tfTelefono.setVisible(false);
+            lbEmail.setVisible(false);
+            tfEmail.setVisible(false);
+            tipo = "Abogado";
+        }
     }
 
     /**
@@ -27,22 +49,126 @@ public class Baja extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        tfDni = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        bEliminar = new javax.swing.JButton();
+        bSalir = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        jLabel1.setText("Baja");
+
+        tfDni.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfDniFocusLost(evt);
+            }
+        });
+
+        jLabel2.setText("Introducir DNI:");
+
+        bEliminar.setText("Eliminar");
+        bEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEliminarActionPerformed(evt);
+            }
+        });
+
+        bSalir.setText("Salir");
+        bSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(253, 253, 253)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfDni, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41)
+                                .addComponent(bEliminar))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(bSalir)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(44, 44, 44)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bEliminar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(bSalir)
+                .addGap(28, 28, 28))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tfDniFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDniFocusLost
+        try
+        {
+            validarDni(tfDni.getText());
+            if(modoCliente)
+            {
+                if(!t8p2e1.T8P2E1.getDatosCliente(tfDni.getText()))
+                    throw new ClienteNoExiste();
+                
+            }
+            else
+            {
+                if(!t8p2e1.T8P2E1.getDatosAbogado(tfDni.getText()))
+                    throw new AbogadoNoExiste();
+            }
+        }
+        catch(ClienteNoExiste e)
+        {
+            JOptionPane.showMessageDialog(null, "No existe un cliente con ese DNI.");
+            tfDni.setText("");
+            tfDni.setFocusable(true);
+        }
+        catch(AbogadoNoExiste e)
+        {
+            JOptionPane.showMessageDialog(null, "No existe un abogado con ese DNI.");
+            tfDni.setText("");
+            tfDni.setFocusable(true);
+        }
+        catch(Exception e)
+        {
+            t8p2e1.T8P2E1.abrirError(e.getClass() + " : " + e.getMessage());
+        }
+    }//GEN-LAST:event_tfDniFocusLost
+
+    private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bEliminarActionPerformed
+
+    private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bSalirActionPerformed
+    
+    
+    private void validarDni(String dni) throws Exception{
+        //validar dni
+    }
     /**
      * @param args the command line arguments
      */
@@ -79,5 +205,10 @@ public class Baja extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bEliminar;
+    private javax.swing.JButton bSalir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField tfDni;
     // End of variables declaration//GEN-END:variables
 }
