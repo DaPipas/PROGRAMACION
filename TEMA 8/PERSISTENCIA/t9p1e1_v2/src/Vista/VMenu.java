@@ -112,9 +112,9 @@ public class VMenu extends javax.swing.JFrame {
                     tfOpcion.setText("");
                     break;
               case 2:
-                    String nombre=JOptionPane.showInputDialog("Teclea el nombre de la persona");
-                    validarNombre(nombre);
-                    Principal.buscarPersona(nombre);
+                    String telefono=JOptionPane.showInputDialog("Teclea el telefono de la persona");
+                    validarNombre(telefono);
+                    Principal.buscarPersona(telefono);
                     tfOpcion.setText("");
                     break;
               case 3:
@@ -142,13 +142,13 @@ public class VMenu extends javax.swing.JFrame {
       }
     }//GEN-LAST:event_tfOpcionActionPerformed
 
-    public boolean validarNombre(String nombre) throws Exception
+    public boolean validarNombre(String telefono) throws Exception
     {
-            if (nombre.isEmpty())
+            if (telefono.isEmpty())
                 throw new CampoVacioException(1);
         
-            Pattern patron = Pattern.compile("^[A-Z][a-z ]*$");
-            Matcher mat = patron.matcher(nombre);
+            Pattern patron = Pattern.compile("^[0-9]{9}$");
+            Matcher mat = patron.matcher(telefono);
             if (!mat.matches())
                 throw new FormatoNoValidoException(1);
         
