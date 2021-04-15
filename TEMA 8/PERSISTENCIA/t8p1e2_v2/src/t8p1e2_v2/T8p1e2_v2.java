@@ -2,12 +2,16 @@ package t8p1e2_v2;
 
 import Modelo.UML.Acontecimiento;
 import GUI.*;
-import Modelo.BD.*;
+import Modelo.DB.*;
+import Modelo.UML.AcontecimientoPK;
 import Modelo.UML.Empresa;
 import Modelo.UML.Persona;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Persistence;
 
 
 
@@ -24,7 +28,15 @@ public class T8p1e2_v2 {
     private static VentanaAcontecimientos ve;
     private static VentanaInscripcion vi;
     
-    public static void main(String[] args) {       
+    private static AcontecimientoJpaController AcontecimientoDB;
+    private static PersonaJpaController PersonaDB;
+    private static EmpresaJpaController EmpresaDB;
+    
+    public static void main(String[] args) {
+        AcontecimientoDB = new AcontecimientoJpaController(Persistence.createEntityManagerFactory("t8p1e2_v2PU"));
+        PersonaDB = new PersonaJpaController(Persistence.createEntityManagerFactory("t8p1e2_v2PU"));
+        EmpresaDB = new EmpresaJpaController(Persistence.createEntityManagerFactory("t8p1e2_v2PU"));
+        
         vp = new VentanaPrincipal();
         vp.setVisible(true);
     }
@@ -39,11 +51,12 @@ public class T8p1e2_v2 {
         v.dispose();
     }
        
-    public static void grabarAcontecimiento(String nombre, String lugar, LocalDate fecha, LocalTime horaI, LocalTime horaF, int nro)throws Exception{
+    public static void grabarAcontecimiento(String nombre, String lugar, String fecha, String horaI, String horaF, int nro)throws Exception{
        
         // Alta -- Crear objeto y enviarlo a AcontecimientoBD
-        acontecimiento = new Acontecimiento(nombre,lugar, fecha,horaI,horaF,nro);
-        AcontecimientoBD.alta(acontecimiento);
+        AcontecimientoPK pk = new AcontecimientoPK(nombre, lugar);
+        acontecimiento = new Acontecimiento( pk , Date.valueOf(fecha),  Date.valueOf(horaI),Date.valueOf(horaF),nro);
+        AcontecimientoDB.create(acontecimiento);
     }
     
    public static void terminar(){
@@ -51,7 +64,13 @@ public class T8p1e2_v2 {
    }
    
    public static String listado() throws Exception{
-       return AcontecimientoBD.listado();
+       List lista = AcontecimientoDB.findAcontecimientoEntities();
+       String textoFinal = "";
+       for(int i=0; i > lista.size(); i++)
+       {
+           textoFinal += lista.get(i).toString() + "\n";
+       }
+       return textoFinal;
    }
    
    public static void borrarAcontecimiento(String nombre) throws Exception
@@ -71,7 +90,7 @@ public class T8p1e2_v2 {
        ve.setVisible(true);
    }
     
-   public static void modificarAcontecimientoParteDos(String nombre, String lugar, LocalDate fecha, LocalTime horaI, LocalTime horaF, int nro) throws Exception
+   public static void modificarAcontecimientoParteDos(String nombre, String lugar, String fecha, String horaI, String horaF, int nro) throws Exception
    {
        // actualizamos objeto en memoria
        acontecimiento.setLugar(lugar);
@@ -106,13 +125,13 @@ public class T8p1e2_v2 {
         return listaAcontecimientos.get(x).getNombre();
     }
    
-    public static LocalDate getFechaAcontecimiento(int x)
+    public static String getFechaAcontecimiento(int x)
     {
         acontecimiento = listaAcontecimientos.get(x);
         return acontecimiento.getFecha();
     }
     
-    public static LocalTime getHoraAcontecimiento()
+    public static String getHoraAcontecimiento()
     {
         return acontecimiento.getHoraI();
     }

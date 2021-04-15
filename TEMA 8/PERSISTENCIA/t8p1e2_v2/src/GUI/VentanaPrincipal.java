@@ -4,7 +4,7 @@ import Excepciones.AcontecimientoNoEncontrado;
 import Excepciones.CampoVacio;
 import Excepciones.NombreNoValido;
 import javax.swing.JOptionPane;
-import t9p1e2.Controlador;
+
 
 public class VentanaPrincipal extends javax.swing.JFrame {
 
@@ -195,7 +195,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAltaActionPerformed
-             Controlador.visualizarVentanaAlta();
+             t8p1e2_v2.T8p1e2_v2.visualizarVentanaAlta();
     }//GEN-LAST:event_mAltaActionPerformed
 
     private void bAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAltaActionPerformed
@@ -204,8 +204,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void mSalirListadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSalirListadoActionPerformed
        try{
-            javax.swing.JOptionPane.showMessageDialog(this,Controlador.listado());
-            Controlador.terminar();
+            javax.swing.JOptionPane.showMessageDialog(this,t8p1e2_v2.T8p1e2_v2.listado());
+            t8p1e2_v2.T8p1e2_v2.terminar();
        }
        catch(Exception e)
        {
@@ -214,7 +214,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mSalirListadoActionPerformed
 
     private void mSalirSinListadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSalirSinListadoActionPerformed
-        Controlador.terminar();
+        t8p1e2_v2.T8p1e2_v2.terminar();
     }//GEN-LAST:event_mSalirSinListadoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -242,7 +242,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         {
             String nombre = javax.swing.JOptionPane.showInputDialog(this,"Teclea el nombre del acontecimiento que quieres eliminar");
             validarNombre(nombre);
-            Controlador.borrarAcontecimiento(nombre);
+            t8p1e2_v2.T8p1e2_v2.borrarAcontecimiento(nombre);
             JOptionPane.showMessageDialog(this,"Acontecimiento borrado");
             
         }
@@ -261,7 +261,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         {
             String nombre = javax.swing.JOptionPane.showInputDialog(this,"Teclea el nombre del acontecimiento que quieres modificar");
             validarNombre(nombre);
-            Controlador.modificarAcontecimientoParteUno(nombre);
+            t8p1e2_v2.T8p1e2_v2.modificarAcontecimientoParteUno(nombre);
         }
         catch(AcontecimientoNoEncontrado e)
         {
@@ -276,7 +276,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void mNuevaInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mNuevaInscripcionActionPerformed
         try
         {
-            if (!Controlador.visualizarVentanaInscripcion())
+            if (!t8p1e2_v2.T8p1e2_v2.visualizarVentanaInscripcion())
                 JOptionPane.showMessageDialog(this,"No hay acontecimientos disponibles");
         }
         catch(Exception e)
@@ -290,7 +290,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         {
             String nombre = JOptionPane.showInputDialog("Indica el nombre del evento");
             // validar
-            JOptionPane.showMessageDialog(this,Controlador.getAsistentes(nombre));
+            JOptionPane.showMessageDialog(this,t8p1e2_v2.T8p1e2_v2.getAsistentes(nombre));
         }
         catch(Exception e)
         {

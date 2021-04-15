@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
-import t9p1e2.Controlador;
+
 
 public class VentanaInscripcion extends javax.swing.JFrame {
   
@@ -22,10 +22,10 @@ public class VentanaInscripcion extends javax.swing.JFrame {
     public void llenarCombo() {
        /* Llenar la combobox con el nombre de los próximos acontecimientos
        con plazas libres */
-        int numero = Controlador.getNumeroAcontecimientosDisponibles();
+        int numero = t8p1e2_v2.T8p1e2_v2.getNumeroAcontecimientosDisponibles();
         // Se puede pasar la combo como parámetro.
         for(int x = 0; x < numero; x++)
-            cbNombreAcontecimiento.insertItemAt(Controlador.getNombreAcontecimiento(x),x);
+            cbNombreAcontecimiento.insertItemAt(t8p1e2_v2.T8p1e2_v2.getNombreAcontecimiento(x),x);
     }
 
     @SuppressWarnings("unchecked")
@@ -37,8 +37,8 @@ public class VentanaInscripcion extends javax.swing.JFrame {
         cbNombreAcontecimiento = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        dpFecha = new com.github.lgooddatepicker.components.DatePicker();
-        tpHora = new com.github.lgooddatepicker.components.TimePicker();
+        tfFecha = new javax.swing.JFormattedTextField();
+        tfHoraInicio = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -77,9 +77,9 @@ public class VentanaInscripcion extends javax.swing.JFrame {
 
         jLabel3.setText("Hora");
 
-        dpFecha.setEnabled(false);
+        tfFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yy"))));
 
-        tpHora.setEnabled(false);
+        tfHoraInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("HH:mm"))));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -88,18 +88,22 @@ public class VentanaInscripcion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbNombreAcontecimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(dpFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tpHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(465, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addGap(27, 27, 27)
+                        .addComponent(cbNombreAcontecimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(379, 379, 379)
+                    .addComponent(tfHoraInicio)
+                    .addGap(380, 380, 380)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,14 +112,17 @@ public class VentanaInscripcion extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cbNombreAcontecimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(dpFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tpHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(49, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(51, 51, 51)
+                    .addComponent(tfHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(52, Short.MAX_VALUE)))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Persona"));
@@ -323,8 +330,8 @@ public class VentanaInscripcion extends javax.swing.JFrame {
 
     private void cbNombreAcontecimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNombreAcontecimientoActionPerformed
         // Muestro datos
-        dpFecha.setDate(Controlador.getFechaAcontecimiento(cbNombreAcontecimiento.getSelectedIndex()));
-        tpHora.setTime(Controlador.getHoraAcontecimiento());
+        tfFecha.setText(t8p1e2_v2.T8p1e2_v2.getFechaAcontecimiento(cbNombreAcontecimiento.getSelectedIndex()));
+        tfHoraInicio.setText(t8p1e2_v2.T8p1e2_v2.getHoraAcontecimiento());
         tfDni.requestFocus();
     }//GEN-LAST:event_cbNombreAcontecimientoActionPerformed
 
@@ -349,18 +356,18 @@ public class VentanaInscripcion extends javax.swing.JFrame {
                     // Persona nueva. Tras las validaciones hay que insertar en la bd
                    if (datosPersonaCorrectos() && datosEmpresaCorrectos())
                    {
-                       Controlador.altaPersonaEmpresa(tfDni.getText(),tfNombre.getText(),tfApellidos.getText(),tfTelefono.getText(),tfNif.getText(),tfNombreEmpresa.getText(),tfRazonSocial.getText(),tfCnae.getText());
-                       Controlador.altaAsistente();
+                       t8p1e2_v2.T8p1e2_v2.altaPersonaEmpresa(tfDni.getText(),tfNombre.getText(),tfApellidos.getText(),tfTelefono.getText(),tfNif.getText(),tfNombreEmpresa.getText(),tfRazonSocial.getText(),tfCnae.getText());
+                       t8p1e2_v2.T8p1e2_v2.altaAsistente();
                        JOptionPane.showMessageDialog(this,"Enhorabuena, ya estás inscritx");
-                       Controlador.volver(this);
+                       t8p1e2_v2.T8p1e2_v2.volver(this);
                    }
                }
                 else
                  {
                      // La persona ya existe. Solo hay que inscribirla.
-                      Controlador.altaAsistente();
+                      t8p1e2_v2.T8p1e2_v2.altaAsistente();
                       JOptionPane.showMessageDialog(this,"Enhorabuena, ya estás inscritx en un nuevo evento");
-                      Controlador.volver(this);
+                      t8p1e2_v2.T8p1e2_v2.volver(this);
                  }
             }
             else
@@ -379,7 +386,7 @@ public class VentanaInscripcion extends javax.swing.JFrame {
     }//GEN-LAST:event_bAceptarActionPerformed
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
-        Controlador.volver(this);
+        t8p1e2_v2.T8p1e2_v2.volver(this);
     }//GEN-LAST:event_bCancelarActionPerformed
 
  
@@ -538,7 +545,7 @@ public class VentanaInscripcion extends javax.swing.JFrame {
            validarDni();
            dniValidado = true;
            // Dni correcto. Vamos a buscarlo en la base de datos
-           encontrada = Controlador.buscarPersona(tfDni.getText());
+           encontrada = t8p1e2_v2.T8p1e2_v2.buscarPersona(tfDni.getText());
            if (encontrada){
                // No es la primera vez que esta persona se inscribe en un evento
                mostrarDatos();
@@ -588,15 +595,15 @@ public class VentanaInscripcion extends javax.swing.JFrame {
     }
     private void mostrarDatos() throws Exception{
         // Datos de la persona
-        tfNombre.setText(Controlador.getNombre());
-        tfApellidos.setText(Controlador.getApellidos());
-        tfTelefono.setText(Controlador.getTelefono());
+        tfNombre.setText(t8p1e2_v2.T8p1e2_v2.getNombre());
+        tfApellidos.setText(t8p1e2_v2.T8p1e2_v2.getApellidos());
+        tfTelefono.setText(t8p1e2_v2.T8p1e2_v2.getTelefono());
         
         // Datos de la empresa
-        tfNif.setText(Controlador.getNif());
-        tfNombreEmpresa.setText(Controlador.getNombreEmpresa());
-        tfRazonSocial.setText(Controlador.getRazonSocial());
-        tfCnae.setText(Controlador.getCnae());
+        tfNif.setText(t8p1e2_v2.T8p1e2_v2.getNif());
+        tfNombreEmpresa.setText(t8p1e2_v2.T8p1e2_v2.getNombreEmpresa());
+        tfRazonSocial.setText(t8p1e2_v2.T8p1e2_v2.getRazonSocial());
+        tfCnae.setText(t8p1e2_v2.T8p1e2_v2.getCnae());
         bAceptar.requestFocus();
         
         // todo está deshabilitado. Se puede habilitar para que cambie datos.
@@ -639,7 +646,6 @@ public class VentanaInscripcion extends javax.swing.JFrame {
     private javax.swing.JButton bAceptar;
     private javax.swing.JButton bCancelar;
     private javax.swing.JComboBox cbNombreAcontecimiento;
-    private com.github.lgooddatepicker.components.DatePicker dpFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -658,11 +664,12 @@ public class VentanaInscripcion extends javax.swing.JFrame {
     private javax.swing.JTextField tfApellidos;
     private javax.swing.JTextField tfCnae;
     private javax.swing.JTextField tfDni;
+    private javax.swing.JFormattedTextField tfFecha;
+    private javax.swing.JFormattedTextField tfHoraInicio;
     private javax.swing.JTextField tfNif;
     private javax.swing.JTextField tfNombre;
     private javax.swing.JTextField tfNombreEmpresa;
     private javax.swing.JTextField tfRazonSocial;
     private javax.swing.JTextField tfTelefono;
-    private com.github.lgooddatepicker.components.TimePicker tpHora;
     // End of variables declaration//GEN-END:variables
 }

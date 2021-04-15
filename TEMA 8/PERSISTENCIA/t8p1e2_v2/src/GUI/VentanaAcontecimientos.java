@@ -1,8 +1,6 @@
 package GUI;
 
-import t9p1e2.Controlador;
 import Excepciones.*;
-import Modelo.UML.Acontecimiento;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -20,7 +18,7 @@ public class VentanaAcontecimientos extends javax.swing.JFrame {
     private boolean modificacion = false;
     
     // constructor para la modificación
-    public VentanaAcontecimientos(String n, String l, LocalDate f,LocalTime hi, LocalTime hf, String a) {
+    public VentanaAcontecimientos(String n, String l, String f,String hi, String hf, String a) {
         // Relación modelo vista ???
         initComponents();
         setLocationRelativeTo(null);
@@ -31,9 +29,9 @@ public class VentanaAcontecimientos extends javax.swing.JFrame {
         tfNombre.setText(n);
         tfNombre.setEditable(false);
         cbLugar.setSelectedItem(l);
-        dpFecha.setDate(f);
-        tpHoraInicio.setTime(hi);
-        tpHoraFin.setTime(hf);
+        tfFecha.setText(f);
+        tfHoraInicio.setText(hi);
+        tfHoraFin.setText(hf);
         tffAforo.setText(a);
         
     }
@@ -54,12 +52,15 @@ public class VentanaAcontecimientos extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         cbLugar = new javax.swing.JComboBox();
         tffAforo = new javax.swing.JFormattedTextField();
+        tfFecha = new javax.swing.JFormattedTextField();
+        tfHoraInicio = new javax.swing.JFormattedTextField();
+        tfHoraFin = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Acontecimientos");
 
-        jLabel1.setText("ALTA DE ACONTECIMIENTOS");
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("ALTA DE ACONTECIMIENTOS");
 
         jLabel2.setText("Nombre");
 
@@ -91,6 +92,12 @@ public class VentanaAcontecimientos extends javax.swing.JFrame {
 
         tffAforo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("####"))));
 
+        tfFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yy"))));
+
+        tfHoraInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("HH:mm"))));
+
+        tfHoraFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("HH:mm"))));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,26 +113,25 @@ public class VentanaAcontecimientos extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(cbLugar, javax.swing.GroupLayout.Alignment.LEADING, 0, 239, Short.MAX_VALUE)
-                            .addComponent(tfNombre, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(tfNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfFecha, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(bAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(bAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel7))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tffAforo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel6)
-                                        .addGap(29, 29, 29)))))
-                        .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfHoraInicio)
+                            .addComponent(tffAforo, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(260, Short.MAX_VALUE)
@@ -145,13 +151,17 @@ public class VentanaAcontecimientos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9)
                     .addComponent(cbLugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jLabel4)
-                .addGap(13, 13, 13)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(24, 24, 24)
+                    .addComponent(jLabel6)
+                    .addComponent(tfHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(tffAforo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -173,14 +183,14 @@ public class VentanaAcontecimientos extends javax.swing.JFrame {
                if (!modificacion)
                {
                    javax.swing.JOptionPane.showMessageDialog(this,"Datos correctos. \nVamos a insertar en la base de  datos");
-                   Controlador.grabarAcontecimiento(tfNombre.getText(),(String) cbLugar.getSelectedItem(),dpFecha.getDate(),tpHoraInicio.getTime(),tpHoraFin.getTime(),Integer.parseInt(tffAforo.getText()));
-                   Controlador.volver(this);
+                   t8p1e2_v2.T8p1e2_v2.grabarAcontecimiento(tfNombre.getText(),(String) cbLugar.getSelectedItem(),tfFecha.getText(),tfHoraInicio.getText(),tfHoraFin.getText(),Integer.parseInt(tffAforo.getText()));
+                   t8p1e2_v2.T8p1e2_v2.volver(this);
                }
                else
                {
                    javax.swing.JOptionPane.showMessageDialog(this,"Datos correctos. \nVamos a modificarlos en la base de  datos");
-                   Controlador.modificarAcontecimientoParteDos(tfNombre.getText(),(String) cbLugar.getSelectedItem(),dpFecha.getDate(),tpHoraInicio.getTime(),tpHoraFin.getTime(),Integer.parseInt(tffAforo.getText()));
-                   Controlador.volver(this);
+                   t8p1e2_v2.T8p1e2_v2.modificarAcontecimientoParteDos(tfNombre.getText(),(String) cbLugar.getSelectedItem(),tfFecha.getText(),tfHoraInicio.getText(),tfHoraFin.getText(),Integer.parseInt(tffAforo.getText()));
+                   t8p1e2_v2.T8p1e2_v2.volver(this);
                }
              
            }
@@ -192,7 +202,7 @@ public class VentanaAcontecimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_bAceptarActionPerformed
 
 private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
-  Controlador.volver(this);
+  t8p1e2_v2.T8p1e2_v2.volver(this);
 }//GEN-LAST:event_bSalirActionPerformed
 
     private boolean datosCorrectos(){
@@ -257,21 +267,21 @@ private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     }
     
     private void validarFecha()throws Exception{
-        if (dpFecha.getDate()== null)
+        if (tfFecha.getText()== null)
             throw new CampoVacio("El fecha del acontecimiento es un dato obligatorio");
  
         // Comprobar que es mayor que la fecha actual
-        if (dpFecha.getDate().compareTo(LocalDate.now()) < 0)
+        if (LocalDate.parse(tfFecha.getText()).compareTo(LocalDate.now()) < 0)
                 throw new FechaNoValida();
     }
     
     private void validarHoras()throws Exception{
-        if (tpHoraInicio.getTime()== null)
+        if (tfHoraInicio.getText()== null)
             throw new CampoVacio("La hora de inicio del acontecimiento es un dato obligatorio");
-        if (tpHoraFin.getTime() == null)
+        if (tfHoraFin.getText() == null)
             throw new CampoVacio("La hora de finalización del acontecimiento es un dato obligatorio");
         // La hora de finalización tiene que ser mayor que la del inicio        
-        int minutos = (int) ChronoUnit.MINUTES.between(tpHoraFin.getTime(), tpHoraInicio.getTime());
+        int minutos = (int) ChronoUnit.MINUTES.between(LocalTime.parse(tfHoraFin.getText()), LocalTime.parse(tfHoraInicio.getText()));
         if (minutos >= 0)
              throw new HorasNoValidas(); 
     }
@@ -330,6 +340,9 @@ private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JFormattedTextField tfFecha;
+    private javax.swing.JFormattedTextField tfHoraFin;
+    private javax.swing.JFormattedTextField tfHoraInicio;
     private javax.swing.JTextField tfNombre;
     private javax.swing.JFormattedTextField tffAforo;
     // End of variables declaration//GEN-END:variables
