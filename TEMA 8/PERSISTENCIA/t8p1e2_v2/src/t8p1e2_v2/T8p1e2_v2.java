@@ -3,7 +3,7 @@ package t8p1e2_v2;
 import Modelo.UML.Acontecimiento;
 import GUI.*;
 import Modelo.DB.*;
-import Modelo.UML.AcontecimientoPK;
+import Modelo.UML.Asistentes;
 import Modelo.UML.Empresa;
 import Modelo.UML.Persona;
 import java.sql.Date;
@@ -31,12 +31,13 @@ public class T8p1e2_v2 {
     private static AcontecimientoJpaController AcontecimientoDB;
     private static PersonaJpaController PersonaDB;
     private static EmpresaJpaController EmpresaDB;
+    private static AsistentesJpaController AsistentesDB;
     
     public static void main(String[] args) {
         AcontecimientoDB = new AcontecimientoJpaController(Persistence.createEntityManagerFactory("t8p1e2_v2PU"));
         PersonaDB = new PersonaJpaController(Persistence.createEntityManagerFactory("t8p1e2_v2PU"));
         EmpresaDB = new EmpresaJpaController(Persistence.createEntityManagerFactory("t8p1e2_v2PU"));
-        
+        AsistentesDB = new AsistentesJpaController(Persistence.createEntityManagerFactory("t8p1e2_v2PU"));
         vp = new VentanaPrincipal();
         vp.setVisible(true);
     }
@@ -54,8 +55,7 @@ public class T8p1e2_v2 {
     public static void grabarAcontecimiento(String nombre, String lugar, String fecha, String horaI, String horaF, int nro)throws Exception{
        
         // Alta -- Crear objeto y enviarlo a AcontecimientoBD
-        AcontecimientoPK pk = new AcontecimientoPK(nombre, lugar);
-        acontecimiento = new Acontecimiento( pk , Date.valueOf(fecha),  Date.valueOf(horaI),Date.valueOf(horaF),nro);
+        acontecimiento = new Acontecimiento(nombre, lugar , Date.valueOf(fecha),  Date.valueOf(horaI),Date.valueOf(horaF),nro);
         AcontecimientoDB.create(acontecimiento);
     }
     
@@ -76,17 +76,17 @@ public class T8p1e2_v2 {
    public static void borrarAcontecimiento(String nombre) throws Exception
    {
        // Primero lo consultamos, mostramos sus datos y luego pedimos confirmación.
-       acontecimiento = new Acontecimiento(nombre);
-       acontecimiento = AcontecimientoBD.consultar(acontecimiento);
+
+       acontecimiento = AcontecimientoDB.findAcontecimiento(nombre);
        if (vp.mostrar(acontecimiento.toString()) == true)
-            AcontecimientoBD.borrar(acontecimiento);
+            AcontecimientoDB.destroy(acontecimiento.getNombre());
    }
     
     public static void modificarAcontecimientoParteUno(String nombre) throws Exception
    {
        // Primero consultamos y mostramos sus datos
-       acontecimiento = AcontecimientoBD.consultar(new Acontecimiento(nombre));
-       ve = new VentanaAcontecimientos(acontecimiento.getNombre(),acontecimiento.getLugar(),acontecimiento.getFecha(),acontecimiento.getHoraI(),acontecimiento.getHoraF(),acontecimiento.getAforo().toString());
+       acontecimiento = AcontecimientoDB.findAcontecimiento(nombre);
+       ve = new VentanaAcontecimientos(acontecimiento.getNombre(),acontecimiento.getLugar(),String.valueOf(acontecimiento.getFecha()), String.valueOf(acontecimiento.getHoraI()), String.valueOf(acontecimiento.getHoraF()), String.valueOf(acontecimiento.getAforo()));
        ve.setVisible(true);
    }
     
@@ -94,17 +94,17 @@ public class T8p1e2_v2 {
    {
        // actualizamos objeto en memoria
        acontecimiento.setLugar(lugar);
-       acontecimiento.setFecha(fecha);
-       acontecimiento.setHoraI(horaI);
-       acontecimiento.setHoraF(horaF);
+       acontecimiento.setFecha(Date.valueOf(fecha));
+       acontecimiento.setHoraI(Date.valueOf(horaI));
+       acontecimiento.setHoraF(Date.valueOf(horaF));
        acontecimiento.setAforo(nro);
-       AcontecimientoBD.modificar(acontecimiento);
+       AcontecimientoDB.edit(acontecimiento);
    }
    
    // Añadido al completo
    public static boolean visualizarVentanaInscripcion() throws Exception{
         // Pido ya a la base de datos información sobre los proximos acontecimientos con plazas libres.
-        listaAcontecimientos = AcontecimientoBD.consultarProximosLibres();
+        listaAcontecimientos = AcontecimientoDB.consultarProximosLibres();
         
         if (listaAcontecimientos.isEmpty())
             return false;
@@ -128,19 +128,18 @@ public class T8p1e2_v2 {
     public static String getFechaAcontecimiento(int x)
     {
         acontecimiento = listaAcontecimientos.get(x);
-        return acontecimiento.getFecha();
+        return String.valueOf(acontecimiento.getFecha());
     }
     
     public static String getHoraAcontecimiento()
     {
-        return acontecimiento.getHoraI();
+        return String.valueOf(acontecimiento.getHoraI());
     }
     
     public static boolean buscarPersona(String dni) throws Exception{
-       p = new Persona();
-       p.setDni(dni);
+    
        // Se puede pasar sólo el dni
-       p = PersonaBD.queryByDni(p);
+       p = PersonaDB.findPersona(dni);
        if (p != null)
            return true;
        return false;
@@ -159,28 +158,28 @@ public class T8p1e2_v2 {
    }
    
    public static String getNombreEmpresa(){
-       return p.getE().getNombre();
+       return p.getNifEmpresa().getNombre();
    }
    
    public static String getNif(){
-       return p.getE().getNif();
+       return p.getNifEmpresa().getNif();
    }
    
    public static String getCnae(){
-       return p.getE().getCnae().toString();
+       return String.valueOf(p.getNifEmpresa().getCnae());
    }
    
    public static String getRazonSocial(){
-       return p.getE().getRazonSocial();
+       return p.getNifEmpresa().getRazonSocial();
    }
    
    public static void altaAsistente() throws Exception{
        // Relaciones
-       acontecimiento.setAsistente(p);
-       p.setEvento(acontecimiento);
-       
+       //acontecimiento.setAsistente(p);
+       //p.setEvento(acontecimiento);
+       Asistentes asi = new Asistentes(acontecimiento.getNombre(),p.getDni());
        // A la base de datos
-       AsistentesBD.alta(acontecimiento,p);
+       AsistentesDB.create(asi);
        
    }
    
@@ -195,19 +194,21 @@ public class T8p1e2_v2 {
        e.setRazonSocial(rs);
        e.setCnae(Integer.parseInt(cnae));
        
-       p.setE(e);
-              
-       acontecimiento.setAsistente(p);
-       p.setEvento(acontecimiento);
+       p.setNifEmpresa(e);
+       
+       Asistentes asi = new Asistentes(nif, d);
+       //acontecimiento.setAsistente(p);
+       //p.setEvento(acontecimiento);
        
     // Vamos a la base de datos
-       EmpresaBD.alta(e);
-       PersonaBD.alta(p);
+       EmpresaDB.create(e);
+       PersonaDB.create(p);
+       AsistentesDB.create(asi);
    }
    
    public static String getAsistentes(String nombre) throws Exception
    {
-       ArrayList<Persona> lista = PersonaBD.getAsistentes(nombre);
+       ArrayList<Persona> lista = PersonaDB.getAsistentes(nombre);
        String datos="";
         for(Persona obj:lista)
        {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 14-04-2021 a las 09:39:42
+-- Tiempo de generación: 16-04-2021 a las 07:48:26
 -- Versión del servidor: 5.6.34
 -- Versión de PHP: 5.6.32
 
@@ -25,16 +25,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `acontencimiento`
+-- Estructura de tabla para la tabla `acontecimiento`
 --
 
-CREATE TABLE `acontencimiento` (
+CREATE TABLE `acontecimiento` (
   `nombre` varchar(50) NOT NULL,
   `lugar` varchar(50) NOT NULL,
   `fecha` date NOT NULL,
   `horaI` time(5) NOT NULL,
   `horaF` time(5) NOT NULL,
   `aforo` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `asistentes`
+--
+
+CREATE TABLE `asistentes` (
+  `dni` varchar(9) NOT NULL,
+  `nif` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -50,21 +61,58 @@ CREATE TABLE `empresa` (
   `cnae` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `persona`
+--
+
+CREATE TABLE `persona` (
+  `dni` varchar(9) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellidos` varchar(50) NOT NULL,
+  `telefono` varchar(9) NOT NULL,
+  `nif_empresa` varchar(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `acontencimiento`
+-- Indices de la tabla `acontecimiento`
 --
-ALTER TABLE `acontencimiento`
-  ADD PRIMARY KEY (`nombre`,`lugar`);
+ALTER TABLE `acontecimiento`
+  ADD PRIMARY KEY (`nombre`);
+
+--
+-- Indices de la tabla `asistentes`
+--
+ALTER TABLE `asistentes`
+  ADD PRIMARY KEY (`dni`,`nif`);
 
 --
 -- Indices de la tabla `empresa`
 --
 ALTER TABLE `empresa`
   ADD PRIMARY KEY (`nif`);
+
+--
+-- Indices de la tabla `persona`
+--
+ALTER TABLE `persona`
+  ADD PRIMARY KEY (`dni`),
+  ADD KEY `nif_empresa` (`nif_empresa`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `persona`
+--
+ALTER TABLE `persona`
+  ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`nif_empresa`) REFERENCES `empresa` (`nif`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -7,7 +7,8 @@ package Modelo.DB;
 
 import Modelo.DB.exceptions.NonexistentEntityException;
 import Modelo.DB.exceptions.PreexistingEntityException;
-import Modelo.UML.Acontecimiento;
+import Modelo.UML.Asistentes;
+import Modelo.UML.AsistentesPK;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -21,9 +22,9 @@ import javax.persistence.criteria.Root;
  *
  * @author 1gdaw05
  */
-public class AcontecimientoJpaController implements Serializable {
+public class AsistentesJpaController implements Serializable {
 
-    public AcontecimientoJpaController(EntityManagerFactory emf) {
+    public AsistentesJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -32,16 +33,19 @@ public class AcontecimientoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Acontecimiento acontecimiento) throws PreexistingEntityException, Exception {
+    public void create(Asistentes asistentes) throws PreexistingEntityException, Exception {
+        if (asistentes.getAsistentesPK() == null) {
+            asistentes.setAsistentesPK(new AsistentesPK());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(acontecimiento);
+            em.persist(asistentes);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findAcontecimiento(acontecimiento.getNombre()) != null) {
-                throw new PreexistingEntityException("Acontecimiento " + acontecimiento + " already exists.", ex);
+            if (findAsistentes(asistentes.getAsistentesPK()) != null) {
+                throw new PreexistingEntityException("Asistentes " + asistentes + " already exists.", ex);
             }
             throw ex;
         } finally {
@@ -51,19 +55,19 @@ public class AcontecimientoJpaController implements Serializable {
         }
     }
 
-    public void edit(Acontecimiento acontecimiento) throws NonexistentEntityException, Exception {
+    public void edit(Asistentes asistentes) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            acontecimiento = em.merge(acontecimiento);
+            asistentes = em.merge(asistentes);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = acontecimiento.getNombre();
-                if (findAcontecimiento(id) == null) {
-                    throw new NonexistentEntityException("The acontecimiento with id " + id + " no longer exists.");
+                AsistentesPK id = asistentes.getAsistentesPK();
+                if (findAsistentes(id) == null) {
+                    throw new NonexistentEntityException("The asistentes with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -74,19 +78,19 @@ public class AcontecimientoJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
+    public void destroy(AsistentesPK id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Acontecimiento acontecimiento;
+            Asistentes asistentes;
             try {
-                acontecimiento = em.getReference(Acontecimiento.class, id);
-                acontecimiento.getNombre();
+                asistentes = em.getReference(Asistentes.class, id);
+                asistentes.getAsistentesPK();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The acontecimiento with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The asistentes with id " + id + " no longer exists.", enfe);
             }
-            em.remove(acontecimiento);
+            em.remove(asistentes);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -95,19 +99,19 @@ public class AcontecimientoJpaController implements Serializable {
         }
     }
 
-    public List<Acontecimiento> findAcontecimientoEntities() {
-        return findAcontecimientoEntities(true, -1, -1);
+    public List<Asistentes> findAsistentesEntities() {
+        return findAsistentesEntities(true, -1, -1);
     }
 
-    public List<Acontecimiento> findAcontecimientoEntities(int maxResults, int firstResult) {
-        return findAcontecimientoEntities(false, maxResults, firstResult);
+    public List<Asistentes> findAsistentesEntities(int maxResults, int firstResult) {
+        return findAsistentesEntities(false, maxResults, firstResult);
     }
 
-    private List<Acontecimiento> findAcontecimientoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Asistentes> findAsistentesEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Acontecimiento.class));
+            cq.select(cq.from(Asistentes.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -119,20 +123,20 @@ public class AcontecimientoJpaController implements Serializable {
         }
     }
 
-    public Acontecimiento findAcontecimiento(String id) {
+    public Asistentes findAsistentes(AsistentesPK id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Acontecimiento.class, id);
+            return em.find(Asistentes.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getAcontecimientoCount() {
+    public int getAsistentesCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Acontecimiento> rt = cq.from(Acontecimiento.class);
+            Root<Asistentes> rt = cq.from(Asistentes.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -27,8 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Acontecimiento.findAll", query = "SELECT a FROM Acontecimiento a")
-    , @NamedQuery(name = "Acontecimiento.findByNombre", query = "SELECT a FROM Acontecimiento a WHERE a.acontecimientoPK.nombre = :nombre")
-    , @NamedQuery(name = "Acontecimiento.findByLugar", query = "SELECT a FROM Acontecimiento a WHERE a.acontecimientoPK.lugar = :lugar")
+    , @NamedQuery(name = "Acontecimiento.findByNombre", query = "SELECT a FROM Acontecimiento a WHERE a.nombre = :nombre")
+    , @NamedQuery(name = "Acontecimiento.findByLugar", query = "SELECT a FROM Acontecimiento a WHERE a.lugar = :lugar")
     , @NamedQuery(name = "Acontecimiento.findByFecha", query = "SELECT a FROM Acontecimiento a WHERE a.fecha = :fecha")
     , @NamedQuery(name = "Acontecimiento.findByHoraI", query = "SELECT a FROM Acontecimiento a WHERE a.horaI = :horaI")
     , @NamedQuery(name = "Acontecimiento.findByHoraF", query = "SELECT a FROM Acontecimiento a WHERE a.horaF = :horaF")
@@ -36,8 +36,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Acontecimiento implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected AcontecimientoPK acontecimientoPK;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "nombre")
+    private String nombre;
+    @Basic(optional = false)
+    @Column(name = "lugar")
+    private String lugar;
     @Basic(optional = false)
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
@@ -57,28 +62,33 @@ public class Acontecimiento implements Serializable {
     public Acontecimiento() {
     }
 
-    public Acontecimiento(AcontecimientoPK acontecimientoPK) {
-        this.acontecimientoPK = acontecimientoPK;
+    public Acontecimiento(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Acontecimiento(AcontecimientoPK acontecimientoPK, Date fecha, Date horaI, Date horaF, int aforo) {
-        this.acontecimientoPK = acontecimientoPK;
+    public Acontecimiento(String nombre, String lugar, Date fecha, Date horaI, Date horaF, int aforo) {
+        this.nombre = nombre;
+        this.lugar = lugar;
         this.fecha = fecha;
         this.horaI = horaI;
         this.horaF = horaF;
         this.aforo = aforo;
     }
 
-    public Acontecimiento(String nombre, String lugar) {
-        this.acontecimientoPK = new AcontecimientoPK(nombre, lugar);
+    public String getNombre() {
+        return nombre;
     }
 
-    public AcontecimientoPK getAcontecimientoPK() {
-        return acontecimientoPK;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setAcontecimientoPK(AcontecimientoPK acontecimientoPK) {
-        this.acontecimientoPK = acontecimientoPK;
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
     }
 
     public Date getFecha() {
@@ -116,7 +126,7 @@ public class Acontecimiento implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (acontecimientoPK != null ? acontecimientoPK.hashCode() : 0);
+        hash += (nombre != null ? nombre.hashCode() : 0);
         return hash;
     }
 
@@ -127,7 +137,7 @@ public class Acontecimiento implements Serializable {
             return false;
         }
         Acontecimiento other = (Acontecimiento) object;
-        if ((this.acontecimientoPK == null && other.acontecimientoPK != null) || (this.acontecimientoPK != null && !this.acontecimientoPK.equals(other.acontecimientoPK))) {
+        if ((this.nombre == null && other.nombre != null) || (this.nombre != null && !this.nombre.equals(other.nombre))) {
             return false;
         }
         return true;
@@ -135,7 +145,7 @@ public class Acontecimiento implements Serializable {
 
     @Override
     public String toString() {
-        return "Modelo.UML.Acontecimiento[ acontecimientoPK=" + acontecimientoPK + " ]";
+        return "Modelo.UML.Acontecimiento[ nombre=" + nombre + " ]";
     }
     
 }
