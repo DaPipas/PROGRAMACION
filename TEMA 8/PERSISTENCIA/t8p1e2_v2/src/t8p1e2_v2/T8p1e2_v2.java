@@ -4,6 +4,7 @@ import Modelo.UML.Acontecimiento;
 import GUI.*;
 import Modelo.DB.*;
 import Modelo.UML.Asistentes;
+import Modelo.UML.AsistentesPK;
 import Modelo.UML.Empresa;
 import Modelo.UML.Persona;
 import java.sql.Date;
@@ -208,9 +209,10 @@ public class T8p1e2_v2 {
    
    public static String getAsistentes(String nombre) throws Exception
    {
-       ArrayList<Persona> lista = PersonaDB.getAsistentes(nombre);
+       List<AsistentesPK> listaDni = AsistentesDB.findAsistentesByEvento(nombre);
+       List<Persona> listaAsistentes = PersonaDB.findPersonaByEvento(listaDni);
        String datos="";
-        for(Persona obj:lista)
+        for(Persona obj:listaAsistentes)
        {
            datos += obj.toString() + "\n";
        }

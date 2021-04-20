@@ -126,7 +126,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Modelo.UML.Persona[ dni=" + dni + " ]";
+        return dni + " " + nombre + " " + apellidos + " " + telefono;
     }
     
 }

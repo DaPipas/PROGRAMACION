@@ -145,4 +145,12 @@ public class AsistentesJpaController implements Serializable {
         }
     }
     
+    /*zona de pruebas de jpql*/
+    public List<AsistentesPK> findAsistentesByEvento(String nombre){
+        EntityManager em = getEntityManager();
+        String jpql = "SELECT asistentes FROM Asistentes asistentes WHERE asistentes.nombre = " + nombre + ";";
+        Query query = em.createQuery(jpql);
+        List<AsistentesPK> listaDniAsistentes = query.getResultList();
+        return listaDniAsistentes;
+    }
 }

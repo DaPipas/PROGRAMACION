@@ -7,6 +7,8 @@ package Modelo.DB;
 
 import Modelo.DB.exceptions.NonexistentEntityException;
 import Modelo.DB.exceptions.PreexistingEntityException;
+import Modelo.UML.Asistentes;
+import Modelo.UML.AsistentesPK;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -14,6 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Modelo.UML.Empresa;
 import Modelo.UML.Persona;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -170,5 +173,20 @@ public class PersonaJpaController implements Serializable {
             em.close();
         }
     }
+    /* zona de pruebas de jpql*/
     
+    public List<Persona> findPersonaByEvento(List<AsistentesPK> listaDni){
+        List<Persona> listaAsistentes = new ArrayList<Persona>(); 
+        for(AsistentesPK persona:listaDni)
+        {
+            listaAsistentes.add(findPersona(persona.getDni()));
+        }
+        /*
+        --de manera funcional
+        listaDni.forEach((persona) -> {
+            listaAsistentes.add(findPersona(persona.getDni()));
+        });
+        */
+        return listaAsistentes;
+    }
 }
