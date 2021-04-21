@@ -3,19 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo.DB;
+package ModeloDB;
 
-import Modelo.DB.exceptions.NonexistentEntityException;
-import Modelo.DB.exceptions.PreexistingEntityException;
-import Modelo.UML.Asistentes;
-import Modelo.UML.AsistentesPK;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Modelo.UML.Empresa;
+import Modelo.UML.Acontecimiento;
 import Modelo.UML.Persona;
+import ModeloDB.exceptions.NonexistentEntityException;
+import ModeloDB.exceptions.PreexistingEntityException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -37,6 +36,9 @@ public class PersonaJpaController implements Serializable {
     }
 
     public void create(Persona persona) throws PreexistingEntityException, Exception {
+        if (persona.getAcontecimientoList() == null) {
+            persona.setAcontecimientoList(new ArrayList<Acontecimiento>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -46,10 +48,20 @@ public class PersonaJpaController implements Serializable {
                 nifEmpresa = em.getReference(nifEmpresa.getClass(), nifEmpresa.getNif());
                 persona.setNifEmpresa(nifEmpresa);
             }
+            List<Acontecimiento> attachedAcontecimientoList = new ArrayList<Acontecimiento>();
+            for (Acontecimiento acontecimientoListAcontecimientoToAttach : persona.getAcontecimientoList()) {
+                acontecimientoListAcontecimientoToAttach = em.getReference(acontecimientoListAcontecimientoToAttach.getClass(), acontecimientoListAcontecimientoToAttach.getNombre());
+                attachedAcontecimientoList.add(acontecimientoListAcontecimientoToAttach);
+            }
+            persona.setAcontecimientoList(attachedAcontecimientoList);
             em.persist(persona);
             if (nifEmpresa != null) {
                 nifEmpresa.getPersonaList().add(persona);
                 nifEmpresa = em.merge(nifEmpresa);
+            }
+            for (Acontecimiento acontecimientoListAcontecimiento : persona.getAcontecimientoList()) {
+                acontecimientoListAcontecimiento.getPersonaList().add(persona);
+                acontecimientoListAcontecimiento = em.merge(acontecimientoListAcontecimiento);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -72,10 +84,19 @@ public class PersonaJpaController implements Serializable {
             Persona persistentPersona = em.find(Persona.class, persona.getDni());
             Empresa nifEmpresaOld = persistentPersona.getNifEmpresa();
             Empresa nifEmpresaNew = persona.getNifEmpresa();
+            List<Acontecimiento> acontecimientoListOld = persistentPersona.getAcontecimientoList();
+            List<Acontecimiento> acontecimientoListNew = persona.getAcontecimientoList();
             if (nifEmpresaNew != null) {
                 nifEmpresaNew = em.getReference(nifEmpresaNew.getClass(), nifEmpresaNew.getNif());
                 persona.setNifEmpresa(nifEmpresaNew);
             }
+            List<Acontecimiento> attachedAcontecimientoListNew = new ArrayList<Acontecimiento>();
+            for (Acontecimiento acontecimientoListNewAcontecimientoToAttach : acontecimientoListNew) {
+                acontecimientoListNewAcontecimientoToAttach = em.getReference(acontecimientoListNewAcontecimientoToAttach.getClass(), acontecimientoListNewAcontecimientoToAttach.getNombre());
+                attachedAcontecimientoListNew.add(acontecimientoListNewAcontecimientoToAttach);
+            }
+            acontecimientoListNew = attachedAcontecimientoListNew;
+            persona.setAcontecimientoList(acontecimientoListNew);
             persona = em.merge(persona);
             if (nifEmpresaOld != null && !nifEmpresaOld.equals(nifEmpresaNew)) {
                 nifEmpresaOld.getPersonaList().remove(persona);
@@ -84,6 +105,18 @@ public class PersonaJpaController implements Serializable {
             if (nifEmpresaNew != null && !nifEmpresaNew.equals(nifEmpresaOld)) {
                 nifEmpresaNew.getPersonaList().add(persona);
                 nifEmpresaNew = em.merge(nifEmpresaNew);
+            }
+            for (Acontecimiento acontecimientoListOldAcontecimiento : acontecimientoListOld) {
+                if (!acontecimientoListNew.contains(acontecimientoListOldAcontecimiento)) {
+                    acontecimientoListOldAcontecimiento.getPersonaList().remove(persona);
+                    acontecimientoListOldAcontecimiento = em.merge(acontecimientoListOldAcontecimiento);
+                }
+            }
+            for (Acontecimiento acontecimientoListNewAcontecimiento : acontecimientoListNew) {
+                if (!acontecimientoListOld.contains(acontecimientoListNewAcontecimiento)) {
+                    acontecimientoListNewAcontecimiento.getPersonaList().add(persona);
+                    acontecimientoListNewAcontecimiento = em.merge(acontecimientoListNewAcontecimiento);
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -118,6 +151,11 @@ public class PersonaJpaController implements Serializable {
             if (nifEmpresa != null) {
                 nifEmpresa.getPersonaList().remove(persona);
                 nifEmpresa = em.merge(nifEmpresa);
+            }
+            List<Acontecimiento> acontecimientoList = persona.getAcontecimientoList();
+            for (Acontecimiento acontecimientoListAcontecimiento : acontecimientoList) {
+                acontecimientoListAcontecimiento.getPersonaList().remove(persona);
+                acontecimientoListAcontecimiento = em.merge(acontecimientoListAcontecimiento);
             }
             em.remove(persona);
             em.getTransaction().commit();
@@ -173,20 +211,5 @@ public class PersonaJpaController implements Serializable {
             em.close();
         }
     }
-    /* zona de pruebas de jpql*/
     
-    public List<Persona> findPersonaByEvento(List<AsistentesPK> listaDni){
-        List<Persona> listaAsistentes = new ArrayList<Persona>(); 
-        for(AsistentesPK persona:listaDni)
-        {
-            listaAsistentes.add(findPersona(persona.getDni()));
-        }
-        /*
-        --de manera funcional
-        listaDni.forEach((persona) -> {
-            listaAsistentes.add(findPersona(persona.getDni()));
-        });
-        */
-        return listaAsistentes;
-    }
 }

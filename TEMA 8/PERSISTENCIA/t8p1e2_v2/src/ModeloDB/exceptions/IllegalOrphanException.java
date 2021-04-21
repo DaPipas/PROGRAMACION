@@ -1,4 +1,4 @@
-package Modelo.DB.exceptions;
+package ModeloDB.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

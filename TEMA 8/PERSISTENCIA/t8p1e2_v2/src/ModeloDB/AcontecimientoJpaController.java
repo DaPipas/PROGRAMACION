@@ -3,19 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo.DB;
+package ModeloDB;
 
-import Modelo.DB.exceptions.NonexistentEntityException;
-import Modelo.DB.exceptions.PreexistingEntityException;
 import Modelo.UML.Acontecimiento;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import Modelo.UML.Persona;
+import ModeloDB.exceptions.NonexistentEntityException;
+import ModeloDB.exceptions.PreexistingEntityException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -33,11 +35,24 @@ public class AcontecimientoJpaController implements Serializable {
     }
 
     public void create(Acontecimiento acontecimiento) throws PreexistingEntityException, Exception {
+        if (acontecimiento.getPersonaList() == null) {
+            acontecimiento.setPersonaList(new ArrayList<Persona>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<Persona> attachedPersonaList = new ArrayList<Persona>();
+            for (Persona personaListPersonaToAttach : acontecimiento.getPersonaList()) {
+                personaListPersonaToAttach = em.getReference(personaListPersonaToAttach.getClass(), personaListPersonaToAttach.getDni());
+                attachedPersonaList.add(personaListPersonaToAttach);
+            }
+            acontecimiento.setPersonaList(attachedPersonaList);
             em.persist(acontecimiento);
+            for (Persona personaListPersona : acontecimiento.getPersonaList()) {
+                personaListPersona.getAcontecimientoList().add(acontecimiento);
+                personaListPersona = em.merge(personaListPersona);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findAcontecimiento(acontecimiento.getNombre()) != null) {
@@ -56,7 +71,29 @@ public class AcontecimientoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Acontecimiento persistentAcontecimiento = em.find(Acontecimiento.class, acontecimiento.getNombre());
+            List<Persona> personaListOld = persistentAcontecimiento.getPersonaList();
+            List<Persona> personaListNew = acontecimiento.getPersonaList();
+            List<Persona> attachedPersonaListNew = new ArrayList<Persona>();
+            for (Persona personaListNewPersonaToAttach : personaListNew) {
+                personaListNewPersonaToAttach = em.getReference(personaListNewPersonaToAttach.getClass(), personaListNewPersonaToAttach.getDni());
+                attachedPersonaListNew.add(personaListNewPersonaToAttach);
+            }
+            personaListNew = attachedPersonaListNew;
+            acontecimiento.setPersonaList(personaListNew);
             acontecimiento = em.merge(acontecimiento);
+            for (Persona personaListOldPersona : personaListOld) {
+                if (!personaListNew.contains(personaListOldPersona)) {
+                    personaListOldPersona.getAcontecimientoList().remove(acontecimiento);
+                    personaListOldPersona = em.merge(personaListOldPersona);
+                }
+            }
+            for (Persona personaListNewPersona : personaListNew) {
+                if (!personaListOld.contains(personaListNewPersona)) {
+                    personaListNewPersona.getAcontecimientoList().add(acontecimiento);
+                    personaListNewPersona = em.merge(personaListNewPersona);
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -85,6 +122,11 @@ public class AcontecimientoJpaController implements Serializable {
                 acontecimiento.getNombre();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The acontecimiento with id " + id + " no longer exists.", enfe);
+            }
+            List<Persona> personaList = acontecimiento.getPersonaList();
+            for (Persona personaListPersona : personaList) {
+                personaListPersona.getAcontecimientoList().remove(acontecimiento);
+                personaListPersona = em.merge(personaListPersona);
             }
             em.remove(acontecimiento);
             em.getTransaction().commit();

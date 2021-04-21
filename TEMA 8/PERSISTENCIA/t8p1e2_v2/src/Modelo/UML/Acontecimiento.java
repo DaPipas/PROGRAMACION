@@ -7,16 +7,19 @@ package Modelo.UML;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -58,6 +61,8 @@ public class Acontecimiento implements Serializable {
     @Basic(optional = false)
     @Column(name = "aforo")
     private int aforo;
+    @ManyToMany(mappedBy = "acontecimientoList")
+    private List<Persona> personaList;
 
     public Acontecimiento() {
     }
@@ -121,6 +126,15 @@ public class Acontecimiento implements Serializable {
 
     public void setAforo(int aforo) {
         this.aforo = aforo;
+    }
+
+    @XmlTransient
+    public List<Persona> getPersonaList() {
+        return personaList;
+    }
+
+    public void setPersonaList(List<Persona> personaList) {
+        this.personaList = personaList;
     }
 
     @Override

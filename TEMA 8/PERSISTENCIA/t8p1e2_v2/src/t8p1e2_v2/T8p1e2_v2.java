@@ -3,13 +3,9 @@ package t8p1e2_v2;
 import Modelo.UML.Acontecimiento;
 import GUI.*;
 import Modelo.DB.*;
-import Modelo.UML.Asistentes;
-import Modelo.UML.AsistentesPK;
 import Modelo.UML.Empresa;
 import Modelo.UML.Persona;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Persistence;
@@ -32,13 +28,11 @@ public class T8p1e2_v2 {
     private static AcontecimientoJpaController AcontecimientoDB;
     private static PersonaJpaController PersonaDB;
     private static EmpresaJpaController EmpresaDB;
-    private static AsistentesJpaController AsistentesDB;
     
     public static void main(String[] args) {
         AcontecimientoDB = new AcontecimientoJpaController(Persistence.createEntityManagerFactory("t8p1e2_v2PU"));
         PersonaDB = new PersonaJpaController(Persistence.createEntityManagerFactory("t8p1e2_v2PU"));
         EmpresaDB = new EmpresaJpaController(Persistence.createEntityManagerFactory("t8p1e2_v2PU"));
-        AsistentesDB = new AsistentesJpaController(Persistence.createEntityManagerFactory("t8p1e2_v2PU"));
         vp = new VentanaPrincipal();
         vp.setVisible(true);
     }
@@ -197,14 +191,12 @@ public class T8p1e2_v2 {
        
        p.setNifEmpresa(e);
        
-       Asistentes asi = new Asistentes(nif, d);
-       //acontecimiento.setAsistente(p);
-       //p.setEvento(acontecimiento);
+       acontecimiento.setAsistente(p);
+       p.setEvento(acontecimiento);
        
     // Vamos a la base de datos
        EmpresaDB.create(e);
        PersonaDB.create(p);
-       AsistentesDB.create(asi);
    }
    
    public static String getAsistentes(String nombre) throws Exception

@@ -1,4 +1,4 @@
-package Modelo.DB.exceptions;
+package ModeloDB.exceptions;
 
 public class NonexistentEntityException extends Exception {
     public NonexistentEntityException(String message, Throwable cause) {

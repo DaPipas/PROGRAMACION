@@ -3,11 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo.DB;
+package ModeloDB;
 
-import Modelo.DB.exceptions.IllegalOrphanException;
-import Modelo.DB.exceptions.NonexistentEntityException;
-import Modelo.DB.exceptions.PreexistingEntityException;
 import Modelo.UML.Empresa;
 import java.io.Serializable;
 import javax.persistence.Query;
@@ -15,6 +12,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Modelo.UML.Persona;
+import ModeloDB.exceptions.IllegalOrphanException;
+import ModeloDB.exceptions.NonexistentEntityException;
+import ModeloDB.exceptions.PreexistingEntityException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;

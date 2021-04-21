@@ -6,16 +6,20 @@
 package Modelo.UML;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -46,6 +50,11 @@ public class Persona implements Serializable {
     @Basic(optional = false)
     @Column(name = "telefono")
     private String telefono;
+    @JoinTable(name = "asistentes", joinColumns = {
+        @JoinColumn(name = "dni", referencedColumnName = "dni")}, inverseJoinColumns = {
+        @JoinColumn(name = "nombre", referencedColumnName = "nombre")})
+    @ManyToMany
+    private List<Acontecimiento> acontecimientoList;
     @JoinColumn(name = "nif_empresa", referencedColumnName = "nif")
     @ManyToOne(optional = false)
     private Empresa nifEmpresa;
@@ -96,6 +105,15 @@ public class Persona implements Serializable {
         this.telefono = telefono;
     }
 
+    @XmlTransient
+    public List<Acontecimiento> getAcontecimientoList() {
+        return acontecimientoList;
+    }
+
+    public void setAcontecimientoList(List<Acontecimiento> acontecimientoList) {
+        this.acontecimientoList = acontecimientoList;
+    }
+
     public Empresa getNifEmpresa() {
         return nifEmpresa;
     }
@@ -126,7 +144,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return dni + " " + nombre + " " + apellidos + " " + telefono;
+        return "Modelo.UML.Persona[ dni=" + dni + " ]";
     }
     
 }
