@@ -1,0 +1,31 @@
+---personas
+
+/* zona de pruebas de jpql*/
+    /*
+    public List<Persona> findPersonaByEvento(List<AsistentesPK> listaDni){
+        List<Persona> listaAsistentes = new ArrayList<Persona>(); 
+        for(AsistentesPK persona:listaDni)
+        {
+            listaAsistentes.add(findPersona(persona.getDni()));
+        }
+        
+        --  de manera funcional
+        --listaDni.forEach((persona) -> {
+        --    listaAsistentes.add(findPersona(persona.getDni()));
+        --});
+        
+        return listaAsistentes;
+    }
+    */
+---acontecimiento
+
+/*zona de pruebas de jpql*/
+    /*
+    public List<AsistentesPK> findAsistentesByEvento(String nombre){
+        EntityManager em = getEntityManager();
+        String jpql = "SELECT asistentes FROM Asistentes asistentes WHERE asistentes.nombre = " + nombre + ";";
+        Query query = em.createQuery(jpql);
+        List<AsistentesPK > listaDniAsistentes = query.getResultList();
+        return listaDniAsistentes;
+    }
+    */
